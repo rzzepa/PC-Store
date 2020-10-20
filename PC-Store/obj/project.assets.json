@@ -5467,11 +5467,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rzepa\\source\\repos\\PC-Store\\PC-Store\\PC-Store.csproj",
+      "projectUniqueName": "C:\\Users\\Rzepa\\Desktop\\Projekt\\PC-Store\\PC-Store\\PC-Store.csproj",
       "projectName": "PC-Store",
-      "projectPath": "C:\\Users\\Rzepa\\source\\repos\\PC-Store\\PC-Store\\PC-Store.csproj",
+      "projectPath": "C:\\Users\\Rzepa\\Desktop\\Projekt\\PC-Store\\PC-Store\\PC-Store.csproj",
       "packagesPath": "C:\\Users\\Rzepa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rzepa\\source\\repos\\PC-Store\\PC-Store\\obj\\",
+      "outputPath": "C:\\Users\\Rzepa\\Desktop\\Projekt\\PC-Store\\PC-Store\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rzepa\\AppData\\Roaming\\NuGet\\NuGet.Config",

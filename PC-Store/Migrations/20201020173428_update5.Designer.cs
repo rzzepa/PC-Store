@@ -10,8 +10,8 @@ using PC_Store.Data;
 namespace PC_Store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201019174826_update")]
-    partial class update
+    [Migration("20201020173428_update5")]
+    partial class update5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,6 +238,72 @@ namespace PC_Store.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("people");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Processor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("architecture")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("cooling")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("integratedGraphics")
+                        .HasColumnType("text");
+
+                    b.Property<string>("line")
+                        .HasColumnType("text");
+
+                    b.Property<int>("numberOfCores")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("numberOfThreads")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("processorClockFrequency")
+                        .HasColumnType("real");
+
+                    b.Property<string>("producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("sockerType")
+                        .HasColumnType("text");
+
+                    b.Property<float>("turboMaximumFrequency")
+                        .HasColumnType("real");
+
+                    b.Property<string>("typesOfSupportedMemory")
+                        .HasColumnType("text");
+
+                    b.Property<string>("unlockedMultiplier")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("processors");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("name")
+                        .HasColumnType("text");
+
+                    b.Property<float>("price")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

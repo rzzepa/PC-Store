@@ -17,7 +17,10 @@ namespace PC_Store.Data
 
         
 
-        public DbSet<Person> people { get; set; }
+        public DbSet<Processor> processors { get; set; }
 
+        public DbSet<Product> products{ get; set; }
+
+        public DbSet<Person> people{ get; set; }
     }
 }

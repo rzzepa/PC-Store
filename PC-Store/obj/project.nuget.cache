@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o2PtFNihJTPI5Ke44L5GffFCcNI22euYdluEM+xK4mhWszWVjrXSlI4HzuRTnsbBeeqDibEpaEFI7yrhdkmeUw==",
+  "dgSpecHash": "8CBmJYhke/UJ/yzTTVaLmpy+3fAPM7dWhyWnvg0XHSyGFtrvTSaVaR67ySc2NKUmig/GW5JMerBKt0ypCh2V1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rzepa\\source\\repos\\PC-Store\\PC-Store\\PC-Store.csproj",
+  "projectFilePath": "C:\\Users\\Rzepa\\Desktop\\Projekt\\PC-Store\\PC-Store\\PC-Store.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rzepa\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.3\\microsoft.aspnetcore.cryptography.internal.3.1.3.nupkg.sha512",
     "C:\\Users\\Rzepa\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.3\\microsoft.aspnetcore.cryptography.keyderivation.3.1.3.nupkg.sha512",
