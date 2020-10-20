@@ -14,10 +14,5 @@ namespace PC_Store.Data
             : base(options)
         {
         }
-
-        
-
-        public DbSet<Person> people { get; set; }
-
     }
 }
