@@ -1,40 +1,54 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http.Features;
+using PC_Store.Interfaces;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using PagedList;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PC_Store.Models
 {
 
 
-    public class Processor
+    public class Processor :IEnumerable,IProducts
     {
         public int Id { get; set; }
+        [StringLength(20)]
+        [Required]
+        public string Producer { get; set; }
+        [Required]
+        public string Line { get; set; }
 
-        public string producer { get; set; }
+        public bool Cooling { get; set; }
+        [Required]
+        public string SocketType { get; set; }
+        [Required]
+        public int NumberOfCores { get; set; }
+        [Required]
+        public int NumberOfThreads { get; set; }
 
-        public string line { get; set; }
+        public float ProcessorClockFrequency { get; set; }
 
-        public bool cooling { get; set; }
+        public float TurboMaximumFrequency { get; set; }
 
-        public string sockerType { get; set; }
+        public string IntegratedGraphics { get; set; }
 
-        public int numberOfCores { get; set; }
+        public bool UnlockedMultiplier { get; set; }
 
-        public int numberOfThreads { get; set; }
+        public int Architecture { get; set; } //bit
 
-        public float processorClockFrequency { get; set; }
+        public string TypesOfSupportedMemory { get; set; }
 
-        public float turboMaximumFrequency { get; set; }
+        public string Picture { get; set; }
 
-        public string integratedGraphics { get; set; }
-
-        public string unlockedMultiplier { get; set; }
-
-        public int architecture { get; set; } //bit
-
-        public string typesOfSupportedMemory { get; set; }
-
-        
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

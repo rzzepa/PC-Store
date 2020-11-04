@@ -250,7 +250,7 @@ namespace PC_Store.Migrations
                     b.Property<string>("producer")
                         .HasColumnType("text");
 
-                    b.Property<string>("sockerType")
+                    b.Property<string>("socketType")
                         .HasColumnType("text");
 
                     b.Property<float>("turboMaximumFrequency")

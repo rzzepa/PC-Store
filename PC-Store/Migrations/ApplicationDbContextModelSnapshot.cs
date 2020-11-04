@@ -217,25 +217,106 @@ namespace PC_Store.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PC_Store.Models.Person", b =>
+            modelBuilder.Entity("PC_Store.Models.Dictionary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CodeDict")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Surname")
+                    b.Property<string>("CodeItem")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("CodeValue")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Ext1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Ext2")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ExtN1")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ExtN2")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dictionary");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Motherboard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("AudioChannels")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Chipset")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CombiningCards")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ConnectorType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GraphicsChipset")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IntegratedGraphicsCardSupport")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("IntegratedNetworkCard")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MaximumAmountOfMemory")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("MultiChannelArchitecture")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NetworkCardChipset")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfMemorySlots")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SocketType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SoundChipset")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Standard")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StandardMemory")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Technologies")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("people");
+                    b.ToTable("Motherboards");
                 });
 
             modelBuilder.Entity("PC_Store.Models.Processor", b =>
@@ -245,63 +326,118 @@ namespace PC_Store.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("architecture")
+                    b.Property<int>("Architecture")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("cooling")
+                    b.Property<bool>("Cooling")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("integratedGraphics")
+                    b.Property<string>("IntegratedGraphics")
                         .HasColumnType("text");
 
-                    b.Property<string>("line")
+                    b.Property<string>("Line")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("numberOfCores")
+                    b.Property<int>("NumberOfCores")
                         .HasColumnType("integer");
 
-                    b.Property<int>("numberOfThreads")
+                    b.Property<int>("NumberOfThreads")
                         .HasColumnType("integer");
 
-                    b.Property<float>("processorClockFrequency")
+                    b.Property<string>("Picture")
+                        .HasColumnType("text");
+
+                    b.Property<float>("ProcessorClockFrequency")
                         .HasColumnType("real");
 
-                    b.Property<string>("producer")
+                    b.Property<string>("Producer")
+                        .IsRequired()
+                        .HasColumnType("character varying(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("SocketType")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("sockerType")
-                        .HasColumnType("text");
-
-                    b.Property<float>("turboMaximumFrequency")
+                    b.Property<float>("TurboMaximumFrequency")
                         .HasColumnType("real");
 
-                    b.Property<string>("typesOfSupportedMemory")
+                    b.Property<string>("TypesOfSupportedMemory")
                         .HasColumnType("text");
 
-                    b.Property<string>("unlockedMultiplier")
-                        .HasColumnType("text");
+                    b.Property<bool>("UnlockedMultiplier")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.ToTable("processors");
+                    b.ToTable("Processors");
                 });
 
-            modelBuilder.Entity("PC_Store.Models.Product", b =>
+            modelBuilder.Entity("PC_Store.Models.ViewModels.GraphicCard", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("name")
+                    b.Property<int>("AmountOfRAM")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConnectorType")
                         .HasColumnType("text");
 
-                    b.Property<float>("price")
-                        .HasColumnType("real");
+                    b.Property<int>("CoolingType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CoreClock")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CoreClockBoost")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DSub")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DVI")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DataBus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DisplayPort")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HDMI")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MemoryClock")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberOfFans")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerChipset")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RecommendedPSUPower")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Resolution")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TypeOfRAM")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("products");
+                    b.ToTable("GraphicCards");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

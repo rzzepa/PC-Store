@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Models;
+using PC_Store.Models.ViewModels;
 
 namespace PC_Store.Data
 {
@@ -15,12 +16,16 @@ namespace PC_Store.Data
         {
         }
 
-        
 
-        public DbSet<Processor> processors { get; set; }
 
-        public DbSet<Product> products{ get; set; }
+        public DbSet<Processor> Processors { get; set; }
 
-        public DbSet<Person> people{ get; set; }
+
+
+        public DbSet<Dictionary> Dictionary { get; set; }
+
+        public DbSet<GraphicCard> GraphicCards { get; set; }
+
+        public DbSet<Motherboard> Motherboards { get; set; }
     }
 }
