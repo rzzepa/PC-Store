@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace PC_Store
 {
@@ -28,14 +30,15 @@ namespace PC_Store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(Options=>Options.EnableEndpointRouting=false);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+/*            services.AddRazorPages();*/
+            
             
         }
 
@@ -61,12 +64,24 @@ namespace PC_Store
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            /*app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+            });*/
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    "pagination",
+                    "Page{page}",
+                    new { Controller = "Processors", Action = "Index" });
+
+                routes.MapRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}");
             });
         }
     }

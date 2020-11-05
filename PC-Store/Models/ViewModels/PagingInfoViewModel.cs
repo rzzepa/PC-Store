@@ -7,6 +7,7 @@ namespace PC_Store.Models.ViewModels
 {
     public class PagingInfoViewModel
     {
+
         public int TotalItems { get; set; }
         public int CurrentPage { get; set; }
         public int ItemPerPage { get; set; }

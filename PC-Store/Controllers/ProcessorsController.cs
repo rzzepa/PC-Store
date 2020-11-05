@@ -41,17 +41,17 @@ namespace PC_Store.Controllers
             return View(await _context.Processors.ToListAsync());
         }*/
 
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int eventPage=1)
+        public ViewResult Index(int page =1)
         {
-            if (sortOrder == "producerASC") ViewBag.NameSortParam = "producerDESC";
+            /*if (sortOrder == "producerASC") ViewBag.NameSortParam = "producerDESC";
             else if (sortOrder == "producerDESC") ViewBag.NameSortParam = "producerASC";
             else if (sortOrder == "lineASC") ViewBag.NameSortParam = "lineDESC";
             else if (sortOrder == "lineDESC") ViewBag.NameSortParam = "lineASC";
-            else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";
+            else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";*/
 
             var processors = from s in _context.Processors select s;
 
-            if (!String.IsNullOrEmpty(searchString))
+           /* if (!String.IsNullOrEmpty(searchString))
             {
                 processors = processors.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.Line.ToLower().Contains(searchString.ToLower()) || s.SocketType.ToLower().Contains(searchString.ToLower())).OrderBy(s=>s.Producer);
             }
@@ -74,21 +74,25 @@ namespace PC_Store.Controllers
                 case "lineDESC":
                     processors = processors.OrderByDescending(s => s.Line);
                     break;
-            }
+            }*/
 
+            var count = processors.Count();
+            var items = processors.Skip((page - 1) * PageSize).Take(PageSize);
 
-            indexModel = new IndexProcessorViewModel
+            PagingInfoViewModel pagingInfo = new PagingInfoViewModel()
             {
-                Processors = processors.Skip((eventPage - 1) * PageSize).Take(PageSize),
-                PagingInfo = new PagingInfoViewModel
-                {
-                    CurrentPage = eventPage,
-                    ItemPerPage = PageSize,
-                    TotalItems = _context.Processors.Count()
-                }
+                TotalItems = count,
+                ItemPerPage = PageSize,
+                CurrentPage = page
+            };
+            IndexProcessorViewModel productsListView = new IndexProcessorViewModel
+            {
+                PagingInfo = pagingInfo,
+                Processors = items
             };
 
-            return View(indexModel);
+
+            return View(productsListView);
         }
 
         // GET: Processors/Details/5

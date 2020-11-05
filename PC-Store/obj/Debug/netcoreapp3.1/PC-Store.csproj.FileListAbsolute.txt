@@ -297,4 +297,3 @@ C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\PagedLi
 C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csproj.CoreCompileInputs.cache
 C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache
