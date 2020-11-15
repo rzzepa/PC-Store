@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PagedList;
 using PC_Store.Data;
 using PC_Store.Models;
 using PC_Store.Models.ViewModels;
 using System.Web;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using PC_Store.Infrastructure;
+using X.PagedList;
 
 namespace PC_Store.Controllers
 {
@@ -27,7 +27,7 @@ namespace PC_Store.Controllers
 
         public IndexProcessorViewModel indexModel;
 
-        public int PageSize = 2;
+        public int PageSize = 4;
 
         public ProcessorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
@@ -41,17 +41,17 @@ namespace PC_Store.Controllers
             return View(await _context.Processors.ToListAsync());
         }*/
 
-        public ViewResult Index(int page =1)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            /*if (sortOrder == "producerASC") ViewBag.NameSortParam = "producerDESC";
+            if (sortOrder == "producerASC") ViewBag.NameSortParam = "producerDESC";
             else if (sortOrder == "producerDESC") ViewBag.NameSortParam = "producerASC";
             else if (sortOrder == "lineASC") ViewBag.NameSortParam = "lineDESC";
             else if (sortOrder == "lineDESC") ViewBag.NameSortParam = "lineASC";
-            else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";*/
+            else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";
 
             var processors = from s in _context.Processors select s;
 
-           /* if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 processors = processors.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.Line.ToLower().Contains(searchString.ToLower()) || s.SocketType.ToLower().Contains(searchString.ToLower())).OrderBy(s=>s.Producer);
             }
@@ -74,25 +74,11 @@ namespace PC_Store.Controllers
                 case "lineDESC":
                     processors = processors.OrderByDescending(s => s.Line);
                     break;
-            }*/
+            }
 
-            var count = processors.Count();
-            var items = processors.Skip((page - 1) * PageSize).Take(PageSize);
-
-            PagingInfoViewModel pagingInfo = new PagingInfoViewModel()
-            {
-                TotalItems = count,
-                ItemPerPage = PageSize,
-                CurrentPage = page
-            };
-            IndexProcessorViewModel productsListView = new IndexProcessorViewModel
-            {
-                PagingInfo = pagingInfo,
-                Processors = items
-            };
-
-
-            return View(productsListView);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(processors.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Processors/Details/5

@@ -15,6 +15,9 @@ using Microsoft.Extensions.Hosting;
 using Npgsql;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
+using PC_Store.Models;
+using PC_Store.Interfaces;
 
 namespace PC_Store
 {
@@ -37,9 +40,13 @@ namespace PC_Store
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-/*            services.AddRazorPages();*/
-            
-            
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
+
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,9 +67,10 @@ namespace PC_Store
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             /*app.UseEndpoints(endpoints =>
             {
@@ -79,9 +87,22 @@ namespace PC_Store
                     "Page{page}",
                     new { Controller = "Processors", Action = "Index" });
 
-                routes.MapRoute(
+                /*routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}");
+                    "{controller=Home}/{action=Index}");*/
+
+
+                app.UseHttpsRedirection();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                });
             });
         }
     }

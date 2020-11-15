@@ -1,4 +1,4 @@
-﻿using PagedList;
+﻿using PC_Store.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,5 @@ namespace PC_Store.Models.ViewModels
     public class IndexProcessorViewModel
     {
         public IQueryable<Processor> Processors { get; set; }
-        public PagingInfoViewModel PagingInfo { get; set; }
     }
 }

@@ -46,7 +46,14 @@ namespace PC_Store.Models.ViewModels
 
         public int DVI { get; set; }
 
+        public int GetId()
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public decimal GetPrice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

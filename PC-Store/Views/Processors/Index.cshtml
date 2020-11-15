@@ -1,4 +1,7 @@
-﻿@model PC_Store.Models.ViewModels.IndexProcessorViewModel
+﻿@model IEnumerable<PC_Store.Models.Processor>
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
 
 @{
     ViewData["Title"] = "Index";
@@ -17,7 +20,14 @@
     </p>
 }
 
-
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page,  ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm }),
+    new X.PagedList.Mvc.Common.PagedListRenderOptions
+    {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+    })
 
 <table class="table">
     <thead>
@@ -78,7 +88,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Processors)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -87,7 +97,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Line)
                 </td>
-                <td>
+                <td>    
                     @Html.DisplayFor(modelItem => item.Cooling)
                 </td>
                 <td>
@@ -122,13 +132,16 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
-            </tr>
+            </tr> 
         }
     </tbody>
 </table>
 <br />
 
-<div page-model="@Model.PagingInfo" page-action="Index" page- page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-secondary"
-     page-class-selected="btn-primary" class="btn-group pull-right m-1">
-</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+}

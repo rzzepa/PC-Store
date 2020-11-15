@@ -46,6 +46,14 @@ namespace PC_Store.Models
 
         public string NetworkCardChipset { get; set; }
 
+        public int GetId()
+        {
+            throw new NotImplementedException();
+        }
 
+        public decimal GetPrice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

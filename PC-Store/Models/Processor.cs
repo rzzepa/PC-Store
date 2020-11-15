@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using PagedList;
 using System.Web;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +14,7 @@ namespace PC_Store.Models
 {
 
 
-    public class Processor :IEnumerable,IProducts
+    public class Processor :Product,IEnumerable,IProducts
     {
         public int Id { get; set; }
         [StringLength(20)]
@@ -50,5 +49,16 @@ namespace PC_Store.Models
         {
             throw new NotImplementedException();
         }
+
+        public int GetId()
+        {
+            return Id;
+        }
+
+        public decimal GetPrice()
+        {
+            return 99;
+        }
+
     }
 }

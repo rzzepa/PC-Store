@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace PC_Store.Interfaces
 {
-    interface IProducts
+    public interface IProducts
     {
+        public int GetId();
+
+        public decimal GetPrice();
     }
 }

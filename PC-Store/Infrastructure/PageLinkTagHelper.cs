@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace PC_Store.Infrastructure
 {
-
+    [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper
     {
         private readonly IUrlHelperFactory urlHelperFactory;
@@ -20,7 +21,7 @@ namespace PC_Store.Infrastructure
         [ViewContext] [HtmlAttributeNotBound] public ViewContext ViewContext { get; set; }
         public PagingInfoViewModel PageModel { get; set; }
         public string PageAction { get; set; }
-        public bool PageClassesEnabled { get; set; } = false;
+        public bool PageClassesEnabled { get; set; } = true;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
@@ -46,7 +47,6 @@ namespace PC_Store.Infrastructure
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
             }
-
             output.Content.AppendHtml(result.InnerHtml);
         }
     }
