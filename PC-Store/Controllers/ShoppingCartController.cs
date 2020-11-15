@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PC_Store.Data;
 using PC_Store.Interfaces;
@@ -36,15 +37,18 @@ namespace PC_Store.Controllers
             return View("View",sCVM);
         }
 
+        [Authorize]
         public RedirectToActionResult AddtoShoppingCart(int? id)
         {
-            var selectedProduct = _context.Processors.FirstOrDefault(p => p.Id == id);
-            if(selectedProduct!= null)
-            {
-                _shoppingCart.AddtoCart(selectedProduct, 1);
+                var selectedProduct = _context.Processors.FirstOrDefault(p => p.Id == id);
+                if(selectedProduct!= null)
+                    {
+                         _shoppingCart.AddtoCart(selectedProduct, 1);
+                     }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
-        }
+        
+    
 
         public RedirectToActionResult RemoveFromShoppingCart(int prodId)
         {

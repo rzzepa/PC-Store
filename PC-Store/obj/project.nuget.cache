@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/NJOre0FlNbEiWUAATDZysBBT76bk/mb3FDGirV0FBaLVlrUKQpx8GzSORN2dEez0uwk3JkLR7iDA/BYZk38/g==",
+  "dgSpecHash": "2nCyRQV5qdx0zByID6jRc9bfgnj5SATIdnpAunHITYqyDAT/ROl6K9qkPrOSIoydY/m5AMr0Mqirp824IwYUDg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rzepa\\Desktop\\Projekt\\PC-Store\\PC-Store\\PC-Store.csproj",
+  "projectFilePath": "C:\\Users\\Rzepa\\Desktop\\PC-Store\\PC-Store\\PC-Store.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rzepa\\.nuget\\packages\\bootstrap\\4.5.3\\bootstrap.4.5.3.nupkg.sha512",
     "C:\\Users\\Rzepa\\.nuget\\packages\\jquery\\3.0.0\\jquery.3.0.0.nupkg.sha512",

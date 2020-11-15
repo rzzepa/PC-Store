@@ -47,6 +47,8 @@ namespace PC_Store
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMemoryCache();
             services.AddSession();
+
+         services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/Login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,25 +62,24 @@ namespace PC_Store
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseRouting();
             app.UseSession();
-
+            //app.UseStatusCodePages();
+            app.UseRouting();
             app.UseAuthentication();
-            //app.UseAuthorization();
-
-            /*app.UseEndpoints(endpoints =>
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-            });*/
+            });
+
+ 
 
             app.UseMvc(routes =>
             {
@@ -87,22 +88,10 @@ namespace PC_Store
                     "Page{page}",
                     new { Controller = "Processors", Action = "Index" });
 
-                /*routes.MapRoute(
+                routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}");*/
+                    "{controller=Home}/{action=Index}");
 
-
-                app.UseHttpsRedirection();
-                app.UseStaticFiles();
-
-                app.UseRouting();
-
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}");
-                });
             });
         }
     }

@@ -26,7 +26,7 @@ namespace PC_Store.Controllers
         }
 
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Checkout(Order order)
