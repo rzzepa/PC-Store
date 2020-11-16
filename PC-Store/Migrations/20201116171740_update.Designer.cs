@@ -10,8 +10,8 @@ using PC_Store.Data;
 namespace PC_Store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201110182958_update22")]
-    partial class update22
+    [Migration("20201116171740_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -301,6 +301,9 @@ namespace PC_Store.Migrations
                     b.Property<string>("ProducerCode")
                         .HasColumnType("text");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("SocketType")
                         .HasColumnType("text");
 
@@ -319,6 +322,91 @@ namespace PC_Store.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Motherboards");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("OrderPlaced")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("OrderTotal")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("character varying(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("character varying(10)")
+                        .HasMaxLength(10);
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("ProdId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("PC_Store.Models.Processor", b =>
@@ -347,9 +435,6 @@ namespace PC_Store.Migrations
                     b.Property<int>("NumberOfThreads")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Picture")
-                        .HasColumnType("text");
-
                     b.Property<float>("ProcessorClockFrequency")
                         .HasColumnType("real");
 
@@ -357,6 +442,9 @@ namespace PC_Store.Migrations
                         .IsRequired()
                         .HasColumnType("character varying(20)")
                         .HasMaxLength(20);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("SocketType")
                         .IsRequired()
@@ -374,6 +462,27 @@ namespace PC_Store.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Processors");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("PC_Store.Models.ShoppingCardItem", b =>
@@ -396,7 +505,7 @@ namespace PC_Store.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("shoppingCardItems");
+                    b.ToTable("ShoppingCardItems");
                 });
 
             modelBuilder.Entity("PC_Store.Models.ViewModels.GraphicCard", b =>
@@ -450,6 +559,9 @@ namespace PC_Store.Migrations
 
                     b.Property<string>("ProducerCode")
                         .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("RecommendedPSUPower")
                         .HasColumnType("text");
@@ -516,9 +628,22 @@ namespace PC_Store.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PC_Store.Models.OrderDetail", b =>
+                {
+                    b.HasOne("PC_Store.Models.Order", "Order")
+                        .WithMany("OrderLines")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PC_Store.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("PC_Store.Models.ShoppingCardItem", b =>
                 {
-                    b.HasOne("PC_Store.Models.Processor", "Product")
+                    b.HasOne("PC_Store.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
                 });

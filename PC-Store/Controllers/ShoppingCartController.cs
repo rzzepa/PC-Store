@@ -40,7 +40,7 @@ namespace PC_Store.Controllers
         [Authorize]
         public RedirectToActionResult AddtoShoppingCart(int? id)
         {
-                var selectedProduct = _context.Processors.FirstOrDefault(p => p.Id == id);
+                var selectedProduct = _context.Products.FirstOrDefault(p => p.Id == id);
                 if(selectedProduct!= null)
                     {
                          _shoppingCart.AddtoCart(selectedProduct, 1);
@@ -52,7 +52,7 @@ namespace PC_Store.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int prodId)
         {
-            var selectedProduct = _context.Processors.FirstOrDefault(p => p.Id == prodId);
+            var selectedProduct = _context.Products.FirstOrDefault(p => p.Id == prodId);
             if (selectedProduct != null)
             {
                 _shoppingCart.RemoveFromCart(selectedProduct);

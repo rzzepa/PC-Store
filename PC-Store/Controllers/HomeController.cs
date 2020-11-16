@@ -75,6 +75,11 @@ namespace PC_Store.Controllers
             return View(processors.ToPagedList(pageNumber, pageSize));
         }
 
+        public ViewResult MotherboardList()
+        {
+            return View(from s in _context.Motherboards select s);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

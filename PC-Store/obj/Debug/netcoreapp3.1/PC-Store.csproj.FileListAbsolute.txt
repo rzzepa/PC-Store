@@ -513,4 +513,5 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\staticwebassets
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.pdb
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.genruntimeconfig.cache
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Home\MotherboardList.cshtml.g.cs
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache

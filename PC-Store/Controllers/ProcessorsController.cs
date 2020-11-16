@@ -121,7 +121,14 @@ namespace PC_Store.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = UploadedFile(model);
-                model.Processor.Picture= uniqueFileName;
+                Product product = new Product();
+                product.Picture = uniqueFileName;
+                product.Name = model.Processor.Producer + " " + model.Processor.Line;
+                product.Price = 0;
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+
+                model.Processor.ProductId = product.Id;
                 _context.Add(model.Processor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

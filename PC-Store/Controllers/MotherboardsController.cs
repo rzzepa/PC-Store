@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Models;
+using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {
     public class MotherboardsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        
 
-        public MotherboardsController(ApplicationDbContext context)
+        public MotherboardsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Motherboards
@@ -54,15 +61,26 @@ namespace PC_Store.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Producer,ProducerCode,Standard,Chipset,SocketType,Technologies")] Motherboard motherboard)
+        public async Task<IActionResult> Create(CreateMotherboardViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(motherboard);
-                await _context.SaveChangesAsync();
+                string uniqueFileName = UploadedFile(model);
+                Product product = new Product();
+                product.Picture = uniqueFileName;
+                product.Name = model.Motherboard.Producer + " " +model.Motherboard.Chipset+" "+model.Motherboard.SocketType;
+                product.Price = 0;
+                _context.Products.Add(product);
+
+                 _context.SaveChanges();
+
+                model.Motherboard.ProductId = product.Id;
+                _context.Add(model.Motherboard);
+
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            return View(motherboard);
+            return View();
         }
 
         // GET: Motherboards/Edit/5
@@ -148,6 +166,24 @@ namespace PC_Store.Controllers
         private bool MotherboardExists(int id)
         {
             return _context.Motherboards.Any(e => e.Id == id);
+        }
+
+
+        private string UploadedFile(CreateMotherboardViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.File != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.File.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.File.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }

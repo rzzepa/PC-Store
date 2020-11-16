@@ -13,6 +13,8 @@ namespace PC_Store.Models
         [BindNever]
         public int OrderId { get; set; }
 
+        public string User { get; set; }
+
         public List<OrderDetail> OrderLines{ get; set; }
 
         [Required(ErrorMessage ="Wpisz swoje imię")]

@@ -12,7 +12,7 @@ namespace PC_Store.Models
         [Key]
         public int ShoppingCarditemId { get; set; }
 
-        public Processor Product { get; set; }
+        public Product Product { get; set; }
 
         public int Amount { get; set; }
 

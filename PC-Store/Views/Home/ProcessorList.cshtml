@@ -82,13 +82,12 @@
             <th>
                 Rodzaje obsługiwanej pamięci
             </th>
-        </tr><th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td><img src="~/images/@item.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" /> </td>
+        <tr> 
             <td>
                 @Html.DisplayFor(modelItem => item.Producer)
             </td>
@@ -126,7 +125,7 @@
                 @Html.DisplayFor(modelItem => item.TypesOfSupportedMemory)
             </td>
             <td>
-                <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Id">Dodaj do koszyka</a>
+                <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
             </td>
         </tr>
 

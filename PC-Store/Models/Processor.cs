@@ -14,7 +14,7 @@ namespace PC_Store.Models
 {
 
 
-    public class Processor :Product,IEnumerable,IProducts
+    public class Processor :IEnumerable,IProducts
     {
         public int Id { get; set; }
         [StringLength(20)]
@@ -43,7 +43,7 @@ namespace PC_Store.Models
 
         public string TypesOfSupportedMemory { get; set; }
 
-        public string Picture { get; set; }
+        public int ProductId { get; set; }
 
         public IEnumerator GetEnumerator()
         {

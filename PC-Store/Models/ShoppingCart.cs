@@ -38,12 +38,12 @@ namespace PC_Store.Models
             return new ShoppingCart(context) { ShoppingCartId=cartId};
         }
 
-        public void AddtoCart(Processor product,int amount)
+        public void AddtoCart(Product product,int amount)
         {
             ShoppingCardItem shoppingCartItem;
             try
             {
-                shoppingCartItem = _context.shoppingCardItems.SingleOrDefault(s => s.Product.Id == product.GetId() && s.ShoppingCardId == ShoppingCartId);
+                shoppingCartItem = _context.ShoppingCardItems.SingleOrDefault(s => s.Product.Id == product.Id && s.ShoppingCardId == ShoppingCartId);
             }
             catch
             {
@@ -57,7 +57,7 @@ namespace PC_Store.Models
                         Product = product,
                         Amount = amount
                     };
-                    _context.shoppingCardItems.Add(shoppingCartItem);
+                    _context.ShoppingCardItems.Add(shoppingCartItem);
                 }
                 else
                 {
@@ -66,9 +66,9 @@ namespace PC_Store.Models
                 _context.SaveChanges();
             }
 
-        public int RemoveFromCart(Processor product)
+        public int RemoveFromCart(Product product)
         {
-            var shoppingCartItem = _context.shoppingCardItems.SingleOrDefault(s => s.Product.GetId() == product.Id && s.ShoppingCardId == ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCardItems.SingleOrDefault(s => s.Product.Id == product.Id && s.ShoppingCardId == ShoppingCartId);
 
             var localAmount = 0;
 
@@ -81,7 +81,7 @@ namespace PC_Store.Models
                 }
                 else
                 {
-                    _context.shoppingCardItems.Remove(shoppingCartItem);
+                    _context.ShoppingCardItems.Remove(shoppingCartItem);
                 }
             }
 
@@ -91,22 +91,22 @@ namespace PC_Store.Models
 
         public List<ShoppingCardItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ?? (ShoppingCartItems = _context.shoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId).Include(s=> s.Product).ToList());
+            return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId).Include(s=> s.Product).ToList());
         }
 
         public void ClearCart()
         {
-            var cartItems = _context.shoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId);
+            var cartItems = _context.ShoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId);
 
-            _context.shoppingCardItems.RemoveRange(cartItems);
+            _context.ShoppingCardItems.RemoveRange(cartItems);
             _context.SaveChanges();
         }
 
         public decimal GetShoppingCartTotal()
         {
             try { 
-            var total = _context.shoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId)
-                .Select(c => c.Product.GetPrice() * c.Amount).Sum();
+            var total = _context.ShoppingCardItems.Where(c => c.ShoppingCardId == ShoppingCartId)
+                .Select(c => c.Product.Price * c.Amount).Sum();
                 return total;
             }
             catch

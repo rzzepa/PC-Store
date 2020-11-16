@@ -39,9 +39,9 @@ namespace PC_Store.Data
                 var orderDetail = new OrderDetail()
                 {
                     Amount = item.Amount,
-                    ProdId = item.Product.GetId(),
+                    ProdId = item.Product.Id,
                     OrderId = order.OrderId,
-                    Price = item.Product.GetPrice()
+                    Price = item.Product.Price
                 };
                 _context.OrderDetails.Add(orderDetail);
             }
