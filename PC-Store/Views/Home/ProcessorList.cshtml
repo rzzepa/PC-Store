@@ -126,7 +126,7 @@
                 @Html.DisplayFor(modelItem => item.TypesOfSupportedMemory)
             </td>
             <td>
-                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Id">Dodaj do koszyka</a>
+                <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Id">Dodaj do koszyka</a>
             </td>
         </tr>
 

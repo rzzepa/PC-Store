@@ -43,7 +43,7 @@ namespace PC_Store.Models
             ShoppingCardItem shoppingCartItem;
             try
             {
-                shoppingCartItem = _context.shoppingCardItems.AsEnumerable().SingleOrDefault(s => s.Product.Id == product.GetId() && s.ShoppingCardId == ShoppingCartId);
+                shoppingCartItem = _context.shoppingCardItems.SingleOrDefault(s => s.Product.Id == product.GetId() && s.ShoppingCardId == ShoppingCartId);
             }
             catch
             {
