@@ -115,6 +115,7 @@ namespace PC_Store.Controllers
                     prod.Name = model.Product.Name;
                     prod.Picture=UploadedFile(model);
                     prod.Price = model.Product.Price;
+                    prod.Act = model.Product.Act;
                     _context.Update(prod);
                     await _context.SaveChangesAsync();
                 }

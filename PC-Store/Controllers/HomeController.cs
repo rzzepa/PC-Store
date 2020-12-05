@@ -44,7 +44,22 @@ namespace PC_Store.Controllers
             else if (sortOrder == "lineDESC") ViewBag.NameSortParam = "lineASC";
             else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";
             
-            var processors = from s in _context.Processors select s;
+            //var processors = from s in _context.Processors select s;
+
+            var processors =
+            from PRo in _context.Processors
+            join PR in _context.Products on PRo.ProductId equals PR.Id
+            where PR.Act == true
+            select new Processor
+            {
+                Producer=PRo.Producer,
+                Line=PRo.Line,
+                Cooling=PRo.Cooling,
+                SocketType=PRo.SocketType,
+                NumberOfCores=PRo.NumberOfCores,
+                NumberOfThreads=PRo.NumberOfThreads,
+                IntegratedGraphics=PRo.IntegratedGraphics
+            };
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -77,12 +92,35 @@ namespace PC_Store.Controllers
 
         public ViewResult MotherboardList()
         {
-            return View(from s in _context.Motherboards select s);
+            var MotherBoard =
+            from MB in _context.Motherboards
+            join PR in _context.Products on MB.ProductId equals PR.Id
+            where PR.Act == true
+            select new Motherboard
+            {
+                Producer=MB.Producer,
+                ProducerCode=MB.ProducerCode,
+                Standard=MB.Standard,
+                Chipset=MB.Chipset,
+                SocketType=MB.SocketType
+            };
+
+            return View(MotherBoard);
         }
 
         public ViewResult GraphicCardList()
         {
-            return View(from s in _context.GraphicCards select s);
+            var GraphicCards =
+            from GC in _context.GraphicCards
+            join PR in _context.Products on GC.ProductId equals PR.Id
+            where PR.Act == true
+            select new GraphicCard
+            {
+                Producer=GC.Producer,
+                ProducerCode=GC.ProducerCode,
+                ProducerChipset=GC.ProducerChipset
+            };
+            return View(GraphicCards);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

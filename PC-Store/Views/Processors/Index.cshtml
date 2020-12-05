@@ -7,16 +7,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1><center>Procesory - Panel</center></h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj Procesor</a>
 </p>
 @using (Html.BeginForm())
 {
     <p>
-        Find: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Czego szukasz?" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">Szukaj</button>
+            </form>
+        </nav>
     </p>
 }
 

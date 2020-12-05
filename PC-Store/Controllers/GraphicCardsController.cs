@@ -69,6 +69,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.GraphicCard.Producer + " " + model.GraphicCard.ProducerCode + " " + model.GraphicCard.ProducerChipset;
                 product.Price = 0;
+                product.Act = false;
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
 

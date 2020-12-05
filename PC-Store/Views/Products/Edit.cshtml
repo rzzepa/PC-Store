@@ -33,17 +33,22 @@
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="@Model.Product.Act" /> Aktywny
+                </label>
+            </div>
             @if (Model.File != null)
             {
-                <img src="~/images/@Model.File" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                <img src="~/images/@Model.File" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
             else if (@Model.Product.Picture != null)
             {
-            <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
             else
             {
-            <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

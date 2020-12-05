@@ -17,6 +17,8 @@
     </p>
 }
 
+<h1><center>Procesory</center></h1>
+<br /><br />
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("ProcessorList", new { page = page, SearchString="", sortOrder = ViewBag.NameSortParam }),
     new X.PagedList.Mvc.Common.PagedListRenderOptions
     {
@@ -64,22 +66,7 @@
                 Ilość wątków
             </th>
             <th>
-                Częstotliwość taktowania procesora [GHz]
-            </th>
-            <th>
-                Częstotliwość maksymalna Turbo [GHz]
-            </th>
-            <th>
                 Zintegrowany układ graficzny
-            </th>
-            <th>
-                Odblokowany mnożnik
-            </th>
-            <th>
-                Architektura [bit]
-            </th>
-            <th>
-                Rodzaje obsługiwanej pamięci
             </th>
             <th></th>
         </tr>
@@ -107,22 +94,7 @@
                 @Html.DisplayFor(modelItem => item.NumberOfThreads)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProcessorClockFrequency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TurboMaximumFrequency)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.IntegratedGraphics)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnlockedMultiplier)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Architecture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypesOfSupportedMemory)
             </td>
             <td>
                 <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>

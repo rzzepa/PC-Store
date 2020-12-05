@@ -4,23 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1><center>Produkty</center></h1>
+<br /><br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Nazwa
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Cena
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Picture)
             </th>
+            <th></th>
+            <th>Atywyny</th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -28,24 +29,32 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @if (item.Picture != null)
                 {
-                    <img src="~/images/@item.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                    <img src="~/images/@item.Picture" class="rounded-circle" height="100" width="100" asp-append-version="true" />
                 }
                 else
                 {
-                    <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                    <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="100" width="100" asp-append-version="true" />
                 }
             </td>
+            <td></td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @Html.DisplayFor(modelItem => item.Act)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

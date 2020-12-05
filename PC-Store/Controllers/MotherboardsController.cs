@@ -70,6 +70,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.Motherboard.Producer + " " +model.Motherboard.Chipset+" "+model.Motherboard.SocketType;
                 product.Price = 0;
+                product.Act = false;
                 _context.Products.Add(product);
 
                  _context.SaveChanges();

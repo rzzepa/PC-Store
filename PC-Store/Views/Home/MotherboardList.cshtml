@@ -3,28 +3,26 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<h1><center>Płyty główne</center></h1>
+<br /><br />
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Producer)
+                Producent
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProducerCode)
+                Kod producenta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Standard)
+                Standard
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Chipset)
+                Chipset
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SocketType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Technologies)
+                Typ gniazda
             </th>
             <th></th>
         </tr>
@@ -47,9 +45,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SocketType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Technologies)
                 </td>
                 <td>
                     <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
