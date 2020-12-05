@@ -28,11 +28,21 @@ namespace PC_Store.Controllers
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
 
+            /*var sCVM =
+            from prod in _context.Products
+            join cartitems in _shoppingCart.ShoppingCartItems on prod.Id cartitems.Product.Id
+            select new ShoppingCartViewModel
+            {
+                ShoppingCart = _shoppingCart,
+                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
+                //Product = prod
+            };*/
+
             var sCVM = new ShoppingCartViewModel
             {
                 ShoppingCart=_shoppingCart,
                 ShoppingCartTotal=_shoppingCart.GetShoppingCartTotal()
-            };
+        };
 
             return View("View",sCVM);
         }

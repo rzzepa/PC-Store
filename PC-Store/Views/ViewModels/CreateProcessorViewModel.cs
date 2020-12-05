@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PC_Store.Models;
 
-
-namespace PC_Store.Models.ViewModels
+namespace PC_Store.Views.ViewModels
 {
     public class CreateProcessorViewModel
     {

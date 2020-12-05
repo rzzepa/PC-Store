@@ -302,7 +302,6 @@ C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\V
 C:\Users\Rzepa\Desktop\Projekt\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\bower.json
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\PC-Store.StaticWebAssets.xml
@@ -514,4 +513,12 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.pdb
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.genruntimeconfig.cache
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Home\MotherboardList.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Order\GetMyOrders.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Order\Details.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Create.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Delete.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Details.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Edit.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\scopedcss\bundle\PC-Store.styles.css

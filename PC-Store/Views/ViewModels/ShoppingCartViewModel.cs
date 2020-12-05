@@ -10,5 +10,7 @@ namespace PC_Store.Models.ViewModels
         public ShoppingCart ShoppingCart { get; set; }
 
         public decimal ShoppingCartTotal { get; set; }
+
+        //public Product Product { get; set; }
     }
 }

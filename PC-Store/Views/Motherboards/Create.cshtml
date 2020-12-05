@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+@using (Html.BeginForm("Create", "Processor", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
 <h1>Create</h1>
 
 <h4>Motherboard</h4>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PC_Store.Views.ViewModels.OrderDetailViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Szczególy zamówienia</h1>
+
+<h1>
+    @ViewBag.EmptyCartMessage
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Ilość
+            </th>
+            <th>
+                Cena
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+            <img src="~/images/@item.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" /> 
+            </td>
+            <td>
+                <a class="nav-link text-dark" asp-area=""  asp-action="Details/@item.Product.">@Html.DisplayFor(modelItem => item.Product.Name)</a>
+</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDetail.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDetail.Price)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="GetMyOrders">Powrót</a>
+</div>

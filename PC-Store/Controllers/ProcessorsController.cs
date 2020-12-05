@@ -16,6 +16,7 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using PC_Store.Infrastructure;
 using X.PagedList;
+using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {
