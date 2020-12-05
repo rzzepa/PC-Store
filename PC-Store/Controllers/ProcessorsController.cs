@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Models;
-using PC_Store.Models.ViewModels;
+using PC_Store.Views.ViewModels;
 using System.Web;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using PC_Store.Infrastructure;
 using X.PagedList;
-using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {

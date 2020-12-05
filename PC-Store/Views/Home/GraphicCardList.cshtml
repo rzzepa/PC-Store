@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PC_Store.Models.GraphicCard>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Karty Graficzne</h1>
+
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProducerCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProducerChipset)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerChipset)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

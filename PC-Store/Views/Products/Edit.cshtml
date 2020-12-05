@@ -35,11 +35,15 @@
             </div>
             @if (Model.File != null)
             {
-                <img src="~/images/@Model.File" class="w3-round" height="150" width="150" asp-append-version="true" />
+                <img src="~/images/@Model.File" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+            }
+            else if (@Model.Product.Picture != null)
+            {
+            <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
             }
             else
-            { 
-                <img src="~/images/@Model.Product.Picture" class="w3-round" height="150" width="150" asp-append-version="true" />
+            {
+            <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
             }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

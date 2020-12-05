@@ -30,7 +30,14 @@
         {
         <tr>
             <td>
-            <img src="~/images/@item.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" /> 
+                @if (item.Product.Picture != null)
+                {
+                    <img src="~/images/@item.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                }
+                else
+                {
+                    <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                }
             </td>
             <td>
                 <a class="nav-link text-dark" asp-area=""  asp-action="Details/@item.Product.">@Html.DisplayFor(modelItem => item.Product.Name)</a>
