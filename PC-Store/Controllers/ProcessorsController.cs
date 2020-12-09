@@ -16,6 +16,8 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using PC_Store.Infrastructure;
 using X.PagedList;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace PC_Store.Controllers
 {
@@ -27,19 +29,17 @@ namespace PC_Store.Controllers
 
         public IndexProcessorViewModel indexModel;
 
+        private readonly UserManager<IdentityUser> _userManager;
+
         public int PageSize = 4;
 
-        public ProcessorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ProcessorsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
-        // GET: Processors
-        /*public async Task<IActionResult> Index()
-        {
-            return View(await _context.Processors.ToListAsync());
-        }*/
 
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -81,7 +81,12 @@ namespace PC_Store.Controllers
             return View(processors.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Processors/Details/5
+        public Task<IActionResult> ProcessorDetail(int? id)
+        {
+            var x = _context.Processors.Where(p => p.ProductId == id).Select(p => p.Id).FirstOrDefault();
+            return Details(x);
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -96,10 +101,35 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            return View(processor);
+            return View("Details",processor);
         }
 
-        // GET: Processors/Create
+        public async Task<IActionResult> ProcessorDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var processor =
+            from PRo in _context.Processors
+            join PR in _context.Products on PRo.ProductId equals PR.Id
+            where PR.Act == true && PRo.ProductId==id
+            select new ProcessorProduct
+            {
+                Processor = PRo,
+                Product = PR
+            };
+            if (processor == null)
+            {
+                return NotFound();
+            }
+            ProcessorProduct processorProduct = processor.FirstOrDefault();
+
+            return View(processorProduct);
+        }
+
+
         public IActionResult Create(string Param)
         {
             CreateProcessorViewModel createProcessorViewModel = new CreateProcessorViewModel()
@@ -107,13 +137,12 @@ namespace PC_Store.Controllers
                 Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeValue),
                 SocketTypes = _context.Dictionary.Where(p => (p.CodeDict.Equals("PROCSOCKET")) && ((p.Ext1.Equals(Param)) || String.IsNullOrEmpty(Param))).Select(o =>  o.CodeValue)
             };
+            ViewBag.ProducerList = new SelectList(_context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeItem), "CodeItem");
+            ViewBag.SocketList = new SelectList(_context.Dictionary.Where(p => (p.CodeDict.Equals("PROCSOCKET")) && ((p.Ext1.Equals(Param)) || String.IsNullOrEmpty(Param))).Select(o => o.CodeValue), "Ext1", "CodeValue");
 
             return View(createProcessorViewModel);
         }
 
-        // POST: Processors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateProcessorViewModel model)
@@ -126,6 +155,10 @@ namespace PC_Store.Controllers
                 product.Name = model.Processor.Producer + " " + model.Processor.Line;
                 product.Price = 0;
                 product.Act = false;
+                product.InsertBy= _userManager.GetUserName(HttpContext.User);
+                product.ModifyBy= _userManager.GetUserName(HttpContext.User);
+                product.InsertDate= DateTime.Now;
+                product.ModifyDate= DateTime.Now;
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
 
@@ -155,7 +188,6 @@ namespace PC_Store.Controllers
         }
 
 
-        // GET: Processors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -171,9 +203,7 @@ namespace PC_Store.Controllers
             return View(processor);
         }
 
-        // POST: Processors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Producer,Line,Cooling,SocketType,NumberOfCores,NumberOfThreads,ProcessorClockFrequency,TurboMaximumFrequency,IntegratedGraphics,UnlockedMultiplier,Architecture,TypesOfSupportedMemory")] Processor processor)
@@ -189,6 +219,7 @@ namespace PC_Store.Controllers
                 {
                     _context.Update(processor);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -206,7 +237,6 @@ namespace PC_Store.Controllers
             return View(processor);
         }
 
-        // GET: Processors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -224,7 +254,7 @@ namespace PC_Store.Controllers
             return View(processor);
         }
 
-        // POST: Processors/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -243,6 +273,12 @@ namespace PC_Store.Controllers
         public IEnumerable<Dictionary> GetProducers()
         {
             return _context.Dictionary.ToList().Where(o => o.CodeDict.Equals("PRODPROCES"));
+        }
+
+        public JsonResult GetSocketByProducer(string codeItem)
+        {
+            var item = _context.Dictionary.Where(x => x.Ext1 == codeItem).ToList();
+            return Json(item, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }

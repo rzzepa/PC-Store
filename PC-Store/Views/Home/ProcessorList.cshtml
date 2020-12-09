@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PC_Store.Models.Processor>
+﻿@model IEnumerable<PC_Store.Views.ViewModels.ProcessorProduct>
 
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
@@ -12,14 +12,15 @@
 @using (Html.BeginForm())
 {
     <p>
-        Wpisz czego szukasz: @Html.TextBox("SearchString", null, new { @class = "form-control mr-sm-1", @type = "search"})<br/>
+        Wpisz czego szukasz: @Html.TextBox("SearchString", null, new { @class = "form-control mr-sm-1", @type = "search" })<br />
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Szukaj" />
     </p>
 }
 
-<h1><center>Procesory</center></h1>
-<br /><br />
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("ProcessorList", new { page = page, SearchString="", sortOrder = ViewBag.NameSortParam }),
+<center><h1>Procesory</h1></center>
+<br />
+<br />
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("ProcessorProduct", new { page = page, SearchString = "", sortOrder = ViewBag.NameSortParam }),
     new X.PagedList.Mvc.Common.PagedListRenderOptions
     {
         DisplayItemSliceAndTotal = true,
@@ -28,82 +29,76 @@
         PageClasses = new[] { "page-link" },
     })
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @if (ViewBag.NameSortParam == "producerASC")
-                {
-                    @Html.ActionLink("Producent", "ProcessorList", new { sortOrder = "producerASC" })
-                }
-                else
-                {
-                    @Html.ActionLink("Producent", "ProcessorList", new { sortOrder = "producerDESC" })
-                }
 
-            </th>
-            <th>
-                @if (ViewBag.NameSortParam == "lineASC")
-                {
-                    @Html.ActionLink("Linnia", "ProcessorList", new { sortOrder = "lineASC" })
-                }
-                else
-                {
-                    @Html.ActionLink("Linnia", "ProcessorList", new { sortOrder = "lineDESC" })
-                }
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
 
-            </th>
-            <th>
-                Chłodzenie
-            </th>
-            <th>
-                Socket
-            </th>
-            <th>
-                Ilość rdzeni
-            </th>
-            <th>
-                Ilość wątków
-            </th>
-            <th>
-                Zintegrowany układ graficzny
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr> 
-            <td>
-                @Html.DisplayFor(modelItem => item.Producer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Line)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cooling)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SocketType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfCores)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfThreads)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IntegratedGraphics)
-            </td>
-            <td>
-                <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
-            </td>
-        </tr>
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    @if (item.Product.Picture != null)
+                    {
+                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        </a>
+                    }
 
-        }
-    </tbody>
-</table>
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.Processor.Producer) @Html.DisplayFor(modelItem => item.Processor.Line) @Html.DisplayFor(modelItem => item.Processor.SocketType)</a></h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Socket: @Html.DisplayFor(modelItem => item.Processor.SocketType)</i>
+                            </li>
+                            <li>
+                                <i>Liczba rdzeni: @Html.DisplayFor(modelItem => item.Processor.NumberOfCores)</i>
+                            </li>
+                            <li>
+                                <i>Ilość wątków: @Html.DisplayFor(modelItem => item.Processor.NumberOfThreads)</i>
+                            </li>
+                            <li>
+                                <i>Zintegrowany układ graficzny: @Html.DisplayFor(modelItem => item.Processor.IntegratedGraphics)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Product.Price) Zł</span></h6>
+                        <div class="my-4">
+                            <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                                </button>
+                            </a>
+
+                            <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    <i class="fas fa-info-circle pr-2"></i>Szczegóły
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
 <br />
 
 @section Scripts{

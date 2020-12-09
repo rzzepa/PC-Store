@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using PC_Store.Data;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
@@ -17,13 +19,14 @@ namespace PC_Store.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ProductsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: Products
@@ -50,6 +53,38 @@ namespace PC_Store.Controllers
             return View(product);
         }
 
+        public int ProcessorDetail(int? id)
+        {
+            var itemId =
+            from PROC in _context.Processors
+            join PR in _context.Products on PROC.ProductId equals PR.Id
+            where PR.Id == id
+            select new Processor { Id= PROC.Id };
+
+            return itemId.Select(p=>p.Id).FirstOrDefault(); 
+        }
+
+        public int GraphicCardDetail(int? id)
+        {
+            var itemId =
+            from GC in _context.GraphicCards
+            join PR in _context.Products on GC.ProductId equals PR.Id
+            where PR.Id == id
+            select new GraphicCard { Id = GC.Id };
+
+            return itemId.Select(p => p.Id).FirstOrDefault();
+        }
+
+        public int MotherboardDetail(int? id)
+        {
+            var itemId =
+            from MB in _context.Motherboards
+            join PR in _context.Products on MB.ProductId equals PR.Id
+            where PR.Id == id
+            select new Motherboard { Id = MB.Id };
+
+            return itemId.Select(p => p.Id).FirstOrDefault();
+        }
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -85,12 +120,35 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            EditProductViewModel editProductViewModel = new EditProductViewModel()
-            {
-                Product= product
-            };
+            EditProductViewModel editProductViewModel = null;
 
-            
+            if (product.ProductType.Equals("PROCESSOR"))
+            {
+                editProductViewModel= new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = ProcessorDetail(product.Id)
+                };
+            }
+            else if(product.ProductType.Equals("GRAPHICSCARD"))
+            {
+                editProductViewModel = new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = GraphicCardDetail(product.Id)
+                };
+            }
+            else if (product.ProductType.Equals("MOTHERBOARD"))
+            {
+                editProductViewModel = new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = MotherboardDetail(product.Id)
+                };
+            }
+
+
+
             return View(editProductViewModel);
         }
 
@@ -110,13 +168,17 @@ namespace PC_Store.Controllers
             {
                 try
                 {
-                    Product prod = new Product();
-                    prod.Id = model.Product.Id;
-                    prod.Name = model.Product.Name;
-                    prod.Picture=UploadedFile(model);
-                    prod.Price = model.Product.Price;
-                    prod.Act = model.Product.Act;
-                    _context.Update(prod);
+                    Product product = GetProduct(id);
+                    product.Name = model.Product.Name;
+                    if(model.File!=null)
+                    {
+                        product.Picture = UploadedFile(model);
+                    }
+                    product.Price = model.Product.Price;
+                    product.Act = model.Product.Act;
+                    product.ModifyDate= DateTime.Now;
+                    product.ModifyBy = _userManager.GetUserName(HttpContext.User);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -133,6 +195,13 @@ namespace PC_Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
+        }
+
+        private Product GetProduct(int? id)
+        {
+            Product product = _context.Products.Where(p => p.Id == id).SingleOrDefault();
+
+            return product;
         }
 
         private string UploadedFile(EditProductViewModel model)

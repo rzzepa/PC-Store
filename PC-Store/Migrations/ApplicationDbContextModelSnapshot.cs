@@ -544,6 +544,18 @@ namespace PC_Store.Migrations
                     b.Property<bool>("Act")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("InsertBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ModifyBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -552,6 +564,9 @@ namespace PC_Store.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("ProductType")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

@@ -522,3 +522,12 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csproj
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.pdb
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.genruntimeconfig.cache
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Processors\ProcessorDetails.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Motherboards\MotherboardDetails.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\GraphicCards\GraphiccardDetails.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Admin\RaportView.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\ClosedXML.dll
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache

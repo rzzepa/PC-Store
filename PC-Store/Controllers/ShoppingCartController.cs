@@ -69,5 +69,14 @@ namespace PC_Store.Controllers
             }
             return RedirectToAction("Index");
         }
+        public RedirectToActionResult IncresseAmount(int prodId)
+        {
+            var selectedProduct = _context.Products.FirstOrDefault(p => p.Id == prodId);
+            if (selectedProduct != null)
+            {
+                _shoppingCart.AddtoCart(selectedProduct,1);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

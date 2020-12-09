@@ -10,6 +10,7 @@ namespace PC_Store.Views.ViewModels
     public class EditProductViewModel
     {
         public Product Product { get; set; }
+        public int Id { get; set; }
         public IFormFile File { get; set; }
     }
 }

@@ -1,0 +1,125 @@
+﻿@model PC_Store.Views.ViewModels.GraphicCardProduct
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<center><h1>@Model.graphicCard.Producer @Model.graphicCard.ProducerCode</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Product.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.graphicCard.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.graphicCard.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Producent chipsetu: @Model.graphicCard.ProducerChipset</i>
+                    </li>
+                    <li>
+                        <i>Taktowanie rdzenia: @Model.graphicCard.CoreClock</i>
+                    </li>
+                    <li>
+                        <i>Taktowanie rdzenia w trybie boost: @Model.graphicCard.CoreClockBoost</i>
+                    </li>
+                    <li>
+                        <i>Typ złącza: @Model.graphicCard.ConnectorType</i>
+                    </li>
+                    <li>
+                        <i>Rozdzielczość: @Model.graphicCard.Resolution</i>
+                    </li>
+                    <li>
+                        <i>Rekomendowana moc zasilacza: @Model.graphicCard.RecommendedPSUPower</i>
+                    </li>
+                    <li>
+                        <i>Ilość pamięci RAM: @Model.graphicCard.AmountOfRAM</i>
+                    </li>
+                    <li>
+                        <i>Rodzaj pamięci RAM: @Model.graphicCard.TypeOfRAM</i>
+                    </li>
+                    <li>
+                        <i>Szyna danych: @Model.graphicCard.DataBus</i>
+                    </li>
+                    <li>
+                        <i>Taktowanie pamięci: @Model.graphicCard.MemoryClock</i>
+                    </li>
+                    <li>
+                        <i>Typ chłodzenia: @Model.graphicCard.CoolingType</i>
+                    </li>
+                    <li>
+                        <i>Ilość wentylatorów: @Model.graphicCard.NumberOfFans</i>
+                    </li>
+                    <li>
+                        <i>D-Sub: @Model.graphicCard.DSub</i>
+                    </li>
+                    <li>
+                        <i>DisplayPort: @Model.graphicCard.DisplayPort</i>
+                    </li>
+                    <li>
+                        <i>HDMI: @Model.graphicCard.HDMI</i>
+                    </li>
+                    <li>
+                        <i>DVI: @Model.graphicCard.DVI</i>
+                    </li>
+
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Miejsce na opis
+                </p>
+                <hr>
+                <h4><strong>Ilość:</strong></h4>
+                <div class="def-number-input number-input safari_only">
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                </div>
+                <hr>
+                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <form asp-controller="Home" asp-action="GraphicCardList">
+            <div class="form-group">
+                <input type="submit" value="Wróć" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>

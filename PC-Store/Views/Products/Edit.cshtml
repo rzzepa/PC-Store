@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Edit</h1>
-
-<h4>Product</h4>
+<h1>Edycja</h1>
+Dodany: @Html.DisplayFor(model => model.Product.InsertDate)     Przez: @Html.DisplayFor(model => model.Product.InsertBy)<br />
+Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     Przez: @Html.DisplayFor(model => model.Product.ModifyBy)<br />
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -42,7 +42,7 @@
             {
                 <img src="~/images/@Model.File" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
-            else if (@Model.Product.Picture != null)
+            else if (Model.Product.Picture != null)
             {
                 <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
@@ -56,8 +56,20 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
+    <hr />
+    @if (Model.Product.ProductType.Equals("PROCESSOR"))
+    {
+        <a asp-controller="Processors" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
+    else if (Model.Product.ProductType.Equals("MOTHERBOARD"))
+    {
+        <a asp-controller="Motherboards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
+    else if (Model.Product.ProductType.Equals("GRAPHICSCARD"))
+    {
+        <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
 </div>
 

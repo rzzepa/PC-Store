@@ -1,45 +1,81 @@
-﻿@model IEnumerable<PC_Store.Models.GraphicCard>
+﻿@model IEnumerable<PC_Store.Views.ViewModels.GraphiccardList>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1><center>Karty Graficzne</center></h1>
+<center><h1>Karty Graficzne</h1></center>
+<br />
+<br />
 
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
 
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Producent
-            </th>
-            <th>
-                Kod producenta
-            </th>
-            <th>
-                Producent chipsetu
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProducerCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProducerChipset)
-                </td>
-                <td>
-                    <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    @if (item.Product.Picture != null)
+                    {
+                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetail" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.GraphicCard.Producer) @Html.DisplayFor(modelItem => item.GraphicCard.ProducerCode)</a></h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Producent chipsetu: @Html.DisplayFor(modelItem => item.GraphicCard.ProducerChipset)</i>
+                            </li>
+                            <li>
+                                <i>Kod producenta: @Html.DisplayFor(modelItem => item.GraphicCard.ProducerCode)</i>
+                            </li>
+                            <li>
+                                <i>Pamięć zegara: @Html.DisplayFor(modelItem => item.GraphicCard.MemoryClock)</i>
+                            </li>
+                            <li>
+                                <i>Rodzaj pamięci RAM: @Html.DisplayFor(modelItem => item.GraphicCard.TypeOfRAM)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Product.Price) Zł</span></h6>
+                        <div class="my-4">
+
+                            <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                                </button>
+                            </a>
+
+                            <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    <i class="fas fa-info-circle pr-2"></i>Szczegóły
+                                </button>
+                            </a>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -6,52 +6,79 @@
 
 <div class="row checkoutForm">
     <h2>Twój koszyk</h2>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                
-                <th>Ilość</th>
-                <th>Produkt</th>
-                <th class="text-right">Cena za produkt</th>
-                <th class="text-right">Łącznie</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
-            {
-                <tr>
-                    
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left"><a>@line.Product.Name</a></td>
-                    <td class="text-right">@line.Product.Price.ToString("c")</td>
-                    <td class="text-right">
-                        @((line.Amount * line.Product.Price).ToString("c"))
-                    </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id">X</a></td>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Razem:</td>
-                <td class="text-right">
-                    @Model.ShoppingCartTotal.ToString("c")
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-
-    <div class="text-right">
-        <div class="btn-group ">
-            @if (Model.ShoppingCart.ShoppingCartItems.Count == 0)
-            {
-            <h3>@("Wrzuć coś do koszyka aby złożyć zamówienie")</h3>
-            }
-            else
-            {
-                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
-            }
+    </div>
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col class="text-center"">Ilość</th>
+                            <th scope="col class="text-center"">Product</th>
+                            <th scope="col class="text-center"">Cena za produkt</th>
+                            <th scope="col" class="text-center">Łącznie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                        {
+                        <tr>
+                            @* <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>*@
+                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="IncresseAmount" asp-route-prodId="@line.Product.Id"><button class="btn btn-success"></button></form> </td>
+                            <td class="text-center">@line.Amount</td>
+                            <td class="text-center">
+                                @if (line.Product.ProductType.Equals("PROCESSOR"))
+                                {
+                                    <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
+                                else if (line.Product.ProductType.Equals("MOTHERBOARD"))
+                                {
+                                    <a asp-controller="Motherboards" asp-action="MotherboardDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
+                                else if (line.Product.ProductType.Equals("GRAPHICSCARD"))
+                                {
+                                    <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
+                            </td>
+                            <td class="text-center">@line.Product.Price.ToString("c") Zł</td>
+                            <td class="text-center">
+                                @((line.Amount * line.Product.Price).ToString("c")) Zł
+                            </td>
+                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id"><button class="btn btn-sm btn-danger"></button></form> </td>
+                        </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Za wszystko razem:</strong></td>
+                            <td class="text-center"><strong> @Model.ShoppingCartTotal.ToString("c") Zł</strong></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a asp-controller="Home" asp-action="Index">
+                        <button class="btn btn-block btn-light">Kontynnuj zakupy</button>
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    @if (Model.ShoppingCart.ShoppingCartItems.Count == 0)
+                    {
+                        <h4>@("Wrzuć coś do koszyka aby złożyć zamówienie")</h4>
+                    }
+                    else
+                    {
+                        <a asp-controller="Order" asp-action="Checkout">
+                            <button class="btn btn-lg btn-block btn-success text-uppercase">Zamów</button>
+                        </a>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

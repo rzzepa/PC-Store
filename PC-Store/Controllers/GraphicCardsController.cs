@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,19 +17,26 @@ namespace PC_Store.Controllers
     public class GraphicCardsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public GraphicCardsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public GraphicCardsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: GraphicCards
         public async Task<IActionResult> Index()
         {
             return View(await _context.GraphicCards.ToListAsync());
+        }
+
+        public Task<IActionResult> GraphicCardDetail(int? id)
+        {
+            var x = _context.GraphicCards.Where(p => p.ProductId == id).Select(p => p.Id).FirstOrDefault();
+            return Details(x);
         }
 
         // GET: GraphicCards/Details/5
@@ -46,7 +54,32 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            return View(graphicCard);
+            return View("Details",graphicCard);
+        }
+
+        public async Task<IActionResult> GraphiccardDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var processor =
+            from GC in _context.GraphicCards
+            join PR in _context.Products on GC.ProductId equals PR.Id
+            where PR.Act == true && GC.ProductId == id
+            select new GraphicCardProduct
+            {
+                graphicCard = GC,
+                Product = PR
+            };
+            if (processor == null)
+            {
+                return NotFound();
+            }
+            GraphicCardProduct graphicCardProduct = processor.FirstOrDefault();
+
+            return View(graphicCardProduct);
         }
 
         // GET: GraphicCards/Create
@@ -131,6 +164,12 @@ namespace PC_Store.Controllers
             {
                 try
                 {
+                    /*var item = _context.Products.Where(p => p.Id == graphicCard.ProductId).SingleOrDefault();
+                    Product product = item;
+                    product.ModifyBy = _userManager.GetUserName(HttpContext.User);
+                    product.ModifyDate = product.ModifyDate = DateTime.Now;
+
+                    _context.Update(product);*/
                     _context.Update(graphicCard);
                     await _context.SaveChangesAsync();
                 }

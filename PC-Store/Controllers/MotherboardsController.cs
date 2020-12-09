@@ -18,18 +18,25 @@ namespace PC_Store.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public MotherboardsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public MotherboardsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: Motherboards
         public async Task<IActionResult> Index()
         {
             return View(await _context.Motherboards.ToListAsync());
+        }
+
+        public Task<IActionResult> MotherboardDetail(int? id)
+        {
+            var x = _context.Motherboards.Where(p => p.ProductId == id).Select(p => p.Id).FirstOrDefault();
+            return Details(x);
         }
 
         // GET: Motherboards/Details/5
@@ -47,7 +54,32 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            return View(motherboard);
+            return View("Details",motherboard);
+        }
+
+        public async Task<IActionResult> MotherboardDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var motherboard =
+            from MB in _context.Motherboards
+            join PR in _context.Products on MB.ProductId equals PR.Id
+            where PR.Act == true && MB.ProductId == id
+            select new MotherboardProduct
+            {
+                Motherboard = MB,
+                Product = PR
+            };
+            if (motherboard == null)
+            {
+                return NotFound();
+            }
+            MotherboardProduct motherboardProduct = motherboard.FirstOrDefault();
+
+            return View(motherboardProduct);
         }
 
         // GET: Motherboards/Create
@@ -116,6 +148,12 @@ namespace PC_Store.Controllers
             {
                 try
                 {
+                    /*var item = _context.Products.Where(p => p.Id == motherboard.ProductId).SingleOrDefault();
+                    Product product= item;
+                    product.ModifyBy= _userManager.GetUserName(HttpContext.User);
+                    product.ModifyDate= product.ModifyDate = DateTime.Now;
+                    
+                    _context.Update(product);*/
                     _context.Update(motherboard);
                     await _context.SaveChangesAsync();
                 }

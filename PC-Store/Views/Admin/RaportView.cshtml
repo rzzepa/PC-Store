@@ -1,0 +1,30 @@
+﻿@model PC_Store.Views.ViewModels.SalesRaportViewModel
+
+
+<center>
+    <h1>Raporty</h1>
+
+    <hr />
+
+    <form asp-controller="Admin" asp-action="GetProductSalesRaport">
+        <p><h3>Raport Sprzedazy Produktów</h3></p>
+        @Html.TextBoxFor(model => model.FromDate, new { type = "date"@*, @Value = string.Format("{0:yyyy-MM-dd}", Model.FromDate)*@ })
+        @Html.TextBoxFor(model => model.ToDate, new { type = "date", @*@Value = string.Format("{0:yyyy-MM-dd}", Model.ToDate)*@})
+        <br /><br />
+        <button class="btn btn-info">Exportuj do Excela</button>
+        <h3>
+            @ViewBag.Mess
+        </h3>
+    </form>
+    <hr />
+    <form asp-controller="Admin" asp-action="GetUserSalesRaport">
+        <p><h3>Raport Sprzedaży Użytkownicy</h3></p>
+        @Html.TextBoxFor(model => model.FromDate, new { type = "date"@*, @Value = string.Format("{0:yyyy-MM-dd}", Model.FromDate)*@ })
+        @Html.TextBoxFor(model => model.ToDate, new { type = "date", @*@Value = string.Format("{0:yyyy-MM-dd}", Model.ToDate)*@})
+        <br /><br />
+        <button class="btn btn-info">Exportuj do Excela</button>
+        <h3>
+            @ViewBag.Mess2
+        </h3>
+    </form>
+</center>

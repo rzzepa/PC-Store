@@ -1,0 +1,108 @@
+﻿@model PC_Store.Views.ViewModels.ProcessorProduct
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<center><h1>@Model.Processor.Producer @Model.Processor.Line</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Product.Picture!=null)
+                                {
+                                        <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                        <img  src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.Processor.Producer</i>
+                    </li>
+                    <li>
+                        <i>Linnia: @Model.Processor.Line</i>
+                    </li>
+                    <li>
+                        <i>Chłodzenie: @Model.Processor.Cooling</i>
+                    </li>
+                    <li>
+                        <i>Rodzaj gniazda: @Model.Processor.SocketType</i>
+                    </li>
+                    <li>
+                        <i>Liczba rdzeni: @Model.Processor.NumberOfCores</i>
+                    </li>
+                    <li>
+                        <i>Liczba wątków: @Model.Processor.NumberOfThreads</i>
+                    </li>
+                    <li>
+                        <i>Częstotliwość zegara: @Model.Processor.ProcessorClockFrequency</i>
+                    </li>
+                    <li>
+                        <i>Maksymalna częstotliwość: @Model.Processor.TurboMaximumFrequency</i>
+                    </li>
+                    <li>
+                        <i>Zintegrowana grafika: @Model.Processor.IntegratedGraphics</i>
+                    </li>
+                    <li>
+                        <i>Odblokowany mnożnik: @Model.Processor.UnlockedMultiplier</i>
+                    </li>
+                    <li>
+                        <i>Architektura: @Model.Processor.Architecture</i>
+                    </li>
+                    <li>
+                        <i>Typ pamięci: @Model.Processor.TypesOfSupportedMemory</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <h4><strong>Ilość:</strong></h4>
+                <div class="def-number-input number-input safari_only">
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                </div>
+                <hr>
+                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <form asp-controller="Home" asp-action="ProcessorList">
+            <div class="form-group">
+                <input type="submit" value="Wróć" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>

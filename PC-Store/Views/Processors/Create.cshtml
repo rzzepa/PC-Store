@@ -17,17 +17,18 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.Producer" class="control-label"></label>
-                <select asp-for="@Model.Processor.Producer" class="control-label">
-                    @{
-                        foreach (var x in @Model.Producers)
-                        {
-                            <option>@x</option>
-                        }
-
-                    }
-                </select>
-                <span asp-validation-for="@Model.Processor.Producer" class="text-danger"></span>
+                <label asp-for="@Model.Processor.SocketType" class="control-label"></label>
+                @if (ViewBag.SocketList != null)
+                {
+                    @Html.DropDownListFor(m => m.Producers, ViewBag.ProducerList as SelectList, "--Wybierz Producenta--", new { @class = "form-control" })
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Processor.SocketType" class="control-label"></label>
+                @if (ViewBag.SocketList != null)
+                {
+                    @Html.DropDownListFor(m => m.SocketTypes, new SelectList(" "), "--Wybierz Socket--", new { @class = "form-control" })
+                }
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Processor.Line" class="control-label"></label>
@@ -38,19 +39,6 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="@Model.Processor.Cooling" /> @Html.DisplayNameFor(model => model.Processor.Cooling)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Processor.SocketType" class="control-label"></label>
-                <select asp-for="@Model.Processor.SocketType" class="control-label">
-
-                    @{
-                        foreach (var x in @Model.SocketTypes)
-                        {
-                            <option>@x</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="@Model.Processor.SocketType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Processor.NumberOfCores" class="control-label"></label>
@@ -106,10 +94,9 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-    </div>
+</div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

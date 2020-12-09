@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using PC_Store.Data;
 using PC_Store.Models;
 using X.PagedList;
+using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -43,45 +44,40 @@ namespace PC_Store.Controllers
             else if (sortOrder == "lineASC") ViewBag.NameSortParam = "lineDESC";
             else if (sortOrder == "lineDESC") ViewBag.NameSortParam = "lineASC";
             else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";
-            
+
             //var processors = from s in _context.Processors select s;
 
             var processors =
             from PRo in _context.Processors
             join PR in _context.Products on PRo.ProductId equals PR.Id
             where PR.Act == true
-            select new Processor
+            select new ProcessorProduct 
             {
-                Producer=PRo.Producer,
-                Line=PRo.Line,
-                Cooling=PRo.Cooling,
-                SocketType=PRo.SocketType,
-                NumberOfCores=PRo.NumberOfCores,
-                NumberOfThreads=PRo.NumberOfThreads,
-                IntegratedGraphics=PRo.IntegratedGraphics
+                Processor=PRo,
+                Product=PR
             };
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                processors = processors.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.Line.ToLower().Contains(searchString.ToLower()) || s.SocketType.ToLower().Contains(searchString.ToLower())).OrderBy(s => s.Producer);
+                processors = processors.Where(s => s.Processor.Producer.ToLower().Contains(searchString.ToLower()) || s.Processor.Line.ToLower().Contains(searchString.ToLower()) || s.Processor.SocketType.ToLower().Contains(searchString.ToLower())).OrderBy(s => s.Processor.Producer);
             }
 
             switch (sortOrder)
             {
                 case "producerASC":
-                    processors = processors.OrderBy(s => s.Producer);
+                    processors = processors.OrderBy(s => s.Processor.Producer);
                     break;
 
                 case "producerDESC":
-                    processors = processors.OrderByDescending(s => s.Producer);
+                    processors = processors.OrderByDescending(s => s.Processor.Producer);
                     break;
 
                 case "lineASC":
-                    processors = processors.OrderBy(s => s.Line);
+                    processors = processors.OrderBy(s => s.Processor.Line);
                     break;
 
                 case "lineDESC":
-                    processors = processors.OrderByDescending(s => s.Line);
+                    processors = processors.OrderByDescending(s => s.Processor.Line);
                     break;
             }
 
@@ -96,13 +92,10 @@ namespace PC_Store.Controllers
             from MB in _context.Motherboards
             join PR in _context.Products on MB.ProductId equals PR.Id
             where PR.Act == true
-            select new Motherboard
+            select new MotherboardList
             {
-                Producer=MB.Producer,
-                ProducerCode=MB.ProducerCode,
-                Standard=MB.Standard,
-                Chipset=MB.Chipset,
-                SocketType=MB.SocketType
+                Motherboard = MB,
+                Product=PR
             };
 
             return View(MotherBoard);
@@ -114,11 +107,10 @@ namespace PC_Store.Controllers
             from GC in _context.GraphicCards
             join PR in _context.Products on GC.ProductId equals PR.Id
             where PR.Act == true
-            select new GraphicCard
+            select new GraphiccardList
             {
-                Producer=GC.Producer,
-                ProducerCode=GC.ProducerCode,
-                ProducerChipset=GC.ProducerChipset
+                GraphicCard=GC,
+                Product=PR
             };
             return View(GraphicCards);
         }

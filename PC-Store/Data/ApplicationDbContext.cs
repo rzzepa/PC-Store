@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Models;
 using PC_Store.Models.ViewModels;
+using PC_Store.structure;
 
 namespace PC_Store.Data
 {
@@ -33,6 +34,19 @@ namespace PC_Store.Data
 
         public DbSet<ShoppingCardItem> ShoppingCardItems { get; set; }
 
+        
+        public DbQuery<ProductSalesRaport> ProductSalesRaport { get; set; }
+
+        public DbQuery<UsersSalesRaport> UsersSalesRaport { get; set; }
+
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Query<ProductSalesRaport>().ToView("productsalesraport");
+            builder.Query<UsersSalesRaport>().ToView("usersalesraport");
+
+        }
     }
 }

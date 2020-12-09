@@ -1,0 +1,90 @@
+﻿@model PC_Store.Views.ViewModels.MotherboardProduct
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<center><h1>@Model.Motherboard.Producer @Model.Motherboard.ProducerCode</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Product.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.Motherboard.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.Motherboard.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Standard: @Model.Motherboard.Standard</i>
+                    </li>
+                    <li>
+                        <i>Chipset: @Model.Motherboard.Chipset</i>
+                    </li>
+                    <li>
+                        <i>Typ gniazda procesora: @Model.Motherboard.SocketType</i>
+                    </li>
+                    <li>
+                        <i>Technologie: @Model.Motherboard.Technologies</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <h4><strong>Ilość:</strong></h4>
+                <div class="def-number-input number-input safari_only">
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                </div>
+                <hr>
+                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <form asp-controller="Home" asp-action="MotherboardList">
+            <div class="form-group">
+                <input type="submit" value="Wróć" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>

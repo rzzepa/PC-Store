@@ -1,55 +1,73 @@
-﻿@model IEnumerable<PC_Store.Models.Motherboard>
+﻿@model IEnumerable<PC_Store.Views.ViewModels.MotherboardList>
 
 @{
     ViewData["Title"] = "Index";
 }
-<h1><center>Płyty główne</center></h1>
-<br /><br />
+<center><h1>Płyty główne</h1></center>
+<br />
+<br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Producent
-            </th>
-            <th>
-                Kod producenta
-            </th>
-            <th>
-                Standard
-            </th>
-            <th>
-                Chipset
-            </th>
-            <th>
-                Typ gniazda
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Producer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProducerCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Standard)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Chipset)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SocketType)
-                </td>
-                <td>
-                    <a class="btn btn-success" asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.ProductId">Dodaj do koszyka</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <a asp-controller="Motherboards" asp-action="MotherboardDetails" asp-route-id="@item.Product.Id">
+                        @if (item.Product.Picture != null)
+                        {
+                            <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
+                        }
+                        else
+                        {
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        }
+                    </a>
+</div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="Motherboards" asp-action="MotherboardDetails" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.Motherboard.Producer) @Html.DisplayFor(modelItem => item.Motherboard.ProducerCode)</a> </h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Typ gniazda procesora: @Html.DisplayFor(modelItem => item.Motherboard.SocketType)</i>
+                            </li>
+                            <li>
+                                <i>Standard płyty: @Html.DisplayFor(modelItem => item.Motherboard.Standard)</i>
+                            </li>
+                            <li>
+                                <i>Standard płyty: @Html.DisplayFor(modelItem => item.Motherboard.StandardMemory)</i>
+                            </li>
+                            <li>
+                                <i>Liczba miejsc na pamięć: @Html.DisplayFor(modelItem => item.Motherboard.NumberOfMemorySlots)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Product.Price) Zł</span></h6>
+                        <div class="my-4">
+                            <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                                </button>
+                            </a>
+                            <a asp-controller="Motherboards" asp-action="MotherboardDetails" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    <i class="fas fa-info-circle pr-2"></i>Szczegóły
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
