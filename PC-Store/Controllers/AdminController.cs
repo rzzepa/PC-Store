@@ -13,6 +13,7 @@ using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +23,7 @@ namespace PC_Store.Controllers
             _context = context;
         }
 
-        [Authorize]
+        
         public IActionResult Panel()
         {
             return View();

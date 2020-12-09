@@ -104,7 +104,7 @@ namespace PC_Store.Controllers
             return View("Details",processor);
         }
 
-        public async Task<IActionResult> ProcessorDetails(int? id)
+        public IActionResult ProcessorDetails(int? id)
         {
             if (id == null)
             {

@@ -37,8 +37,28 @@ namespace PC_Store
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+    .       AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "809918557684-t62t7ob6h5hoh8aosp3dia9p4otd8emb.apps.googleusercontent.com";
+                options.ClientSecret = "qoFhlmJgcmxw4Uly-QFdn-8h";
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DeleteRolePolicy",
+                    policy => policy.RequireClaim("Delete Role")
+                                    .RequireClaim("Create Role")
+                    );
+            });
+
             services.AddControllersWithViews();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -47,8 +67,11 @@ namespace PC_Store
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMemoryCache();
             services.AddSession();
+            
 
-         services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/Login");
+
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/Login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

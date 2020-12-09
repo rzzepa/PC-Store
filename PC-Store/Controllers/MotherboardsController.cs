@@ -57,7 +57,7 @@ namespace PC_Store.Controllers
             return View("Details",motherboard);
         }
 
-        public async Task<IActionResult> MotherboardDetails(int? id)
+        public IActionResult MotherboardDetails(int? id)
         {
             if (id == null)
             {
@@ -93,7 +93,7 @@ namespace PC_Store.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateMotherboardViewModel model)
+        public IActionResult Create(CreateMotherboardViewModel model)
         {
             if (ModelState.IsValid)
             {

@@ -57,7 +57,7 @@ namespace PC_Store.Controllers
             return View("Details",graphicCard);
         }
 
-        public async Task<IActionResult> GraphiccardDetails(int? id)
+        public IActionResult GraphiccardDetails(int? id)
         {
             if (id == null)
             {

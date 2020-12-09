@@ -28,15 +28,76 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" asp-controller="Admin" asp-action="Panel" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Panel
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item"
+                                       asp-controller="Processors" asp-action="Index">
+                                        Procesory
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="GraphicCards" asp-action="Index">
+                                        Karty graficzne
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="Motherboards" asp-action="Index">
+                                        Płyty główne
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="Dictionaries" asp-action="Index">
+                                        Słowniki
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="Products" asp-action="Index">
+                                        Produkty
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="Admin" asp-action="RaportView">
+                                        Raporty
+                                    </a>
+                                    <a class="dropdown-item"
+                                       asp-controller="Administration" asp-action="ListRoles">
+                                        Role
+                                    </a>
+                                </div>
+
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Kategorie
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item"
+                                   asp-controller="Home" asp-action="ProcessorList">
+                                    Procesory
+                                </a>
+                                <a class="dropdown-item"
+                                   asp-controller="Home" asp-action="MotherboardList">
+                                    Płyty główne
+                                </a>
+                                <a class="dropdown-item"
+                                   asp-controller="Home" asp-action="GraphiccardList">
+                                    Karty graficzne
+                                </a>
+                            </div>
+
+                        </li>
+
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Panel">Panel</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="GetMyOrders">Moje zamówienia</a>
                             </li>
                         }
+
+
                         <li>
                             <a class="nav-link navbar-link-2 waves-effect nav-link text-dark" asp-controller="ShoppingCart" asp-action="Index">
                                 <i class="fas fa-shopping-cart pl-0">Koszyk <img class="rounded-circle" height="30" width="30" src="~/images/serverimg/shopping-cart-realistic.jpg" /></i>

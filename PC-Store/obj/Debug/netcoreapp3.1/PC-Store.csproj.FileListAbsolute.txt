@@ -530,4 +530,11 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\ClosedXML.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Administration\CreateRole.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ListRoles.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditRole.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditUsersInRole.cshtml.g.cs
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache
