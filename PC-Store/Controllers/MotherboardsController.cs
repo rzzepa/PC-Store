@@ -82,15 +82,12 @@ namespace PC_Store.Controllers
             return View(motherboardProduct);
         }
 
-        // GET: Motherboards/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Motherboards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CreateMotherboardViewModel model)
@@ -102,6 +99,11 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.Motherboard.Producer + " " +model.Motherboard.Chipset+" "+model.Motherboard.SocketType;
                 product.Price = 0;
+                product.InsertBy = _userManager.GetUserName(HttpContext.User);
+                product.ModifyBy = _userManager.GetUserName(HttpContext.User);
+                product.InsertDate = DateTime.Now;
+                product.ModifyDate = DateTime.Now;
+                product.ProductType = "MOTHERBOARD";
                 product.Act = false;
                 _context.Products.Add(product);
 
@@ -116,7 +118,7 @@ namespace PC_Store.Controllers
             return View();
         }
 
-        // GET: Motherboards/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,12 +134,10 @@ namespace PC_Store.Controllers
             return View(motherboard);
         }
 
-        // POST: Motherboards/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Producer,ProducerCode,Standard,Chipset,SocketType,Technologies")] Motherboard motherboard)
+        public async Task<IActionResult> Edit(int id, Motherboard motherboard)
         {
             if (id != motherboard.Id)
             {
@@ -148,12 +148,6 @@ namespace PC_Store.Controllers
             {
                 try
                 {
-                    /*var item = _context.Products.Where(p => p.Id == motherboard.ProductId).SingleOrDefault();
-                    Product product= item;
-                    product.ModifyBy= _userManager.GetUserName(HttpContext.User);
-                    product.ModifyDate= product.ModifyDate = DateTime.Now;
-                    
-                    _context.Update(product);*/
                     _context.Update(motherboard);
                     await _context.SaveChangesAsync();
                 }

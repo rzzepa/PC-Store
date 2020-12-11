@@ -32,6 +32,10 @@ namespace PC_Store.Data
 
         public DbSet<Motherboard> Motherboards { get; set; }
 
+        public DbSet<ComputerCase> ComputerCases { get; set; }
+
+        public DbSet<Ram> Rams { get; set; }
+
         public DbSet<ShoppingCardItem> ShoppingCardItems { get; set; }
 
         

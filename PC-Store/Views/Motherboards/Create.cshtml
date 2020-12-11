@@ -3,14 +3,14 @@
 @{
     ViewData["Title"] = "Create";
 }
-@using (Html.BeginForm("Create", "Processor", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
+@using (Html.BeginForm("Create", "Motherboard", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
 <h1>Create</h1>
 
 <h4>Motherboard</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="@Model.Motherboard.Producer" class="control-label"></label>

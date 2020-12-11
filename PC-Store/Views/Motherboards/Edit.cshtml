@@ -43,6 +43,7 @@
                 <input asp-for="Technologies" class="form-control" />
                 <span asp-validation-for="Technologies" class="text-danger"></span>
             </div>
+            @Html.HiddenFor(model => model.ProductId)
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

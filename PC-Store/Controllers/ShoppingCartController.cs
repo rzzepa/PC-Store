@@ -47,7 +47,6 @@ namespace PC_Store.Controllers
             return View("View",sCVM);
         }
 
-        [Authorize]
         public RedirectToActionResult AddtoShoppingCart(int? id)
         {
                 var selectedProduct = _context.Products.FirstOrDefault(p => p.Id == id);

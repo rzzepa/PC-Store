@@ -1,0 +1,102 @@
+﻿@model PC_Store.Views.ViewModels.CreateRamViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@using (Html.BeginForm("Create", "Ram", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
+<h1>Create</h1>
+
+<h4>Motherboard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Producer" class="control-label"></label>
+                <input asp-for="@Model.Ram.Producer" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Producer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.ProducerCode" class="control-label"></label>
+                <input asp-for="@Model.Ram.ProducerCode" class="form-control" />
+                <span asp-validation-for="@Model.Ram.ProducerCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Line" class="control-label"></label>
+                <input asp-for="@Model.Ram.Line" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Line" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.ConnectorType" class="control-label"></label>
+                <input asp-for="@Model.Ram.ConnectorType" class="form-control" />
+                <span asp-validation-for="@Model.Ram.ConnectorType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.MemoryType" class="control-label"></label>
+                <input asp-for="@Model.Ram.MemoryType" class="form-control" />
+                <span asp-validation-for="@Model.Ram.MemoryType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Cooling" class="control-label"></label>
+                <input asp-for="@Model.Ram.Cooling" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Cooling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.LowProfile" class="control-label"></label>
+                <input asp-for="@Model.Ram.LowProfile" class="form-control" />
+                <span asp-validation-for="@Model.Ram.LowProfile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.TotalCapacity" class="control-label"></label>
+                <input asp-for="@Model.Ram.TotalCapacity" class="form-control" />
+                <span asp-validation-for="@Model.Ram.TotalCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.NumberOfModules" class="control-label"></label>
+                <input asp-for="@Model.Ram.NumberOfModules" class="form-control" />
+                <span asp-validation-for="@Model.Ram.NumberOfModules" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Frequency" class="control-label"></label>
+                <input asp-for="@Model.Ram.Frequency" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Frequency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Delay" class="control-label"></label>
+                <input asp-for="@Model.Ram.Delay" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Delay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Voltage" class="control-label"></label>
+                <input asp-for="@Model.Ram.Voltage" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Voltage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Ram.Backlight" class="control-label"></label>
+                <input asp-for="@Model.Ram.Backlight" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Backlight" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="File" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="File" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

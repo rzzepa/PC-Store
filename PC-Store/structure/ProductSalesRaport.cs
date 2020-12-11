@@ -15,6 +15,8 @@ namespace PC_Store.structure
         public int Motherboards { get; set; }
 
         public int Graphiccards { get; set; }
+        
+        public int Computercases{ get; set; }
 
         public IEnumerator GetEnumerator()
         {

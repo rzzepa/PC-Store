@@ -85,6 +85,29 @@ namespace PC_Store.Controllers
 
             return itemId.Select(p => p.Id).FirstOrDefault();
         }
+
+        public int ComputerCaseDetail(int? id)
+        {
+            var itemId =
+            from CC in _context.ComputerCases
+            join PR in _context.Products on CC.ProductId equals PR.Id
+            where PR.Id == id
+            select new Motherboard { Id = CC.Id };
+
+            return itemId.Select(p => p.Id).FirstOrDefault();
+        }
+
+        public int RamDetail(int? id)
+        {
+            var itemId =
+            from Ra in _context.Rams
+            join PR in _context.Products on Ra.ProductId equals PR.Id
+            where PR.Id == id
+            select new Ram { Id = Ra.Id };
+
+            return itemId.Select(p => p.Id).FirstOrDefault();
+        }
+
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -144,6 +167,22 @@ namespace PC_Store.Controllers
                 {
                     Product = product,
                     Id = MotherboardDetail(product.Id)
+                };
+            }
+            else if (product.ProductType.Equals("COMPUTERCASE"))
+            {
+                editProductViewModel = new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = ComputerCaseDetail(product.Id)
+                };
+            }
+            else if (product.ProductType.Equals("RAMMEMORY"))
+            {
+                editProductViewModel = new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = ComputerCaseDetail(product.Id)
                 };
             }
 

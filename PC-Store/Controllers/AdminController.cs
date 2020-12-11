@@ -68,15 +68,17 @@ namespace PC_Store.Controllers
                 worksheet.Cell(currentRow, 2).Value = "Procesory";
                 worksheet.Cell(currentRow, 3).Value = "Karty graficzne";
                 worksheet.Cell(currentRow, 4).Value = "Płyty główne";
+                worksheet.Cell(currentRow, 5).Value = "Obudowy";
 
-                foreach (var item in salesraport)
+                    foreach (var item in salesraport)
                 {
                     currentRow++;
                     worksheet.Cell(currentRow, 1).Value = item.Date;
                     worksheet.Cell(currentRow, 2).Value = item.Processors;
                     worksheet.Cell(currentRow, 3).Value = item.Graphiccards;
                     worksheet.Cell(currentRow, 4).Value = item.Motherboards;
-                }
+                    worksheet.Cell(currentRow, 5).Value = item.Computercases;
+                    }
 
                 using (var stream = new MemoryStream())
                 {

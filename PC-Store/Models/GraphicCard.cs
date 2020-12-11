@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PC_Store.Models
 {
-    public class GraphicCard: IProducts
+    public class GraphicCard
     {
         public int Id { get; set; }
 
@@ -48,14 +48,5 @@ namespace PC_Store.Models
 
         public int ProductId { get; set; }
 
-        public int GetId()
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal GetPrice()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

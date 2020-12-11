@@ -16,7 +16,7 @@ namespace PC_Store.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -211,6 +211,81 @@ namespace PC_Store.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.ComputerCase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Backlit")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Compatibility")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ComputerCaseType")
+                        .HasColumnType("text");
+
+                    b.Property<float>("Depth")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Height")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("MemoryCardReader")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("MicrophoneConnector")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Muted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerCode")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("SpeakerConnector")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("USBC")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Usb20")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Usb30")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Usb31")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Usb32")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Width")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("Window")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ComputerCases");
                 });
 
             modelBuilder.Entity("PC_Store.Models.Dictionary", b =>
@@ -567,6 +642,60 @@ namespace PC_Store.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.Ram", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("Backlight")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ConnectorType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cooling")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Delay")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Frequency")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Line")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("LowProfile")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MemoryType")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfModules")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerCode")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TotalCapacity")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("Voltage")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rams");
                 });
 
             modelBuilder.Entity("PC_Store.Models.ShoppingCardItem", b =>

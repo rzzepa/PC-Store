@@ -1,0 +1,132 @@
+﻿@model PC_Store.Views.ViewModels.ComputerCaseProduct
+
+@{
+    ViewData["Title"] = "Szczegóły Obudowy";
+}
+
+<center><h1>@Model.ComputerCase.Producer @Model.ComputerCase.ProducerCode</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Product.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.ComputerCase.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.ComputerCase.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Kolor: @Model.ComputerCase.Color</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie: @Model.ComputerCase.Backlit</i>
+                    </li>
+                    <li>
+                        <i>Wysokość [cm]: @Model.ComputerCase.Height</i>
+                    </li>
+                    <li>
+                        <i>Szerokość [cm]: @Model.ComputerCase.Width</i>
+                    </li>
+                    <li>
+                        <i>Głębokość [cm]: @Model.ComputerCase.Depth</i>
+                    </li>
+                    <li>
+                        <i>Waga [kg]: @Model.ComputerCase.Weight</i>
+                    </li>
+                    <li>
+                        <i>Typ obudowy: @Model.ComputerCase.ComputerCaseType</i>
+                    </li>
+                    <li>
+                        <i>Kompatybilność: @Model.ComputerCase.Compatibility</i>
+                    </li>
+                    <li>
+                        <i>Okno: @Model.ComputerCase.Window</i>
+                    </li>
+                    <li>
+                        <i>Wyciszona: @Model.ComputerCase.Muted</i>
+                    </li>
+                    <li>
+                        <i>USB 2.0: @Model.ComputerCase.Usb20</i>
+                    </li>
+                    <li>
+                        <i>USB 3.0: @Model.ComputerCase.Usb30</i>
+                    </li>
+                    <li>
+                        <i>USB 3.1: @Model.ComputerCase.Usb31</i>
+                    </li>
+                    <li>
+                        <i>USB 3.2: @Model.ComputerCase.Usb32</i>
+                    </li>
+                    <li>
+                        <i>USB Typ-C: @Model.ComputerCase.USBC</i>
+                    </li>
+                    <li>
+                        <i>Czytnik kart pamięci: @Model.ComputerCase.MemoryCardReader</i>
+                    </li>
+                    <li>
+                        <i>Złącze słuchawkowe/głośnikowe: @Model.ComputerCase.SpeakerConnector</i>
+                    </li>
+                    <li>
+                        <i>Złącze mikrofonowe: @Model.ComputerCase.MicrophoneConnector</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <h4><strong>Ilość:</strong></h4>
+                <div class="def-number-input number-input safari_only">
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                </div>
+                <hr>
+                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <form asp-controller="Home" asp-action="ComputerCaseList">
+            <div class="form-group">
+                <input type="submit" value="Wróć" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>

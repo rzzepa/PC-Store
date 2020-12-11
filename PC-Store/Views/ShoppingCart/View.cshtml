@@ -40,6 +40,14 @@
                                 {
                                     <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
                                 }
+                                else if (line.Product.ProductType.Equals("COMPUTERCASE"))
+                                {
+                                    <a asp-controller="ComputerCases" asp-action="ComputerCaseDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
+                                else if (line.Product.ProductType.Equals("RAMMEMORY"))
+                                {
+                                    <a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
                             </td>
                             <td class="text-center">@line.Product.Price.ToString("c") Zł</td>
                             <td class="text-center">

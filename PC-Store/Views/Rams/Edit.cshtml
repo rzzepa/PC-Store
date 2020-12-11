@@ -1,0 +1,92 @@
+﻿@model PC_Store.Models.Ram
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edycja</h1>
+
+<h4>Pamięć RAM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="@Model.Producer" class="control-label"></label>
+                <input asp-for="@Model.Producer" class="form-control" />
+                <span asp-validation-for="@Model.Producer" class="text-danger"></span>
+            </div>
+            @Html.HiddenFor(model => model.ProductId)
+            <div class="form-group">
+                <label asp-for="@Model.ProducerCode" class="control-label"></label>
+                <input asp-for="@Model.ProducerCode" class="form-control" />
+                <span asp-validation-for="@Model.ProducerCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Line" class="control-label"></label>
+                <input asp-for="@Model.Line" class="form-control" />
+                <span asp-validation-for="@Model.Line" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ConnectorType" class="control-label"></label>
+                <input asp-for="@Model.ConnectorType" class="form-control" />
+                <span asp-validation-for="@Model.ConnectorType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MemoryType" class="control-label"></label>
+                <input asp-for="@Model.MemoryType" class="form-control" />
+                <span asp-validation-for="@Model.MemoryType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Cooling" class="control-label"></label>
+                <input asp-for="@Model.Cooling" class="form-control" />
+                <span asp-validation-for="@Model.Cooling" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.LowProfile" class="control-label"></label>
+                <input asp-for="@Model.LowProfile" class="form-control" />
+                <span asp-validation-for="@Model.LowProfile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TotalCapacity" class="control-label"></label>
+                <input asp-for="@Model.TotalCapacity" class="form-control" />
+                <span asp-validation-for="@Model.TotalCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NumberOfModules" class="control-label"></label>
+                <input asp-for="@Model.NumberOfModules" class="form-control" />
+                <span asp-validation-for="@Model.NumberOfModules" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Frequency" class="control-label"></label>
+                <input asp-for="@Model.Frequency" class="form-control" />
+                <span asp-validation-for="@Model.Frequency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Delay" class="control-label"></label>
+                <input asp-for="@Model.Delay" class="form-control" />
+                <span asp-validation-for="@Model.Delay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Voltage" class="control-label"></label>
+                <input asp-for="@Model.Voltage" class="form-control" />
+                <span asp-validation-for="@Model.Voltage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Backlight" class="control-label"></label>
+                <input asp-for="@Model.Backlight" class="form-control" />
+                <span asp-validation-for="@Model.Backlight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Wróć</a>
+</div>
+

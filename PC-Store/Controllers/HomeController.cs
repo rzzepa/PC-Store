@@ -115,6 +115,38 @@ namespace PC_Store.Controllers
             return View(GraphicCards);
         }
 
+        public ViewResult ComputerCaseList()
+        {
+            var ComputerCase =
+            from CC in _context.ComputerCases
+            join PR in _context.Products on CC.ProductId equals PR.Id
+            where PR.Act == true
+            select new ComputerCaseList
+            {
+                ComputerCase = CC,
+                Product = PR
+            };
+
+            return View(ComputerCase);
+        }
+
+        public ViewResult RamList()
+        {
+            var ram =
+            from Ra in _context.Rams
+            join PR in _context.Products on Ra.ProductId equals PR.Id
+            where PR.Act == true
+            select new RamList
+            {
+                ram = Ra,
+                Product = PR
+            };
+
+            var x = ram.ToList();
+
+            return View(ram);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

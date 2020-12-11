@@ -102,6 +102,11 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.GraphicCard.Producer + " " + model.GraphicCard.ProducerCode + " " + model.GraphicCard.ProducerChipset;
                 product.Price = 0;
+                product.InsertBy = _userManager.GetUserName(HttpContext.User);
+                product.ModifyBy = _userManager.GetUserName(HttpContext.User);
+                product.InsertDate = DateTime.Now;
+                product.ModifyDate = DateTime.Now;
+                product.ProductType = "GRAPHICSCARD";
                 product.Act = false;
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
@@ -148,12 +153,11 @@ namespace PC_Store.Controllers
             return View(graphicCard);
         }
 
-        // POST: GraphicCards/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Producer,ProducerCode,ProducerChipset,CoreClock,CoreClockBoost,ConnectorType,Resolution,RecommendedPSUPower,AmountOfRAM,TypeOfRAM,DataBus,MemoryClock,CoolingType,NumberOfFans,DSub,DisplayPort,HDMI,DVI")] GraphicCard graphicCard)
+        public async Task<IActionResult> Edit(int id, GraphicCard graphicCard)
         {
             if (id != graphicCard.Id)
             {
@@ -164,12 +168,6 @@ namespace PC_Store.Controllers
             {
                 try
                 {
-                    /*var item = _context.Products.Where(p => p.Id == graphicCard.ProductId).SingleOrDefault();
-                    Product product = item;
-                    product.ModifyBy = _userManager.GetUserName(HttpContext.User);
-                    product.ModifyDate = product.ModifyDate = DateTime.Now;
-
-                    _context.Update(product);*/
                     _context.Update(graphicCard);
                     await _context.SaveChangesAsync();
                 }

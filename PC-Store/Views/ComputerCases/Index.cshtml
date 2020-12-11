@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PC_Store.Models.ComputerCase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Obudowy do komputera</h1>
+
+<p>
+    <a asp-action="Create">Dodaj</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Producent
+            </th>
+            <th>
+                Kod producenta
+            </th>
+            <th>
+                Kolor
+            </th>
+            <th>
+                Podświetlenie
+            </th>
+            <th>
+                Typ obudowy
+            </th>
+            <th>
+                Kompatybilność
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Backlit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComputerCaseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Compatibility)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

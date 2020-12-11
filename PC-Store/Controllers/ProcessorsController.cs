@@ -159,6 +159,7 @@ namespace PC_Store.Controllers
                 product.ModifyBy= _userManager.GetUserName(HttpContext.User);
                 product.InsertDate= DateTime.Now;
                 product.ModifyDate= DateTime.Now;
+                product.ProductType = "PROCESSOR";
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
 
@@ -206,7 +207,7 @@ namespace PC_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Producer,Line,Cooling,SocketType,NumberOfCores,NumberOfThreads,ProcessorClockFrequency,TurboMaximumFrequency,IntegratedGraphics,UnlockedMultiplier,Architecture,TypesOfSupportedMemory")] Processor processor)
+        public async Task<IActionResult> Edit(int id, Processor processor)
         {
             if (id != processor.Id)
             {

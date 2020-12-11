@@ -50,6 +50,8 @@ Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     
             {
                 <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="250" width="250" asp-append-version="true" />
             }
+            @Html.HiddenFor(model => model.Product.InsertDate)
+            @Html.HiddenFor(model => model.Product.InsertBy)
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -70,6 +72,14 @@ Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     
     else if (Model.Product.ProductType.Equals("GRAPHICSCARD"))
     {
         <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
+    else if (Model.Product.ProductType.Equals("COMPUTERCASE"))
+    {
+        <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
+    else if (Model.Product.ProductType.Equals("RAMMEMORY"))
+    {
+        <a asp-controller="Rams" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
     }
 </div>
 
