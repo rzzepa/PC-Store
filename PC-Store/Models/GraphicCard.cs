@@ -16,9 +16,13 @@ namespace PC_Store.Models
 
         public string ProducerChipset { get; set; }
 
+        public string ChipsetType { get; set; }
+
         public int CoreClock { get; set; }
 
         public int CoreClockBoost { get; set; }
+        
+        public int CardLength { get; set; }
 
         public string ConnectorType { get; set; }
 
@@ -28,6 +32,8 @@ namespace PC_Store.Models
 
         public string RecommendedPSUPower { get; set; }
 
+        public bool Led { get; set; }
+
         public int AmountOfRAM { get; set; }
 
         public string TypeOfRAM { get; set; }
@@ -36,7 +42,7 @@ namespace PC_Store.Models
 
         public int MemoryClock { get; set; }
 
-        public int CoolingType { get; set; }
+        public string CoolingType { get; set; }
 
         public int NumberOfFans { get; set; }
 

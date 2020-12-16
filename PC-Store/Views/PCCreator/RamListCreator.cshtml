@@ -6,17 +6,13 @@
 <center><h1>Pamięci RAM</h1></center>
 <br />
 <br />
-@if (Model.ToList().Count == 0)
-{
-    <center><h4>Brak pasującej pamięci RAM</h4></center>
-}
-else
-{
-    <form asp-action="RamListCreator" method="get">
+<div style="display: flex;">
+    <form asp-action="RamListCreator" method="get" float="left">
         <div class="form-actions no-color">
             <p>
-                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
                 <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
                 <a asp-action="RamListCreator">
                     <button type="button" class="btn btn-success">
                         Wróć do pełnej listy
@@ -25,7 +21,43 @@ else
             </p>
         </div>
     </form>
+    <pre>                                                                                         </pre>
+    <form asp-action="RamListCreator" method="get">
+        <div class="form-row align-items-center">
+            <p>
+                <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <select class="form-control" name="sortOrder" value="@ViewData["sortOrder"]">
+
+                    @if (@ViewData["sortOrder"].ToString() == "price_desc")
+                    {
+                        <option value="price_asc">Cena - rosnąco</option>
+                        <option value="price_desc" selected>Cena - malejąco</option>
+                    }
+                    else
+                    {
+                        <option value="price_asc" selected>Cena - rosnąco</option>
+                        <option value="price_desc">Cena - malejąco</option>
+                    }
+                </select>
+
+            </p>
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Sortuj" class="btn btn-primary" />
+
+        </div>
+    </form>
+</div>
+<a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć do konfiguratora
+    </button>
+</a>
+@if (Model.ToList().Count == 0)
+{
+    <center><h4>Brak pasującej pamięci RAM</h4></center>
 }
+
 @foreach (var item in Model)
 {
     <section>
@@ -34,7 +66,7 @@ else
             <div class="col-md-5 col-lg-3 col-xl-3">
 
                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                    <a asp-controller="Ram" asp-action="RamDetails" asp-route-id="@item.Id">
+                    <a asp-controller="PcCreator" asp-action="RamCreatorDetails" asp-route-id="@item.Id">
                         @if (item.Picture != null)
                         {
                             <img class="img-fluid w-100" src="~/images/@item.Picture" alt="Sample">
@@ -51,7 +83,7 @@ else
                 <div class="row">
                     <div class="col-lg-7 col-xl-7">
 
-                        <h5><a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.ProducerCode)</a> </h5>
+                        <h5><a asp-controller="PcCreator" asp-action="RamCreatorDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.ProducerCode)</a> </h5>
                         <ul class="rating">
                             <li>
                                 <i>Producent: @Html.DisplayFor(modelItem => item.Producer)</i>
@@ -123,6 +155,6 @@ else
 </center>
 <a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
     <button type="button" class="btn btn-light btn-md mr-1 mb-2">
-        Wróć
+        Wróć do konfiguratora
     </button>
 </a>

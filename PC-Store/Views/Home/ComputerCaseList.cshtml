@@ -10,7 +10,7 @@
     <form asp-action="ComputerCaseList" method="get" float="left">
         <div class="form-actions no-color">
             <p>
-                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
                 <input type="submit" value="Szukaj" class="btn btn-primary" />
                 <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
                 <a asp-action="ComputerCaseList">
@@ -21,14 +21,14 @@
             </p>
         </div>
     </form>
-    <pre>                                      </pre>
+    <pre>                                                                               </pre>
     <form asp-action="ComputerCaseList" method="get" float="right">
         <div class="form-row align-items-center">
             <p>
                 <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
-                <select class="custom-select mr-sm-2" name="sortOrder" value="@ViewData["sortOrder"]">
+                <select class="form-control" name="sortOrder" value="@ViewData["sortOrder"]">
 
-                    @if (@ViewData["sortOrder"].ToString() == "price_asc")
+                    @if (@ViewData["sortOrder"].ToString() == "price_desc")
                     {
                         <option value="price_asc">Cena - rosnąco</option>
                         <option value="price_desc" selected>Cena - malejąco</option>
@@ -38,10 +38,13 @@
                         <option value="price_asc" selected>Cena - rosnąco</option>
                         <option value="price_desc">Cena - malejąco</option>
                     }
-
                 </select>
-                <input type="submit" value="Sortuj" class="btn btn-primary" />
+
             </p>
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Sortuj" class="btn btn-primary" />
+
         </div>
     </form>
 </div>

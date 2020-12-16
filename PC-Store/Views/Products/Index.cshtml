@@ -10,8 +10,8 @@
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
-            <select name="filter" value="@ViewData["Filter"]">
+            <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
+            <select class="custom-select mr-sm-2 w-auto" name="filter" value="@ViewData["Filter"]">
                 <option value="">Wszystko</option>
                 @foreach (var item in ViewBag.products)
                 {
@@ -41,8 +41,8 @@
             <th>
                 Nazwa
             </th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TypeProdSortParm"]">Typ porduktu</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">Cena</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TypeProdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-filter="@ViewData["Filter"]">Typ porduktu</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-filter="@ViewData["Filter"]">Cena</a></th>
             <th>
             </th>
             <th></th>

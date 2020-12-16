@@ -52,6 +52,12 @@ namespace PC_Store.structure
 
         public string Picture { get; set; }
 
+        public int PCIExpressx1 { get; set; }
+
+        public int PCIExpressx16 { get; set; }
+
+        public int PCIExpressx4 { get; set; }
+
         public int Id { get; set; }
 
         public IEnumerator GetEnumerator()

@@ -53,6 +53,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> MotherboardListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var MotherBoard =
             from MCL in _context.motherboardCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -96,10 +98,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                MotherBoard = MotherBoard.Where(s => s.Producer.Contains(searchString) || s.SocketType.Contains(searchString));
+                MotherBoard = MotherBoard.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.SocketType.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    MotherBoard = MotherBoard.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    MotherBoard = MotherBoard.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<MotherboardCreatorList>.CreateAsync(MotherBoard.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -107,7 +117,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> ProcessorListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            //var processors = _context.processorCreatorLists.Where(p => p.PcCreatorId.Equals(_PCCreator.PcCreatorId));
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var processors =
             from MCL in _context.processorCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -144,10 +155,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                processors = processors.Where(s => s.Producer.Contains(searchString) || s.SocketType.Contains(searchString));
+                processors = processors.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.SocketType.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    processors = processors.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    processors = processors.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<ProcessorCreatorList>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -156,7 +175,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> PowerSupplyListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            //var powerSupplies = _context.powerSupplyCreatorLists.Where(p => p.PcCreatorId.Equals(_PCCreator.PcCreatorId));
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var powersupply =
             from MCL in _context.powerSupplyCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -205,10 +225,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                powersupply = powersupply.Where(s => s.Producer.Contains(searchString) || s.Standard.Contains(searchString));
+                powersupply = powersupply.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.Standard.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    powersupply = powersupply.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    powersupply = powersupply.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<PowerSupplyCreatorList>.CreateAsync(powersupply.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -217,7 +245,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> RamListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            //var ram = _context.ramCreatorLists.Where(p => p.PcCreatorId.Equals(_PCCreator.PcCreatorId));
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var rams =
             from MCL in _context.ramCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -255,10 +284,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                rams = rams.Where(s => s.Producer.Contains(searchString) || s.ProducerCode.Contains(searchString) || s.MemoryType.Contains(searchString));
+                rams = rams.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.ProducerCode.ToLower().Contains(searchString.ToLower()) || s.MemoryType.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    rams = rams.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    rams = rams.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<RamCreatorList>.CreateAsync(rams.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -266,7 +303,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> ComputerCaseListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            //var ComputerCase = _context.ComputerCaseCreatorLists.Where(p => p.PcCreatorId.Equals(_PCCreator.PcCreatorId));
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var computercase =
             from MCL in _context.ComputerCaseCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -311,10 +349,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                computercase = computercase.Where(s => s.Producer.Contains(searchString) || s.Compatibility.Contains(searchString));
+                computercase = computercase.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.Compatibility.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    computercase = computercase.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    computercase = computercase.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<ComputerCaseCreatorList>.CreateAsync(computercase.AsNoTracking(), pageNumber ?? 1, pageSize));
@@ -322,7 +368,8 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> GraphicCardListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            //var ComputerCase = _context.ComputerCaseCreatorLists.Where(p => p.PcCreatorId.Equals(_PCCreator.PcCreatorId));
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
+
             var graphiccard =
             from MCL in _context.graphicCardCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
@@ -366,10 +413,18 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                graphiccard = graphiccard.Where(s => s.Producer.Contains(searchString) || s.ProducerChipset.Contains(searchString) || s.ProducerCode.Contains(searchString));
+                graphiccard = graphiccard.Where(s => s.Producer.ToLower().Contains(searchString.ToLower()) || s.ProducerChipset.ToLower().Contains(searchString.ToLower()) || s.ProducerCode.ToLower().Contains(searchString.ToLower()));
             }
 
-
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    graphiccard = graphiccard.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    graphiccard = graphiccard.OrderBy(s => s.Price);
+                    break;
+            }
 
             int pageSize = 15;
             return View(await PaginatedList<GraphicCardCreatorList>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));

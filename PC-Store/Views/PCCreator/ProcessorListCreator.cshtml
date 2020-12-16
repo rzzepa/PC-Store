@@ -12,17 +12,13 @@
 <center><h1>Procesory</h1></center>
 <br />
 <br />
-@if (Model.ToList().Count == 0)
-{
-    <center><h4>Brak pasującego procesora</h4></center>
-}
-else
-{
-    <form asp-action="ProcessorListCreator" method="get">
+<div style="display: flex;">
+    <form asp-action="ProcessorListCreator" method="get" float="left">
         <div class="form-actions no-color">
             <p>
-                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
                 <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
                 <a asp-action="ProcessorListCreator">
                     <button type="button" class="btn btn-success">
                         Wróć do pełnej listy
@@ -31,7 +27,43 @@ else
             </p>
         </div>
     </form>
+    <pre>                                                                                         </pre>
+    <form asp-action="ProcessorListCreator" method="get">
+        <div class="form-row align-items-center">
+            <p>
+                <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <select class="form-control" name="sortOrder" value="@ViewData["sortOrder"]">
+
+                    @if (@ViewData["sortOrder"].ToString() == "price_desc")
+                    {
+                        <option value="price_asc">Cena - rosnąco</option>
+                        <option value="price_desc" selected>Cena - malejąco</option>
+                    }
+                    else
+                    {
+                        <option value="price_asc" selected>Cena - rosnąco</option>
+                        <option value="price_desc">Cena - malejąco</option>
+                    }
+                </select>
+
+            </p>
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Sortuj" class="btn btn-primary" />
+
+        </div>
+    </form>
+</div>
+<a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć do konfiguratora
+    </button>
+</a>
+@if (Model.ToList().Count == 0)
+{
+    <center><h4>Brak pasującego procesora</h4></center>
 }
+
 
 
 
@@ -43,18 +75,17 @@ else
             <div class="col-md-5 col-lg-3 col-xl-3">
 
                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                    @if (item.Picture != null)
-                    {
-                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                    <a asp-controller="PcCreator" asp-action="ProcessorCreatorDetails" asp-route-id="@item.Id">
+                        @if (item.Picture != null)
+                        {
                             <img class="img-fluid w-100" src="~/images/@item.Picture" alt="Sample">
-                        </a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                        }
+                        else
+                        {
                             <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
-                        </a>
-                    }
+                        }
+                    </a>
+                   
 
                 </div>
 
@@ -63,7 +94,7 @@ else
                 <div class="row">
                     <div class="col-lg-7 col-xl-7">
 
-                        <h5><a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.Line) @Html.DisplayFor(modelItem => item.SocketType)</a></h5>
+                        <h5><a asp-controller="PcCreator" asp-action="ProcessorCreatorDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.Line) @Html.DisplayFor(modelItem => item.SocketType)</a></h5>
                         <ul class="rating">
                             <li>
                                 <i>Socket: @Html.DisplayFor(modelItem => item.SocketType)</i>
@@ -131,6 +162,6 @@ else
 </center>
 <a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
     <button type="button" class="btn btn-light btn-md mr-1 mb-2">
-        Wróć
+        Wróć do konfiguratora
     </button>
 </a>

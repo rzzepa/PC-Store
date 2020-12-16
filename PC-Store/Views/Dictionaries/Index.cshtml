@@ -17,8 +17,8 @@
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
-                      <select name="filter" value="@ViewData["Filter"]">
+            <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
+                      <select class="custom-select mr-sm-2 w-auto" name="filter" value="@ViewData["Filter"]">
                           <option value="">Wszystko</option>
                           @foreach (var item in ViewBag.dictitems)
                           {
@@ -50,7 +50,7 @@
                 CodeItem
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DictSortParm"]">CodeDict</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DictSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">CodeDict</a>
             </th>
             <th>
                 CodeValue

@@ -1,10 +1,10 @@
-﻿@model PC_Store.Views.ViewModels.GraphicCardProduct
+﻿@model PC_Store.structure.GraphicCardCreatorList
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<center><h1>@Model.GraphicCard.Producer @Model.GraphicCard.ProducerCode</h1></center>
+<center><h1>@Model.Producer @Model.ProducerCode</h1></center>
 
 <div>
     <hr />
@@ -22,9 +22,9 @@
                         <div class="col-12 mb-0">
                             <figure class="view overlay rounded z-depth-1 main-img">
 
-                                @if (@Model.Product.Picture != null)
+                                @if (@Model.Picture != null)
                                 {
-                                    <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                    <img src="~/images/@Model.Picture" class="img-fluid z-depth-1">
                                 }
                                 else
                                 {
@@ -39,65 +39,65 @@
             </div>
             <div class="col-md-6">
 
-                <h5>Szczegóły processora</h5>
+                <h5>Szczegóły Karty graficznej</h5>
                 <ul class="rating">
                     <li>
-                        <i>Producent: @Model.GraphicCard.Producer</i>
+                        <i>Producent: @Model.Producer</i>
                     </li>
                     <li>
-                        <i>Kod producenta: @Model.GraphicCard.ProducerCode</i>
+                        <i>Kod producenta: @Model.ProducerCode</i>
                     </li>
                     <li>
-                        <i>Producent chipsetu: @Model.GraphicCard.ProducerChipset</i>
+                        <i>Producent chipsetu: @Model.ProducerChipset</i>
                     </li>
                     <li>
-                        <i>Taktowanie rdzenia: @Model.GraphicCard.CoreClock</i>
+                        <i>Taktowanie rdzenia: @Model.CoreClock</i>
                     </li>
                     <li>
-                        <i>Taktowanie rdzenia w trybie boost: @Model.GraphicCard.CoreClockBoost</i>
+                        <i>Taktowanie rdzenia w trybie boost: @Model.CoreClockBoost</i>
                     </li>
                     <li>
-                        <i>Typ złącza: @Model.GraphicCard.ConnectorType</i>
+                        <i>Typ złącza: @Model.ConnectorType</i>
                     </li>
                     <li>
-                        <i>Rozdzielczość: @Model.GraphicCard.Resolution</i>
+                        <i>Rozdzielczość: @Model.Resolution</i>
                     </li>
                     <li>
-                        <i>Rekomendowana moc zasilacza: @Model.GraphicCard.RecommendedPSUPower</i>
+                        <i>Rekomendowana moc zasilacza: @Model.RecommendedPSUPower</i>
                     </li>
                     <li>
-                        <i>Ilość pamięci RAM: @Model.GraphicCard.AmountOfRAM</i>
+                        <i>Ilość pamięci RAM: @Model.AmountOfRAM</i>
                     </li>
                     <li>
-                        <i>Rodzaj pamięci RAM: @Model.GraphicCard.TypeOfRAM</i>
+                        <i>Rodzaj pamięci RAM: @Model.TypeOfRAM</i>
                     </li>
                     <li>
-                        <i>Szyna danych: @Model.GraphicCard.DataBus</i>
+                        <i>Szyna danych: @Model.DataBus</i>
                     </li>
                     <li>
-                        <i>Taktowanie pamięci: @Model.GraphicCard.MemoryClock</i>
+                        <i>Taktowanie pamięci: @Model.MemoryClock</i>
                     </li>
                     <li>
-                        <i>Typ chłodzenia: @Model.GraphicCard.CoolingType</i>
+                        <i>Typ chłodzenia: @Model.CoolingType</i>
                     </li>
                     <li>
-                        <i>Ilość wentylatorów: @Model.GraphicCard.NumberOfFans</i>
+                        <i>Ilość wentylatorów: @Model.NumberOfFans</i>
                     </li>
                     <li>
-                        <i>D-Sub: @Model.GraphicCard.DSub</i>
+                        <i>D-Sub: @Model.DSub</i>
                     </li>
                     <li>
-                        <i>DisplayPort: @Model.GraphicCard.DisplayPort</i>
+                        <i>DisplayPort: @Model.DisplayPort</i>
                     </li>
                     <li>
-                        <i>HDMI: @Model.GraphicCard.HDMI</i>
+                        <i>HDMI: @Model.HDMI</i>
                     </li>
                     <li>
-                        <i>DVI: @Model.GraphicCard.DVI</i>
+                        <i>DVI: @Model.DVI</i>
                     </li>
 
                 </ul>
-                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <h3><span class="mr-1"><strong>Cena: @Model.Price Zł</strong></span></h3>
                 <p class="pt-1">
                     Miejsce na opis
                 </p>
@@ -107,9 +107,9 @@
                     <input class="quantity" min="0" name="quantity" value="1" type="number">
                 </div>
                 <hr>
-                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id="@Model.Id">
                     <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
-                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                        Dodaj do konfiguracji
                     </button>
                 </a>
             </div>

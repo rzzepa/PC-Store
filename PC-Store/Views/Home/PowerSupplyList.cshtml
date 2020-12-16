@@ -11,7 +11,7 @@
     <form asp-action="PowerSupplyList" method="get" float="left">
         <div class="form-actions no-color">
             <p>
-                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
                 <input type="submit" value="Szukaj" class="btn btn-primary" />
                 <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
                 <a asp-action="PowerSupplyList">
@@ -22,14 +22,14 @@
             </p>
         </div>
     </form>
-    <pre>                                      </pre>
-    <form asp-action="PowerSupplyList" method="get" float="right">
+    <pre>                                                                                         </pre>
+    <form asp-action="PowerSupplyList" method="get">
         <div class="form-row align-items-center">
             <p>
                 <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
-                <select class="custom-select mr-sm-2" name="sortOrder" value="@ViewData["sortOrder"]">
+                <select class="form-control" name="sortOrder" value="@ViewData["sortOrder"]">
 
-                    @if (@ViewData["sortOrder"].ToString() == "price_asc")
+                    @if (@ViewData["sortOrder"].ToString() == "price_desc")
                     {
                         <option value="price_asc">Cena - rosnąco</option>
                         <option value="price_desc" selected>Cena - malejąco</option>
@@ -39,10 +39,13 @@
                         <option value="price_asc" selected>Cena - rosnąco</option>
                         <option value="price_desc">Cena - malejąco</option>
                     }
-
                 </select>
-                <input type="submit" value="Sortuj" class="btn btn-primary" />
+
             </p>
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Sortuj" class="btn btn-primary" />
+
         </div>
     </form>
 </div>
@@ -56,13 +59,13 @@
                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                     @if (item.Product.Picture != null)
                     {
-                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">
+                        <a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@item.Product.Id">
                             <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
                         </a>
                     }
                     else
                     {
-                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetail" asp-route-id="@item.Product.Id">
+                        <a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@item.Product.Id">
                             <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
                         </a>
                     }

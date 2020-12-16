@@ -42,7 +42,7 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> ProcessorList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var processors =
             from PRo in _context.Processors
@@ -88,7 +88,7 @@ namespace PC_Store.Controllers
 
         public async Task<IActionResult> MotherboardList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var MotherBoard =
             from MB in _context.Motherboards
@@ -132,7 +132,7 @@ namespace PC_Store.Controllers
         
         public async Task<IActionResult> GraphicCardList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var GraphicCards =
             from GC in _context.GraphicCards
@@ -175,7 +175,7 @@ namespace PC_Store.Controllers
         
         public async Task<IActionResult> ComputerCaseList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var ComputerCase =
             from CC in _context.ComputerCases
@@ -219,7 +219,7 @@ namespace PC_Store.Controllers
         
         public async Task<IActionResult> RamList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var ram =
             from Ra in _context.Rams
@@ -263,7 +263,7 @@ namespace PC_Store.Controllers
         
         public async Task<IActionResult> PowerSupplyList(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_asc" : "price_desc";
+            ViewData["sortOrder"] = sortOrder == "price_desc" ? "price_desc" : "price_asc";
 
             var powerSupplies =
             from PS in _context.PowerSupplies

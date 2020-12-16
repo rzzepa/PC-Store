@@ -10,7 +10,7 @@
     <form asp-action="RamList" method="get" float="left">
         <div class="form-actions no-color">
             <p>
-                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
                 <input type="submit" value="Szukaj" class="btn btn-primary" />
                 <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
                 <a asp-action="RamList">
@@ -21,14 +21,14 @@
             </p>
         </div>
     </form>
-    <pre>                                      </pre>
+    <pre>                                                                               </pre>
     <form asp-action="RamList" method="get" float="right">
         <div class="form-row align-items-center">
             <p>
                 <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
-                <select class="custom-select mr-sm-2" name="sortOrder" value="@ViewData["sortOrder"]">
+                <select class="form-control" name="sortOrder" value="@ViewData["sortOrder"]">
 
-                    @if (@ViewData["sortOrder"].ToString() == "price_asc")
+                    @if (@ViewData["sortOrder"].ToString() == "price_desc")
                     {
                         <option value="price_asc">Cena - rosnąco</option>
                         <option value="price_desc" selected>Cena - malejąco</option>
@@ -38,10 +38,13 @@
                         <option value="price_asc" selected>Cena - rosnąco</option>
                         <option value="price_desc">Cena - malejąco</option>
                     }
-
                 </select>
-                <input type="submit" value="Sortuj" class="btn btn-primary" />
+
             </p>
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Sortuj" class="btn btn-primary" />
+
         </div>
     </form>
 </div>
@@ -53,7 +56,7 @@
             <div class="col-md-5 col-lg-3 col-xl-3">
 
                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                    <a asp-controller="Ram" asp-action="RamDetails" asp-route-id="@item.Product.Id">
+                    <a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@item.Product.Id">
                         @if (item.Product.Picture != null)
                         {
                             <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
