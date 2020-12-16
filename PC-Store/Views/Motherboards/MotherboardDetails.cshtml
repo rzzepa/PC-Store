@@ -59,6 +59,51 @@
                     <li>
                         <i>Technologie: @Model.Motherboard.Technologies</i>
                     </li>
+                    <li>
+                        <i>Standard pamięci: @Model.Motherboard.StandardMemory</i>
+                    </li>
+                    <li>
+                        <i>Rodzaj złącza: @Model.Motherboard.ConnectorType</i>
+                    </li>
+                    <li>
+                        <i>Ilość slotów pamięci: @Model.Motherboard.NumberOfMemorySlots</i>
+                    </li>
+                    <li>
+                        <i>Maksymalna ilość pamięci [GB]: @Model.Motherboard.MaximumAmountOfMemory</i>
+                    </li>
+                    <li>
+                        <i>Architektura wielokanałowa: @Model.Motherboard.MultiChannelArchitecture</i>
+                    </li>
+                    <li>
+                        <i>Obsługa zintegrowanych kart graficznych: @Model.Motherboard.IntegratedGraphicsCardSupport</i>
+                    </li>
+                    <li>
+                        <i>Chipset graficzny: @Model.Motherboard.GraphicsChipset</i>
+                    </li>
+                    <li>
+                        <i>Łączenie kart: @Model.Motherboard.CombiningCards</i>
+                    </li>
+                    <li>
+                        <i>Chipset dźwiękowy: @Model.Motherboard.SoundChipset</i>
+                    </li>
+                    <li>
+                        <i>Kanały audio: @Model.Motherboard.AudioChannels</i>
+                    </li>
+                    <li>
+                        <i>Zintegrowana karta sieciowa: @Model.Motherboard.IntegratedNetworkCard</i>
+                    </li>
+                    <li>
+                        <i>Chipset karty sieciowej: @Model.Motherboard.NetworkCardChipset</i>
+                    </li>
+                    <li>
+                        <i>PCI Express x1: @Model.Motherboard.PCIExpressx1</i>
+                    </li>
+                    <li>
+                        <i>PCI Express x4: @Model.Motherboard.PCIExpressx16</i>
+                    </li>
+                    <li>
+                        <i>PCI Express x16: @Model.Motherboard.PCIExpressx4</i>
+                    </li>
                 </ul>
                 <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
                 <p class="pt-1">
@@ -82,9 +127,9 @@
 
     </section>
     <div>
-        <form asp-controller="Home" asp-action="MotherboardList">
-            <div class="form-group">
-                <input type="submit" value="Wróć" class="btn btn-primary" />
-            </div>
-        </form>
+            <a asp-controller="Home" asp-action="MotherboardList">
+                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                    Wróć
+                </button>
+            </a>
     </div>

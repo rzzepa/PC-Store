@@ -1,0 +1,290 @@
+﻿@model PC_Store.Views.ViewModels.PCCreator
+
+@{
+    ViewData["Title"] = "Kreator PC";
+}
+
+<center>
+    <h1>Kreator PC</h1>
+    <hr />
+    <div class="container mt-100">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.ProcessorProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="ProcessorListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Processory</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="ProcessorListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.ProcessorProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.ProcessorProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@Model.ProcessorProduct.Name</h4>
+                                <h4 class="card-title">@Model.ProcessorProduct.Price Zł</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.ProcessorProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.GraphicCardProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="GraphiccardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Karty graficzne</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="GraphiccardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.GraphicCardProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.GraphicCardProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@Model.GraphicCardProduct.Name</h4>
+                                <h4 class="card-title">@Model.GraphicCardProduct.Price Zł</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.GraphicCardProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.MotherboardProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="MotherboardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Płyty główne</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="MotherboardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.MotherboardProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.MotherboardProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h6 class="card-title">@Model.MotherboardProduct.Name</h6>
+                                <h6 class="card-title">@Model.MotherboardProduct.Price Zł</h6>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.MotherboardProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.ComputerCaseProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="ComputercaseListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Obudowy</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="ComputercaseListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.ComputerCaseProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.ComputerCaseProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@Model.ComputerCaseProduct.Name</h4>
+                                <h4 class="card-title">@Model.ComputerCaseProduct.Price Zł</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.ComputerCaseProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.RamProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Pamięci RAM</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.RamProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.RamProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@Model.RamProduct.Name</h4>
+                                <h4 class="card-title">@Model.RamProduct.Price Zł</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.RamProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    @if (Model.PowerSupplyProduct == null)
+                    {
+                        <a class="card-img-tiles" asp-action="PowerSupplyListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Zasilacze</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                            <div class="inner">
+                                <div class="main-img">
+                                    @if (Model.PowerSupplyProduct.Picture != null)
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/@Model.PowerSupplyProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                    else
+                                    {
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card-body text-center">
+                                <h4 class="card-title">@Model.PowerSupplyProduct.Name</h4>
+                                <h4 class="card-title">@Model.PowerSupplyProduct.Price Zł</h4>
+                                <p>Dodaj do konfiguracji</p>
+                            </div>
+                        </a>
+                        <a asp-action="RemoveFromCreator" asp-route-id=@Model.PowerSupplyProduct.Id>
+                            <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                                Usuń
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        <hr />
+        <a asp-controller="ShoppingCart" asp-action="AddPCtoShoppingCart" asp-route-id=@Model.PcCreatorId>
+            <button type="button" class="btn btn-primary mr-1 mb-2 btn-lg">
+                Dodaj do koszyka
+            </button>
+        </a>
+    </div>
+</center>

@@ -1,16 +1,14 @@
-﻿using System;
+﻿using PC_Store.structure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PC_Store.Views.ViewModels
 {
-
     public class UserRoleViewModel
     {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public bool IsSelected { get; set; }
+        public List<UserRole> UserRoles { get; set; }
+        public string Role { get; set; }
     }
-
 }

@@ -1,0 +1,144 @@
+﻿@model PC_Store.Views.ViewModels.PowerSupplyProduct
+
+@{
+    ViewData["Title"] = "Szczegóły zasilacza";
+}
+
+<center><h1>@Model.powerSupply.Producer @Model.powerSupply.ProducerCode @Model.powerSupply.Power</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Product.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Product.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.powerSupply.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.powerSupply.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Standard/Format: @Model.powerSupply.Standard</i>
+                    </li>
+                    <li>
+                        <i>Moc [W]: @Model.powerSupply.Power</i>
+                    </li>
+                    <li>
+                        <i>Certyfikat sprawności: @Model.powerSupply.EfficiencyCertificate</i>
+                    </li>
+                    <li>
+                        <i>Układ PFC: @Model.powerSupply.PFCSystem</i>
+                    </li>
+                    <li>
+                        <i>Sprawność: @Model.powerSupply.Efficiency</i>
+                    </li>
+                    <li>
+                        <i>Typ chłodzenia: @Model.powerSupply.CoolingType</i>
+                    </li>
+                    <li>
+                        <i>Średnica wentylatora: @Model.powerSupply.Diameter</i>
+                    </li>
+                    <li>
+                        <i>Zabezpieczenia: @Model.powerSupply.Security</i>
+                    </li>
+                    <li>
+                        <i>Modularne okablowanie: @Model.powerSupply.ModularCabling</i>
+                    </li>
+                    <li>
+                        <i>ATX 24-pin (20+4): @Model.powerSupply.ATX24pin204</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 8-pin (6+2): @Model.powerSupply.PCIE8pin62</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 8-pin: @Model.powerSupply.PCIE8pin</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 6-pin: @Model.powerSupply.PCIE6pin</i>
+                    </li>
+                    <li>
+                        <i>CPU 4+4 (8) pin: @Model.powerSupply.CPU44pin8</i>
+                    </li>
+                    <li>
+                        <i>CPU 8-pin: @Model.powerSupply.CPU8pin</i>
+                    </li>
+                    <li>
+                        <i>CPU 4-pin: @Model.powerSupply.CPU4pin</i>
+                    </li>
+                    <li>
+                        <i>SATA: @Model.powerSupply.SATA</i>
+                    </li>
+                    <li>
+                        <i>Molex : @Model.powerSupply.Molex</i>
+                    </li>
+                    <li>
+                        <i>Wysokość [mm]: @Model.powerSupply.Height</i>
+                    </li>
+                    <li>
+                        <i>Szerokość [mm]: @Model.powerSupply.Width</i>
+                    </li>
+                    <li>
+                        <i>Głębokość [mm]: @Model.powerSupply.Depth</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie: @Model.powerSupply.Backlight</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <h4><strong>Ilość:</strong></h4>
+                <div class="def-number-input number-input safari_only">
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                </div>
+                <hr>
+                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        Dodaj do koszyka
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <a asp-controller="Home" asp-action="PowerSupplyList">
+            <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                Wróć
+            </button>
+        </a>
+    </div>

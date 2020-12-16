@@ -22,6 +22,8 @@ namespace PC_Store.Models
 
         public string ConnectorType { get; set; }
 
+        public string VerConnectorType { get; set; }
+
         public string Resolution { get; set; }
 
         public string RecommendedPSUPower { get; set; }
@@ -30,7 +32,7 @@ namespace PC_Store.Models
 
         public string TypeOfRAM { get; set; }
 
-        public int DataBus { get; set; } //bit
+        public int DataBus { get; set; }
 
         public int MemoryClock { get; set; }
 

@@ -19,6 +19,8 @@ namespace PC_Store.Models
 
         public bool Act { get; set; }
 
+        public bool Deleted { get; set; }
+
         public string ProductType { get; set; }
 
         [BindNever]

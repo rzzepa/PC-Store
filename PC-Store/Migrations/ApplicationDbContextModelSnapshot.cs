@@ -388,6 +388,9 @@ namespace PC_Store.Migrations
                     b.Property<string>("TypeOfRAM")
                         .HasColumnType("text");
 
+                    b.Property<string>("VerConnectorType")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("GraphicCards");
@@ -431,6 +434,15 @@ namespace PC_Store.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("NumberOfMemorySlots")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIExpressx1")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIExpressx16")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIExpressx4")
                         .HasColumnType("integer");
 
                     b.Property<string>("Producer")
@@ -550,6 +562,93 @@ namespace PC_Store.Migrations
                     b.ToTable("OrderDetails");
                 });
 
+            modelBuilder.Entity("PC_Store.Models.PowerSupply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("ATX24pin204")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Backlight")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("CPU44pin8")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CPU4pin")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CPU8pin")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CoolingType")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Depth")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Diameter")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Efficiency")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("EfficiencyCertificate")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ModularCabling")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Molex")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIE6pin")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIE8pin")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PCIE8pin62")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("PFCSystem")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Producer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProducerCode")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SATA")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Security")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Standard")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PowerSupplies");
+                });
+
             modelBuilder.Entity("PC_Store.Models.Processor", b =>
                 {
                     b.Property<int>("Id")
@@ -613,6 +712,9 @@ namespace PC_Store.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<bool>("Act")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Deleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("InsertBy")
@@ -721,6 +823,49 @@ namespace PC_Store.Migrations
                     b.ToTable("ShoppingCardItems");
                 });
 
+            modelBuilder.Entity("PC_Store.Views.ViewModels.PCCreator", b =>
+                {
+                    b.Property<string>("PcCreatorId")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ComputerCaseProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("GraphicCardProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("MotherboardProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PowerSupplyProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ProcessorProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("RamProductId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PcCreatorId");
+
+                    b.HasIndex("ComputerCaseProductId");
+
+                    b.HasIndex("GraphicCardProductId");
+
+                    b.HasIndex("MotherboardProductId");
+
+                    b.HasIndex("PowerSupplyProductId");
+
+                    b.HasIndex("ProcessorProductId");
+
+                    b.HasIndex("RamProductId");
+
+                    b.ToTable("pCCreators");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -790,6 +935,33 @@ namespace PC_Store.Migrations
                     b.HasOne("PC_Store.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("PC_Store.Views.ViewModels.PCCreator", b =>
+                {
+                    b.HasOne("PC_Store.Models.Product", "ComputerCaseProduct")
+                        .WithMany()
+                        .HasForeignKey("ComputerCaseProductId");
+
+                    b.HasOne("PC_Store.Models.Product", "GraphicCardProduct")
+                        .WithMany()
+                        .HasForeignKey("GraphicCardProductId");
+
+                    b.HasOne("PC_Store.Models.Product", "MotherboardProduct")
+                        .WithMany()
+                        .HasForeignKey("MotherboardProductId");
+
+                    b.HasOne("PC_Store.Models.Product", "PowerSupplyProduct")
+                        .WithMany()
+                        .HasForeignKey("PowerSupplyProductId");
+
+                    b.HasOne("PC_Store.Models.Product", "ProcessorProduct")
+                        .WithMany()
+                        .HasForeignKey("ProcessorProductId");
+
+                    b.HasOne("PC_Store.Models.Product", "RamProduct")
+                        .WithMany()
+                        .HasForeignKey("RamProductId");
                 });
 #pragma warning restore 612, 618
         }

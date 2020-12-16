@@ -31,8 +31,6 @@ namespace PC_Store.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
 
-        public int PageSize = 4;
-
         public ProcessorsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
@@ -41,15 +39,22 @@ namespace PC_Store.Controllers
         }
 
 
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            if (sortOrder == "producerASC") ViewBag.NameSortParam = "producerDESC";
-            else if (sortOrder == "producerDESC") ViewBag.NameSortParam = "producerASC";
-            else if (sortOrder == "lineASC") ViewBag.NameSortParam = "lineDESC";
-            else if (sortOrder == "lineDESC") ViewBag.NameSortParam = "lineASC";
-            else if (sortOrder is null) ViewBag.NameSortParam = "producerASC";
+            ViewData["ProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "producer_desc" : "";
 
             var processors = from s in _context.Processors select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -59,26 +64,16 @@ namespace PC_Store.Controllers
 
             switch (sortOrder)
             {
-                case "producerASC":
-                    processors = processors.OrderBy(s => s.Producer);
-                    break;
-
-                case "producerDESC":
+                case "producer_desc":
                     processors = processors.OrderByDescending(s => s.Producer);
                     break;
-
-                case "lineASC":
-                    processors = processors.OrderBy(s => s.Line);
-                    break;
-
-                case "lineDESC":
-                    processors = processors.OrderByDescending(s => s.Line);
+                default:
+                    processors = processors.OrderBy(s => s.Producer);
                     break;
             }
 
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(processors.ToPagedList(pageNumber, pageSize));
+            int pageSize = 10;
+            return View(await PaginatedList<Processor>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public Task<IActionResult> ProcessorDetail(int? id)
@@ -135,17 +130,15 @@ namespace PC_Store.Controllers
             CreateProcessorViewModel createProcessorViewModel = new CreateProcessorViewModel()
             {
                 Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeValue),
-                SocketTypes = _context.Dictionary.Where(p => (p.CodeDict.Equals("PROCSOCKET")) && ((p.Ext1.Equals(Param)) || String.IsNullOrEmpty(Param))).Select(o =>  o.CodeValue)
+                SocketTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("PROCSOCKET")).Select(o => o.CodeValue)
             };
-            ViewBag.ProducerList = new SelectList(_context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeItem), "CodeItem");
-            ViewBag.SocketList = new SelectList(_context.Dictionary.Where(p => (p.CodeDict.Equals("PROCSOCKET")) && ((p.Ext1.Equals(Param)) || String.IsNullOrEmpty(Param))).Select(o => o.CodeValue), "Ext1", "CodeValue");
 
             return View(createProcessorViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateProcessorViewModel model)
+        public IActionResult Create(CreateProcessorViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +147,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.Processor.Producer + " " + model.Processor.Line;
                 product.Price = 0;
+                product.Deleted = false;
                 product.Act = false;
                 product.InsertBy= _userManager.GetUserName(HttpContext.User);
                 product.ModifyBy= _userManager.GetUserName(HttpContext.User);
@@ -161,11 +155,11 @@ namespace PC_Store.Controllers
                 product.ModifyDate= DateTime.Now;
                 product.ProductType = "PROCESSOR";
                 _context.Products.Add(product);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 model.Processor.ProductId = product.Id;
-                _context.Add(model.Processor);
-                await _context.SaveChangesAsync();
+                _context.Processors.Add(model.Processor);
+                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
              }
                 return View();
@@ -196,12 +190,17 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            var processor = await _context.Processors.FindAsync(id);
-            if (processor == null)
+            CreateProcessorViewModel createProcessorViewModel = new CreateProcessorViewModel()
+            {
+                Processor= _context.Processors.Find(id),
+            Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeValue),
+                SocketTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("PROCSOCKET")).Select(o => o.CodeValue)
+            };
+            if (createProcessorViewModel.Processor == null)
             {
                 return NotFound();
             }
-            return View(processor);
+            return View(createProcessorViewModel);
         }
 
 
@@ -261,6 +260,9 @@ namespace PC_Store.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var processor = await _context.Processors.FindAsync(id);
+            var prod = await _context.Products.FindAsync(processor.ProductId);
+            prod.Deleted = true;
+            _context.Products.Update(prod);
             _context.Processors.Remove(processor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

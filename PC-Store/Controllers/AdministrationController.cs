@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PC_Store.Data;
+using PC_Store.structure;
 using PC_Store.Views.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -132,10 +133,16 @@ namespace PC_Store.Controllers
             }
         }
 
+        public async Task<IActionResult> GetUsers(string roleId, string searchString)
+        {
+
+            return await EditUsersInRole(roleId, searchString);
+        }
+
         [HttpGet]
-            public async Task<IActionResult> EditUsersInRole(string roleId)
+            public async Task<IActionResult> EditUsersInRole(string roleId, string searchString)
             {
-                ViewBag.roleId = roleId;
+            ViewData["CurrentFilter"] = searchString;
 
                 var role = await roleManager.FindByIdAsync(roleId);
 
@@ -145,11 +152,12 @@ namespace PC_Store.Controllers
                     return View("NotFound");
                 }
 
-                var model = new List<UserRoleViewModel>();
+                var model = new List<UserRole>();
+
 
                 foreach (var user in userManager.Users.ToList())
                 {
-                    var userRoleViewModel = new UserRoleViewModel
+                    var userRoleViewModel = new UserRole
                     {
                         UserId = user.Id,
                         UserName = user.UserName
@@ -167,31 +175,51 @@ namespace PC_Store.Controllers
                     model.Add(userRoleViewModel);
                 }
 
-                return View(model);
+            
+
+                if (!String.IsNullOrEmpty(searchString))
+                   {
+                    var filtredmodel = new List<UserRole>();
+                foreach (var user in model)
+                    {
+                    if (user.UserName.Contains(searchString))
+                        filtredmodel.Add(user);
+                    }
+                    model = filtredmodel;
+                   }
+
+            UserRoleViewModel roleViewModel = new UserRoleViewModel()
+            {
+               UserRoles=model,
+               Role=roleId
+            };
+
+            return View("EditUsersInRole", roleViewModel);
             }
 
         [HttpPost]
-        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
+        public async Task<IActionResult> EditUsersInRole(UserRoleViewModel model, string roleId, string searchString)
         {
+            
             var role = await roleManager.FindByIdAsync(roleId);
-
+            
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
                 return View("NotFound");
             }
 
-            for (int i = 0; i < model.Count; i++)
+            for (int i = 0; i < model.UserRoles.Count; i++)
             {
-                var user = await userManager.FindByIdAsync(model[i].UserId);
+                var user = await userManager.FindByIdAsync(model.UserRoles[i].UserId);
 
                 IdentityResult result = null;
 
-                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
+                if (model.UserRoles[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                 {
                     result = await userManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
+                else if (!model.UserRoles[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
                 {
                     result = await userManager.RemoveFromRoleAsync(user, role.Name);
                 }
@@ -202,7 +230,7 @@ namespace PC_Store.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (i < (model.Count - 1))
+                    if (i < (model.UserRoles.Count - 1))
                         continue;
                     else
                         return RedirectToAction("EditRole", new { Id = roleId });

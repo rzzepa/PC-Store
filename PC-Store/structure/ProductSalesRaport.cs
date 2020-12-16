@@ -18,6 +18,10 @@ namespace PC_Store.structure
         
         public int Computercases{ get; set; }
 
+        public int Rams { get; set; }
+
+        public int PowerSupplies { get; set; }
+
         public IEnumerator GetEnumerator()
         {
             throw new NotImplementedException();

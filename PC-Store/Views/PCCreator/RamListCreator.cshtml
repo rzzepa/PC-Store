@@ -1,0 +1,128 @@
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.structure.RamCreatorList>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<center><h1>Pamięci RAM</h1></center>
+<br />
+<br />
+@if (Model.ToList().Count == 0)
+{
+    <center><h4>Brak pasującej pamięci RAM</h4></center>
+}
+else
+{
+    <form asp-action="RamListCreator" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <a asp-action="RamListCreator">
+                    <button type="button" class="btn btn-success">
+                        Wróć do pełnej listy
+                    </button>
+                </a>
+            </p>
+        </div>
+    </form>
+}
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <a asp-controller="Ram" asp-action="RamDetails" asp-route-id="@item.Id">
+                        @if (item.Picture != null)
+                        {
+                            <img class="img-fluid w-100" src="~/images/@item.Picture" alt="Sample">
+                        }
+                        else
+                        {
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        }
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.ProducerCode)</a> </h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Producent: @Html.DisplayFor(modelItem => item.Producer)</i>
+                            </li>
+                            <li>
+                                <i>Kod producenta: @Html.DisplayFor(modelItem => item.ProducerCode)</i>
+                            </li>
+                            <li>
+                                <i>Linia: @Html.DisplayFor(modelItem => item.Line)</i>
+                            </li>
+                            <li>
+                                <i>Typ złącza: @Html.DisplayFor(modelItem => item.ConnectorType)</i>
+                            </li>
+                            <li>
+                                <i>Pojemność łączna: @Html.DisplayFor(modelItem => item.TotalCapacity)</i>
+                            </li>
+                            <li>
+                                <i>Częstotliwość pracy [MHz]: @Html.DisplayFor(modelItem => item.Frequency)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Price) Zł</span></h6>
+                        <div class="my-4">
+                            <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    Dodaj do konfiguracji
+                                </button>
+                            </a>
+                            <a asp-controller="PcCreator" asp-action="RamCreatorDetails" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    Szczegóły
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<center>
+    <a asp-action="RamListCreator"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="RamListCreator"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

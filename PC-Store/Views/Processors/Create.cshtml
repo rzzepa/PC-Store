@@ -8,95 +8,94 @@
 }
 
 @using (Html.BeginForm("Create", "Processor", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Dodaj Procesor</h1>
-
-<h4>Processor</h4>
+<center><h1>Dodawanie Procesora</h1></center>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.SocketType" class="control-label"></label>
-                @if (ViewBag.SocketList != null)
-                {
-                    @Html.DropDownListFor(m => m.Producers, ViewBag.ProducerList as SelectList, "--Wybierz Producenta--", new { @class = "form-control" })
-                }
+                Producent
+                @Html.DropDownListFor(m => m.Processor.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.SocketType" class="control-label"></label>
-                @if (ViewBag.SocketList != null)
-                {
-                    @Html.DropDownListFor(m => m.SocketTypes, new SelectList(" "), "--Wybierz Socket--", new { @class = "form-control" })
-                }
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Processor.Line" class="control-label"></label>
+                Linnia
                 <input asp-for="@Model.Processor.Line" class="form-control" />
                 <span asp-validation-for="@Model.Processor.Line" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                Rodzaj gniazda
+                @Html.DropDownListFor(m => m.Processor.SocketType, new SelectList(Model.SocketTypes, "CodeItem"), "--Wybierz Socket--", new { @class = "form-control" })
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="@Model.Processor.Cooling" /> @Html.DisplayNameFor(model => model.Processor.Cooling)
+                    Chłodzenie
+                    <input asp-for="@Model.Processor.Cooling" class="form-control" />
+                    <span asp-validation-for="@Model.Processor.Cooling" class="text-danger"></span>
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.NumberOfCores" class="control-label"></label>
+                Liczba rdzeni
                 <input asp-for="@Model.Processor.NumberOfCores" class="form-control" />
                 <span asp-validation-for="@Model.Processor.NumberOfCores" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.NumberOfThreads" class="control-label"></label>
+                Liczba wątków
                 <input asp-for="@Model.Processor.NumberOfThreads" class="form-control" />
                 <span asp-validation-for="@Model.Processor.NumberOfThreads" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.ProcessorClockFrequency" class="control-label"></label>
+                Częstotliwość zegara
                 <input asp-for="@Model.Processor.ProcessorClockFrequency" class="form-control" />
                 <span asp-validation-for="@Model.Processor.ProcessorClockFrequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.TurboMaximumFrequency" class="control-label"></label>
+                Maksymalna częstotliwość
                 <input asp-for="@Model.Processor.TurboMaximumFrequency" class="form-control" />
                 <span asp-validation-for="@Model.Processor.TurboMaximumFrequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.IntegratedGraphics" class="control-label"></label>
+                Zintegrowana grafika
                 <input asp-for="@Model.Processor.IntegratedGraphics" class="form-control" />
                 <span asp-validation-for="@Model.Processor.IntegratedGraphics" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="@Model.Processor.UnlockedMultiplier" /> @Html.DisplayNameFor(model => model.Processor.UnlockedMultiplier)
+                    Odblokowany mnożnik
+                    <input asp-for="@Model.Processor.UnlockedMultiplier" class="form-control" />
+                    <span asp-validation-for="@Model.Processor.UnlockedMultiplier" class="text-danger"></span>
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.Architecture" class="control-label"></label>
+                Architektura
                 <input asp-for="@Model.Processor.Architecture" class="form-control" />
                 <span asp-validation-for="@Model.Processor.Architecture" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Processor.TypesOfSupportedMemory" class="control-label"></label>
+                Typ pamięci
                 <input asp-for="@Model.Processor.TypesOfSupportedMemory" class="form-control" />
                 <span asp-validation-for="@Model.Processor.TypesOfSupportedMemory" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="File" class="control-label"></label>
-                    <div class="custom-file">
-                        <input asp-for="File" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
 </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>

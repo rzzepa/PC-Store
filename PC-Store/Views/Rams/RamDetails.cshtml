@@ -48,37 +48,37 @@
                         <i>Kod producenta: @Model.ram.ProducerCode</i>
                     </li>
                     <li>
-                        <i>Kolor: @Model.ram.Line</i>
+                        <i>Linnia: @Model.ram.Line</i>
                     </li>
                     <li>
-                        <i>Podświetlenie: @Model.ram.ConnectorType</i>
+                        <i>Typ złącza: @Model.ram.ConnectorType</i>
                     </li>
                     <li>
-                        <i>Wysokość [cm]: @Model.ram.MemoryType</i>
+                        <i>Rodzaj pamięci: @Model.ram.MemoryType</i>
                     </li>
                     <li>
-                        <i>Szerokość [cm]: @Model.ram.Cooling</i>
+                        <i>Chłodzenie: @Model.ram.Cooling</i>
                     </li>
                     <li>
-                        <i>Głębokość [cm]: @Model.ram.LowProfile</i>
+                        <i>Niskoprofilowe: @Model.ram.LowProfile</i>
                     </li>
                     <li>
-                        <i>Waga [kg]: @Model.ram.TotalCapacity</i>
+                        <i>Pojemność łączna [GB]: @Model.ram.TotalCapacity</i>
                     </li>
                     <li>
-                        <i>Typ obudowy: @Model.ram.NumberOfModules</i>
+                        <i>Liczba modułów: @Model.ram.NumberOfModules</i>
                     </li>
                     <li>
-                        <i>Kompatybilność: @Model.ram.Frequency</i>
+                        <i>Częstotliwość pracy [MHz]: @Model.ram.Frequency</i>
                     </li>
                     <li>
-                        <i>Okno: @Model.ram.Delay</i>
+                        <i>Opóźnienie: @Model.ram.Delay</i>
                     </li>
                     <li>
-                        <i>Wyciszona: @Model.ram.Voltage</i>
+                        <i>Napięcie [V]: @Model.ram.Voltage</i>
                     </li>
                     <li>
-                        <i>USB 2.0: @Model.ram.Backlight</i>
+                        <i>Podświetlenie: @Model.ram.Backlight</i>
                     </li>
                 </ul>
                 <h3><span class="mr-1"><strong>Cena: @Model.Product.Price Zł</strong></span></h3>
@@ -103,9 +103,9 @@
 
     </section>
     <div>
-        <form asp-controller="Home" asp-action="RamList">
-            <div class="form-group">
-                <input type="submit" value="Wróć" class="btn btn-primary" />
-            </div>
-        </form>
+            <a asp-controller="Home" asp-action="RamList">
+                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                    Wróć
+                </button>
+            </a>
     </div>

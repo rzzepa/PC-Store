@@ -23,16 +23,15 @@ Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     
                 <input asp-for="@Model.Product.Price" class="form-control" />
                 <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="File" class="control-label"></label>
-                    <div class="custom-file">
-                        <input asp-for="File" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
+            <hr />
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="@Model.Product.Act" /> Aktywny
@@ -53,13 +52,17 @@ Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     
             @Html.HiddenFor(model => model.Product.InsertDate)
             @Html.HiddenFor(model => model.Product.InsertBy)
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
     <hr />
     @if (Model.Product.ProductType.Equals("PROCESSOR"))
     {
@@ -80,6 +83,10 @@ Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     
     else if (Model.Product.ProductType.Equals("RAMMEMORY"))
     {
         <a asp-controller="Rams" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+    }
+    else if (Model.Product.ProductType.Equals("POWERSUPPLY"))
+    {
+    <a asp-controller="PowerSupplies" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
     }
 </div>
 

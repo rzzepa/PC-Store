@@ -1,137 +1,128 @@
-﻿@model IEnumerable<PC_Store.Models.GraphicCard>
+﻿@model PC_Store.Infrastructure.PaginatedList<GraphicCard>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1><center>Karty Graficzne - Panel</center></h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-success btn-md mr-1 mb-2">
+            Dodaj
+        </button>
+    </a>
 </p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" />
+            <a asp-action="Index">
+                <button type="button" class="btn btn-success">
+                    Wróć do pełnej listy
+                </button>
+            </a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Producer)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProdSortParm"]">Producent</a>
+</th>
+            <th>
+                Kod producenta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProducerCode)
+                Producent chipsetu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProducerChipset)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RamAmountSortParm"]">Ilość pamięci RAM</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CoreClock)
+                Rodzaj pamięci RAM
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoreClockBoost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ConnectorType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resolution)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecommendedPSUPower)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AmountOfRAM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeOfRAM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataBus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MemoryClock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoolingType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfFans)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DSub)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DisplayPort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HDMI)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DVI)
-            </th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Producer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProducerCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProducerChipset)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoreClock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoreClockBoost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConnectorType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resolution)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecommendedPSUPower)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountOfRAM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfRAM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataBus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MemoryClock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoolingType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfFans)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DSub)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DisplayPort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HDMI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DVI)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProducerChipset)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountOfRAM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfRAM)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                            Edytuj
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-info btn-md mr-1 mb-2">
+                            Szczegóły
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+
+                        <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                            Usuń
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<center>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

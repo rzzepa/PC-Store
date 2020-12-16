@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit Role";
 }
 
-<h1>Edit Role</h1>
+<h1>Edycja uprawnień</h1>
 
 <form method="post" class="mt-3">
     <div class="form-group row">
@@ -25,14 +25,14 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
+            <a asp-action="ListRoles" class="btn btn-primary">Anuluj</a>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h3>Users in this role</h3>
+            <h3>Użytkownicy posiadający uprawnienie</h3>
         </div>
         <div class="card-body">
             @if (Model.Users.Any())
@@ -44,7 +44,7 @@
             }
             else
             {
-                <h5 class="card-title">None at the moment</h5>
+                <h5 class="card-title">Nikt nie ma tego uprawnienia</h5>
             }
         </div>
         <div class="card-footer">
@@ -52,11 +52,9 @@
             <div class="card-footer">
                 <a asp-controller="Administration" asp-action="EditUsersInRole"
                    asp-route-roleId="@Model.Id" class="btn btn-primary">
-                    Add or remove users from this role
+                   Zarządzanie uprawnieniem
                 </a>
             </div>
-
-            <a href="#" class="btn btn-primary" style="width:auto">Remove Users</a>
         </div>
     </div>
 </form>

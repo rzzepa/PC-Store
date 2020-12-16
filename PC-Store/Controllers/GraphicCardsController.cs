@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
 
@@ -27,10 +28,48 @@ namespace PC_Store.Controllers
             _userManager = userManager;
         }
 
-        // GET: GraphicCards
-        public async Task<IActionResult> Index()
+        
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            return View(await _context.GraphicCards.ToListAsync());
+            ViewData["ProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Prod_desc" : "";
+            ViewData["RamAmountSortParm"] = sortOrder == "ram_asc" ? "ram_desc" : "ram_asc";
+
+            var graphiccard = from s in _context.GraphicCards select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                graphiccard = graphiccard.Where(s => s.Producer.Contains(searchString) || s.ProducerChipset.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Prod_desc":
+                    graphiccard = graphiccard.OrderByDescending(s => s.Producer);
+                    break;
+                case "ram_asc":
+                    graphiccard = graphiccard.OrderBy(s => s.AmountOfRAM);
+                    break;
+                case "ram_desc":
+                    graphiccard = graphiccard.OrderByDescending(s => s.AmountOfRAM);
+                    break;
+                default:
+                    graphiccard = graphiccard.OrderBy(s => s.Producer);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<GraphicCard>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public Task<IActionResult> GraphicCardDetail(int? id)
@@ -70,7 +109,7 @@ namespace PC_Store.Controllers
             where PR.Act == true && GC.ProductId == id
             select new GraphicCardProduct
             {
-                graphicCard = GC,
+                GraphicCard = GC,
                 Product = PR
             };
             if (processor == null)
@@ -102,6 +141,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.GraphicCard.Producer + " " + model.GraphicCard.ProducerCode + " " + model.GraphicCard.ProducerChipset;
                 product.Price = 0;
+                product.Deleted = false;
                 product.InsertBy = _userManager.GetUserName(HttpContext.User);
                 product.ModifyBy = _userManager.GetUserName(HttpContext.User);
                 product.InsertDate = DateTime.Now;
@@ -211,6 +251,9 @@ namespace PC_Store.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var graphicCard = await _context.GraphicCards.FindAsync(id);
+            var prod = await _context.Products.FindAsync(graphicCard.ProductId);
+            prod.Deleted = true;
+            _context.Products.Update(prod);
             _context.GraphicCards.Remove(graphicCard);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

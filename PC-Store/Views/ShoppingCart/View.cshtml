@@ -14,8 +14,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th></th>
                             <th scope="col class="text-center"">Ilość</th>
-                            <th scope="col class="text-center"">Product</th>
+                            <th scope="col class="text-center"">Produkt</th>
                             <th scope="col class="text-center"">Cena za produkt</th>
                             <th scope="col" class="text-center">Łącznie</th>
                         </tr>
@@ -24,8 +25,7 @@
                         @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
                         {
                         <tr>
-                            @* <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>*@
-                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="IncresseAmount" asp-route-prodId="@line.Product.Id"><button class="btn btn-success"></button></form> </td>
+                            <td class="text-center"><form asp-controller="ShoppingCart" asp-action="IncresseAmount" asp-route-prodId="@line.Product.Id"><button class="btn btn-success"></button></form> </td>
                             <td class="text-center">@line.Amount</td>
                             <td class="text-center">
                                 @if (line.Product.ProductType.Equals("PROCESSOR"))
@@ -48,21 +48,26 @@
                                 {
                                     <a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
                                 }
+                                else if (line.Product.ProductType.Equals("POWERSUPPLY"))
+                                {
+                                    <a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@line.Product.Id">@line.Product.Name</a>
+                                }
                             </td>
                             <td class="text-center">@line.Product.Price.ToString("c") Zł</td>
                             <td class="text-center">
                                 @((line.Amount * line.Product.Price).ToString("c")) Zł
                             </td>
-                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id"><button class="btn btn-sm btn-danger"></button></form> </td>
+                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id"><button class="btn btn-danger"></button></form> </td>
                         </tr>
                         }
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Za wszystko razem:</strong></td>
-                            <td class="text-center"><strong> @Model.ShoppingCartTotal.ToString("c") Zł</strong></td>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><strong>Za wszystko razem:</strong></td>
+                        <td class="text-center"><strong> @Model.ShoppingCartTotal.ToString("c") Zł</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

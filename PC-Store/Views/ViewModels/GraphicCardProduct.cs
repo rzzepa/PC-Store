@@ -9,7 +9,7 @@ namespace PC_Store.Views.ViewModels
 {
     public class GraphicCardProduct : IEnumerable
     {
-        public GraphicCard graphicCard { get; set; }
+        public GraphicCard GraphicCard { get; set; }
         public Product Product { get; set; }
 
         public IEnumerator GetEnumerator()

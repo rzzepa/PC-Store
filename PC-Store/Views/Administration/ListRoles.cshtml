@@ -4,12 +4,12 @@
     ViewBag.Title = "All Roles";
 }
 
-<h1>All Roles</h1>
+<h1>Zarządzenie uprawnieniami</h1>
 
 @if (Model.RoleList.Count!=0)
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
-       asp-controller="administration">Add new role</a>
+       asp-controller="administration">Dodaj uprawnienie</a>
 
     foreach (var role in Model.RoleList)
     {
@@ -24,11 +24,11 @@
 
                 <a asp-controller="Administration" asp-action="EditRole"
                    asp-route-id="@role.Id" class="btn btn-primary">
-                    Edit
+                    Edycja
                 </a>
                 <a asp-controller="Administration" asp-action="DeleteRole"
                    asp-route-id="@role.Id" class="btn btn-primary">
-                    Delete
+                    Usuń
                 </a>
             </div>
         </div>
@@ -38,15 +38,15 @@ else
 {
     <div class="card">
         <div class="card-header">
-            No roles created yet
+            Brak uprawnień
         </div>
         <div class="card-body">
             <h5 class="card-title">
-                Use the button below to create a role
+                Uzyj przycisku poniżej aby dodać uprawnienie
             </h5>
             <a class="btn btn-primary" style="width:auto"
                asp-controller="administration" asp-action="CreateRole">
-                Create Role
+                Dodaj Rolę
             </a>
         </div>
     </div>

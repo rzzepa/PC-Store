@@ -1,0 +1,146 @@
+﻿@model PC_Store.Views.ViewModels.CreatePowerSupplyViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edycja</h1>
+
+<h4>Zasilacz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="powerSupply.Id" />
+            <div class="form-group">
+                Producent
+                @Html.DropDownListFor(m => m.powerSupply.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                Kod producenta
+                <input asp-for="@Model.powerSupply.ProducerCode" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.ProducerCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Standard/Format
+                @Html.DropDownListFor(m => m.powerSupply.Standard, new SelectList(Model.Standard, "CodeItem"), "--Wybierz standard--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                Moc [W]
+                <input asp-for="@Model.powerSupply.Power" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Power" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Certyfikat sprawności
+                @Html.DropDownListFor(m => m.powerSupply.EfficiencyCertificate, new SelectList(Model.Certificate, "CodeItem"), "--Wybierz Certyfikat--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                Układ PFC
+                <input asp-for="@Model.powerSupply.PFCSystem" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.PFCSystem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Sprawność [%]
+                <input asp-for="@Model.powerSupply.Efficiency" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Efficiency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Typ chłodzenia
+                @Html.DropDownListFor(m => m.powerSupply.CoolingType, new SelectList(Model.CoolingType, "CodeItem"), "--Wybierz chłodzenie--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                Średnica wentylatora [mm]
+                <input asp-for="@Model.powerSupply.Diameter" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Diameter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Zabezpieczenia
+                <input asp-for="@Model.powerSupply.Security" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Security" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Modularne okablowanie
+                @Html.DropDownListFor(m => m.powerSupply.ModularCabling, new SelectList(Model.ModularCabling, "CodeItem"), "--Wybierz okablowanie--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                ATX 24-pin (20+4)
+                <input asp-for="@Model.powerSupply.ATX24pin204" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.ATX24pin204" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI-E 8-pin (6+2)
+                <input asp-for="@Model.powerSupply.PCIE8pin62" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.PCIE8pin62" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI-E 8-pin
+                <input asp-for="@Model.powerSupply.PCIE8pin" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.PCIE8pin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI-E 6-pin
+                <input asp-for="@Model.powerSupply.PCIE6pin" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.PCIE6pin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                CPU 4+4 (8) pin
+                <input asp-for="@Model.powerSupply.CPU44pin8" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.CPU44pin8" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                CPU 8-pin
+                <input asp-for="@Model.powerSupply.CPU8pin" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.CPU8pin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                CPU 4-pin
+                <input asp-for="@Model.powerSupply.CPU4pin" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.CPU4pin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                SATA
+                <input asp-for="@Model.powerSupply.SATA" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.SATA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Molex
+                <input asp-for="@Model.powerSupply.Molex" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Molex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Wysokość [mm]
+                <input asp-for="@Model.powerSupply.Height" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Szerokość [mm]
+                <input asp-for="@Model.powerSupply.Width" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Width" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Głębokość [mm]
+                <input asp-for="@Model.powerSupply.Depth" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Podświetlenie
+                <input asp-for="@Model.powerSupply.Backlight" class="form-control" />
+                <span asp-validation-for="@Model.powerSupply.Backlight" class="text-danger"></span>
+            </div>
+            @Html.HiddenFor(model => model.powerSupply.ProductId)
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
+</div>
+

@@ -12,121 +12,121 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Producer)
+            Producent
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Producer)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProducerCode)
+            Kod producenta
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProducerCode)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
+            Kolor
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Backlit)
+            Podświetlenie
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Backlit)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Height)
+            Wysokość [cm]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Height)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Width)
+            Szerokość [cm]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Width)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Depth)
+            Głębokość [cm]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Depth)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
+            Waga [kg]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Weight)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ComputerCaseType)
+            Typ obudowy
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ComputerCaseType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Compatibility)
+            Kompatybilność
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Compatibility)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Window)
+            Okno
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Window)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Muted)
+            Wyciszona
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Muted)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Usb20)
+            USB 2.0
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Usb20)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Usb30)
+            USB 3.0
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Usb30)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Usb31)
+            USB 3.1
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Usb31)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Usb32)
+            USB 3.2
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Usb32)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.USBC)
+            USB Typ-C
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.USBC)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MemoryCardReader)
+            Czytnik kart pamięci
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MemoryCardReader)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SpeakerConnector)
+            Złącze słuchawkowe/głośnikowe
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SpeakerConnector)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MicrophoneConnector)
+            Złącze mikrofonowe
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MicrophoneConnector)
@@ -135,7 +135,12 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Wróć</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
     </form>
+    <br />
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>

@@ -33,7 +33,7 @@ namespace PC_Store.Controllers
         public IActionResult RaportView()
         {
             ViewBag.Mess = "";
-            SalesRaportViewModel model = new SalesRaportViewModel
+            RaportViewModel model = new RaportViewModel
             {
                 ToDate = DateTime.Now,
                 FromDate = DateTime.Now
@@ -45,7 +45,7 @@ namespace PC_Store.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult GetProductSalesRaport(SalesRaportViewModel model)
+        public IActionResult GetProductSalesRaport(RaportViewModel model)
         {
             ViewBag.Mess = "";
             if(model.FromDate==DateTime.MinValue)
@@ -69,6 +69,8 @@ namespace PC_Store.Controllers
                 worksheet.Cell(currentRow, 3).Value = "Karty graficzne";
                 worksheet.Cell(currentRow, 4).Value = "Płyty główne";
                 worksheet.Cell(currentRow, 5).Value = "Obudowy";
+                worksheet.Cell(currentRow, 6).Value = "Ramy";
+                worksheet.Cell(currentRow, 7).Value = "Zasilacze";
 
                     foreach (var item in salesraport)
                 {
@@ -78,6 +80,8 @@ namespace PC_Store.Controllers
                     worksheet.Cell(currentRow, 3).Value = item.Graphiccards;
                     worksheet.Cell(currentRow, 4).Value = item.Motherboards;
                     worksheet.Cell(currentRow, 5).Value = item.Computercases;
+                    worksheet.Cell(currentRow, 6).Value = item.Rams;
+                    worksheet.Cell(currentRow, 7).Value = item.PowerSupplies;
                     }
 
                 using (var stream = new MemoryStream())
@@ -101,7 +105,7 @@ namespace PC_Store.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult GetUserSalesRaport(SalesRaportViewModel model)
+        public IActionResult GetUserSalesRaport(RaportViewModel model)
         {
             ViewBag.Mess2 = "";
             if (model.FromDate == DateTime.MinValue)

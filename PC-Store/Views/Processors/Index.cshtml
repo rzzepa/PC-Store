@@ -1,7 +1,4 @@
-﻿@model IEnumerable<PC_Store.Models.Processor>
-
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
+﻿@model PC_Store.Infrastructure.PaginatedList<Processor>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,53 +7,36 @@
 <h1><center>Procesory - Panel</center></h1>
 
 <p>
-    <a asp-action="Create">Dodaj Procesor</a>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-success btn-md mr-1 mb-2">
+            Dodaj
+        </button>
+    </a>
 </p>
-@using (Html.BeginForm())
-{
-    <p>
-        <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Czego szukasz?" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">Szukaj</button>
-            </form>
-        </nav>
-    </p>
-}
 
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page,  ViewBag.CurrentFilter, sortOrder = ViewBag.NameSortParm }),
-    new X.PagedList.Mvc.Common.PagedListRenderOptions
-    {
-        DisplayItemSliceAndTotal = true,
-        ContainerDivClasses = new[] { "navigation" },
-        LiElementClasses = new[] { "page-item" },
-        PageClasses = new[] { "page-link" },
-    })
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" />
+            <a asp-action="Index">
+                <button type="button" class="btn btn-success">
+                    Wróć do pełnej listy
+                </button>
+            </a>
+        </p>
+    </div>
+</form>
+
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @if (ViewBag.NameSortParam == "producerASC")
-                {
-                    @Html.ActionLink("Producent", "Index", new { sortOrder = "producerASC" })
-                }
-                else
-                {
-                    @Html.ActionLink("Producent", "Index", new { sortOrder = "producerDESC" })
-                }
-
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProdSortParm"]">Producent</a>
             </th>
             <th>
-                @if (ViewBag.NameSortParam == "lineASC")
-                {
-                    @Html.ActionLink("Linnia", "Index", new { sortOrder = "lineASC" })
-                }
-                else
-                {
-                    @Html.ActionLink("Linnia", "Index", new { sortOrder = "lineDESC" })
-                }
-
+                Linnia
             </th>
             <th>
                 Chłodzenie
@@ -89,6 +69,8 @@
                 Rodzaje obsługiwanej pamięci
             </th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -101,7 +83,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Line)
                 </td>
-                <td>    
+                <td>
                     @Html.DisplayFor(modelItem => item.Cooling)
                 </td>
                 <td>
@@ -132,20 +114,61 @@
                     @Html.DisplayFor(modelItem => item.TypesOfSupportedMemory)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                            Edytuj
+                        </button>
+                    </a>
                 </td>
-            </tr> 
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-info btn-md mr-1 mb-2">
+                            Szczegóły
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+
+                        <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                            Usuń
+                        </button>
+                    </a>
+                </td>
+            </tr>
+
         }
     </tbody>
 </table>
 <br />
 
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $('ul.pagination > li.disabled > a').addClass('page-link');
-        });
-    </script>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+
+<center>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

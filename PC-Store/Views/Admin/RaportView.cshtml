@@ -1,4 +1,4 @@
-﻿@model PC_Store.Views.ViewModels.SalesRaportViewModel
+﻿@model PC_Store.Views.ViewModels.RaportViewModel
 
 
 <center>
@@ -8,7 +8,7 @@
 
     <form asp-controller="Admin" asp-action="GetProductSalesRaport">
         <p><h3>Raport Sprzedazy Produktów</h3></p>
-        @Html.TextBoxFor(model => model.FromDate, new { type = "date"@*, @Value = string.Format("{0:yyyy-MM-dd}", Model.FromDate)*@ })
+        @Html.TextBoxFor(model => model.FromDate, new { type = "date"@*, @Value = Model.FromDate.GetDateTimeFormats()*@ })
         @Html.TextBoxFor(model => model.ToDate, new { type = "date", @*@Value = string.Format("{0:yyyy-MM-dd}", Model.ToDate)*@})
         <br /><br />
         <button class="btn btn-info">Exportuj do Excela</button>

@@ -4,62 +4,138 @@
     ViewData["Title"] = "Create";
 }
 @using (Html.BeginForm("Create", "Motherboard", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Create</h1>
-
-<h4>Motherboard</h4>
+<center><h1>Dodawanie Płyty głównej</h1></center>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.Producer" class="control-label"></label>
+                Producent
                 <input asp-for="@Model.Motherboard.Producer" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.Producer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.ProducerCode" class="control-label"></label>
+                Kod producenta
                 <input asp-for="@Model.Motherboard.ProducerCode" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.ProducerCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.Standard" class="control-label"></label>
+                Standard
                 <input asp-for="@Model.Motherboard.Standard" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.Standard" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.Chipset" class="control-label"></label>
+                Chipset płyty
                 <input asp-for="@Model.Motherboard.Chipset" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.Chipset" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.SocketType" class="control-label"></label>
+                Gniazdo procesora
                 <input asp-for="@Model.Motherboard.SocketType" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.SocketType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Motherboard.Technologies" class="control-label"></label>
+                Technologie
                 <input asp-for="@Model.Motherboard.Technologies" class="form-control" />
                 <span asp-validation-for="@Model.Motherboard.Technologies" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="File" class="control-label"></label>
-                    <div class="custom-file">
-                        <input asp-for="File" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+            <div class="form-group">
+                Standard pamięci
+                <input asp-for="@Model.Motherboard.StandardMemory" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.StandardMemory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Rodzaj złącza
+                <input asp-for="@Model.Motherboard.ConnectorType" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.ConnectorType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Ilość slotów pamięci
+                <input asp-for="@Model.Motherboard.NumberOfMemorySlots" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.NumberOfMemorySlots" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Maksymalna ilość pamięci [GB]
+                <input asp-for="@Model.Motherboard.MaximumAmountOfMemory" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.MaximumAmountOfMemory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Architektura wielokanałowa
+                <input asp-for="@Model.Motherboard.MultiChannelArchitecture" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.MultiChannelArchitecture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Obsługa zintegrowanych kart graficznych
+                <input asp-for="@Model.Motherboard.IntegratedGraphicsCardSupport" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.IntegratedGraphicsCardSupport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Chipset graficzny
+                <input asp-for="@Model.Motherboard.GraphicsChipset" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.GraphicsChipset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Łączenie kart
+                <input asp-for="@Model.Motherboard.CombiningCards" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.CombiningCards" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Chipset dźwiękowy
+                <input asp-for="@Model.Motherboard.SoundChipset" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.SoundChipset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Kanały audio
+                <input asp-for="@Model.Motherboard.AudioChannels" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.AudioChannels" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Zintegrowana karta sieciowa
+                <input asp-for="@Model.Motherboard.IntegratedNetworkCard" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.IntegratedNetworkCard" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Chipset karty sieciowej
+                <input asp-for="@Model.Motherboard.NetworkCardChipset" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.NetworkCardChipset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI Express x1
+                <input asp-for="@Model.Motherboard.PCIExpressx1" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.PCIExpressx1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI Express x4
+                <input asp-for="@Model.Motherboard.PCIExpressx4" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.PCIExpressx4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                PCI Express x16
+                <input asp-for="@Model.Motherboard.PCIExpressx16" class="form-control" />
+                <span asp-validation-for="@Model.Motherboard.PCIExpressx16" class="text-danger"></span>
+            </div>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

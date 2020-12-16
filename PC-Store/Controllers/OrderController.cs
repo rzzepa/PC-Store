@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Interfaces;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
@@ -56,11 +57,12 @@ namespace PC_Store.Controllers
             return View(order);
         }
 
-        public IActionResult GetMyOrders()
+        public async Task<IActionResult> GetMyOrders(int? pageNumber)
         {
             var item = _context.Orders.Where(p => p.User == _userManager.GetUserName(HttpContext.User)).OrderByDescending(p=>p.OrderPlaced);
 
-            return View(item);
+            int pageSize = 10;
+            return View(await PaginatedList<Order>.CreateAsync(item.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public  IActionResult Details(int? id)

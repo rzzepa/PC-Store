@@ -1,4 +1,4 @@
-﻿@model PC_Store.Models.Processor
+﻿@model PC_Store.Views.ViewModels.CreateProcessorViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,76 +12,81 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Processor.Id" />
             <div class="form-group">
-                <label asp-for="Producer" class="control-label"></label>
-                <input asp-for="Producer" class="form-control" />
-                <span asp-validation-for="Producer" class="text-danger"></span>
+                <div class="form-group">
+                    Producent
+                    @Html.DropDownListFor(m => m.Processor.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control", @value = Model.Processor.Producer })
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Line" class="control-label"></label>
-                <input asp-for="Line" class="form-control" />
-                <span asp-validation-for="Line" class="text-danger"></span>
+                Linnia
+                <input asp-for="Processor.Line" class="form-control" />
+                <span asp-validation-for="Processor.Line" class="text-danger"></span>
             </div>
+            
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Cooling" /> @Html.DisplayNameFor(model => model.Cooling)
-                </label>
+                Chłodzenie
+                <input asp-for="Processor.Cooling" class="form-control" />
+                <span asp-validation-for="Processor.Cooling" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SocketType" class="control-label"></label>
-                <input asp-for="SocketType" class="form-control" />
-                <span asp-validation-for="SocketType" class="text-danger"></span>
+                Rodzaj gniazda
+                @Html.DropDownListFor(m => m.Processor.SocketType, new SelectList(Model.SocketTypes, "CodeItem"), "--Wybierz Socket--", new { @class = "form-control", @value = Model.Processor.SocketType })
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfCores" class="control-label"></label>
-                <input asp-for="NumberOfCores" class="form-control" />
-                <span asp-validation-for="NumberOfCores" class="text-danger"></span>
+                Liczba rdzeni
+                <input asp-for="Processor.NumberOfCores" class="form-control" />
+                <span asp-validation-for="Processor.NumberOfCores" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfThreads" class="control-label"></label>
-                <input asp-for="NumberOfThreads" class="form-control" />
-                <span asp-validation-for="NumberOfThreads" class="text-danger"></span>
+                Liczba wątków
+                <input asp-for="Processor.NumberOfThreads" class="form-control" />
+                <span asp-validation-for="Processor.NumberOfThreads" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProcessorClockFrequency" class="control-label"></label>
-                <input asp-for="ProcessorClockFrequency" class="form-control" />
-                <span asp-validation-for="ProcessorClockFrequency" class="text-danger"></span>
+                Częstotliwość zegara
+                <input asp-for="Processor.ProcessorClockFrequency" class="form-control" />
+                <span asp-validation-for="Processor.ProcessorClockFrequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TurboMaximumFrequency" class="control-label"></label>
-                <input asp-for="TurboMaximumFrequency" class="form-control" />
-                <span asp-validation-for="TurboMaximumFrequency" class="text-danger"></span>
+                Maksymalna częstotliwość
+                <input asp-for="Processor.TurboMaximumFrequency" class="form-control" />
+                <span asp-validation-for="Processor.TurboMaximumFrequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IntegratedGraphics" class="control-label"></label>
-                <input asp-for="IntegratedGraphics" class="form-control" />
-                <span asp-validation-for="IntegratedGraphics" class="text-danger"></span>
+                Zintegrowana grafika
+                <input asp-for="Processor.IntegratedGraphics" class="form-control" />
+                <span asp-validation-for="Processor.IntegratedGraphics" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UnlockedMultiplier" class="control-label"></label>
-                <input asp-for="UnlockedMultiplier" class="form-control" />
-                <span asp-validation-for="UnlockedMultiplier" class="text-danger"></span>
+                Odblokowany mnożnik
+                <input asp-for="Processor.UnlockedMultiplier" class="form-control" />
+                <span asp-validation-for="Processor.UnlockedMultiplier" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Architecture" class="control-label"></label>
-                <input asp-for="Architecture" class="form-control" />
-                <span asp-validation-for="Architecture" class="text-danger"></span>
+                Architektura
+                <input asp-for="Processor.Architecture" class="form-control" />
+                <span asp-validation-for="Processor.Architecture" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypesOfSupportedMemory" class="control-label"></label>
-                <input asp-for="TypesOfSupportedMemory" class="form-control" />
-                <span asp-validation-for="TypesOfSupportedMemory" class="text-danger"></span>
+                Typ pamięci
+                <input asp-for="Processor.TypesOfSupportedMemory" class="form-control" />
+                <span asp-validation-for="Processor.TypesOfSupportedMemory" class="text-danger"></span>
             </div>
-            @Html.HiddenFor(model => model.ProductId)
+            @Html.HiddenFor(model => model.Processor.ProductId)
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-controller="ComputerCases" asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

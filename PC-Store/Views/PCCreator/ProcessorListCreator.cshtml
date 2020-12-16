@@ -1,0 +1,136 @@
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.structure.ProcessorCreatorList>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+<center><h1>Procesory</h1></center>
+<br />
+<br />
+@if (Model.ToList().Count == 0)
+{
+    <center><h4>Brak pasującego procesora</h4></center>
+}
+else
+{
+    <form asp-action="ProcessorListCreator" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <a asp-action="ProcessorListCreator">
+                    <button type="button" class="btn btn-success">
+                        Wróć do pełnej listy
+                    </button>
+                </a>
+            </p>
+        </div>
+    </form>
+}
+
+
+
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    @if (item.Picture != null)
+                    {
+                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                            <img class="img-fluid w-100" src="~/images/@item.Picture" alt="Sample">
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Producer) @Html.DisplayFor(modelItem => item.Line) @Html.DisplayFor(modelItem => item.SocketType)</a></h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Socket: @Html.DisplayFor(modelItem => item.SocketType)</i>
+                            </li>
+                            <li>
+                                <i>Liczba rdzeni: @Html.DisplayFor(modelItem => item.NumberOfCores)</i>
+                            </li>
+                            <li>
+                                <i>Ilość wątków: @Html.DisplayFor(modelItem => item.NumberOfThreads)</i>
+                            </li>
+                            <li>
+                                <i>Zintegrowany układ graficzny: @Html.DisplayFor(modelItem => item.IntegratedGraphics)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Price) Zł</span></h6>
+                        <div class="my-4">
+                            <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    Dodaj do konfiguracji
+                                </button>
+                            </a>
+
+                            <a asp-controller="PcCreator" asp-action="ProcessorCreatorDetails" asp-route-id="@item.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    Szczegóły
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<center>
+    <a asp-action="ProcessorListCreator"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="ProcessorListCreator"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="PcCreator" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

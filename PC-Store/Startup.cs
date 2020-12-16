@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using PC_Store.Models;
 using PC_Store.Interfaces;
+using PC_Store.Views.ViewModels;
 
 namespace PC_Store
 {
@@ -63,6 +64,7 @@ namespace PC_Store
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
+            services.AddScoped(sp => PCCreator.CreatePcCreator(sp));
 
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMemoryCache();

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
 using System;
@@ -26,9 +28,54 @@ namespace PC_Store.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            return View(await _context.Rams.ToListAsync());
+            ViewData["ProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Prod_desc" : "";
+            ViewData["TypeConSortParm"] = sortOrder == "typecon_asc" ? "typecon_desc" : "typecon_asc";
+            ViewData["TotalCapSortParm"] = sortOrder == "totalcap_asc" ? "totalcap_desc" : "totalcap_asc";
+
+            var ram = from s in _context.Rams select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ram = ram.Where(s => s.Producer.Contains(searchString) || s.MemoryType.Contains(searchString) || s.Line.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Prod_desc":
+                    ram = ram.OrderByDescending(s => s.Producer);
+                    break;
+                case "typecon_asc":
+                    ram = ram.OrderBy(s => s.ConnectorType);
+                    break;
+                case "typecon_desc":
+                    ram = ram.OrderByDescending(s => s.ConnectorType);
+                    break;
+                case "totalcap_asc":
+                    ram = ram.OrderBy(s => s.TotalCapacity);
+                    break;
+                case "totalcap_desc":
+                    ram = ram.OrderByDescending(s => s.TotalCapacity);
+                    break;
+                default:
+                    ram = ram.OrderBy(s => s.Producer);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<Ram>.CreateAsync(ram.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public Task<IActionResult> RamDetail(int? id)
@@ -82,7 +129,15 @@ namespace PC_Store.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            CreateRamViewModel createRamViewModel = new CreateRamViewModel()
+            {
+                Producers= _context.Dictionary.Where(p => p.CodeDict.Equals("PRODRAM")).OrderBy(p=>p.ExtN1).Select(o => o.CodeValue),
+                ConnectorType = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMCONN")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                Delay = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMDELAY")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                MemoryType = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMTYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                TotalCapacity = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMAMMOUNT")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
+            return View(createRamViewModel);
         }
 
 
@@ -97,6 +152,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.Ram.Producer + " " + model.Ram.ProducerCode + " " + model.Ram.TotalCapacity;
                 product.Price = 0;
+                product.Deleted = false;
                 product.InsertBy = _userManager.GetUserName(HttpContext.User);
                 product.ModifyBy = _userManager.GetUserName(HttpContext.User);
                 product.InsertDate = DateTime.Now;
@@ -123,12 +179,21 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            var ram = await _context.Rams.FindAsync(id);
-            if (ram == null)
+            CreateRamViewModel createRamViewModel = new CreateRamViewModel()
+            {
+                Ram= await _context.Rams.FindAsync(id),
+                Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODRAM")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                ConnectorType = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMCONN")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                Delay = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMDELAY")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                MemoryType = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMTYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                TotalCapacity = _context.Dictionary.Where(p => p.CodeDict.Equals("RAMAMMOUNT")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
+
+            if (createRamViewModel.Ram== null)
             {
                 return NotFound();
             }
-            return View(ram);
+            return View(createRamViewModel);
         }
 
 
@@ -188,6 +253,9 @@ namespace PC_Store.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ram = await _context.Rams.FindAsync(id);
+            var prod = await _context.Products.FindAsync(ram.ProductId);
+            prod.Deleted = true;
+            _context.Products.Update(prod);
             _context.Rams.Remove(ram);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

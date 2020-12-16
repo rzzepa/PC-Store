@@ -1,0 +1,106 @@
+﻿@model PC_Store.structure.RamCreatorList
+
+@{
+    ViewData["Title"] = "Szczegóły Obudowy";
+}
+
+<center><h1>@Model.Producer @Model.ProducerCode</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Linnia: @Model.Line</i>
+                    </li>
+                    <li>
+                        <i>Typ złącza: @Model.ConnectorType</i>
+                    </li>
+                    <li>
+                        <i>Rodzaj pamięci: @Model.MemoryType</i>
+                    </li>
+                    <li>
+                        <i>Chłodzenie: @Model.Cooling</i>
+                    </li>
+                    <li>
+                        <i>Niskoprofilowe: @Model.LowProfile</i>
+                    </li>
+                    <li>
+                        <i>Pojemność łączna [GB]: @Model.TotalCapacity</i>
+                    </li>
+                    <li>
+                        <i>Liczba modułów: @Model.NumberOfModules</i>
+                    </li>
+                    <li>
+                        <i>Częstotliwość pracy [MHz]: @Model.Frequency</i>
+                    </li>
+                    <li>
+                        <i>Opóźnienie: @Model.Delay</i>
+                    </li>
+                    <li>
+                        <i>Napięcie [V]: @Model.Voltage</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie: @Model.Backlight</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id=@Model.Id>
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        Dodaj do konfiguracji
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <a asp-controller="PcCreator" asp-action="RamListCreator">
+            <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                Wróć
+            </button>
+        </a>
+    </div>

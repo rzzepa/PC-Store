@@ -1,4 +1,4 @@
-﻿@model PC_Store.Models.Ram
+﻿@model PC_Store.Views.ViewModels.CreateRamViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,72 +12,66 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Ram.Id" />
             <div class="form-group">
-                <label asp-for="@Model.Producer" class="control-label"></label>
-                <input asp-for="@Model.Producer" class="form-control" />
-                <span asp-validation-for="@Model.Producer" class="text-danger"></span>
-            </div>
-            @Html.HiddenFor(model => model.ProductId)
-            <div class="form-group">
-                <label asp-for="@Model.ProducerCode" class="control-label"></label>
-                <input asp-for="@Model.ProducerCode" class="form-control" />
-                <span asp-validation-for="@Model.ProducerCode" class="text-danger"></span>
+                Producent
+                @Html.DropDownListFor(m => m.Ram.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Line" class="control-label"></label>
-                <input asp-for="@Model.Line" class="form-control" />
-                <span asp-validation-for="@Model.Line" class="text-danger"></span>
+                Kod producenta
+                <input asp-for="@Model.Ram.ProducerCode" class="form-control" />
+                <span asp-validation-for="@Model.Ram.ProducerCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.ConnectorType" class="control-label"></label>
-                <input asp-for="@Model.ConnectorType" class="form-control" />
-                <span asp-validation-for="@Model.ConnectorType" class="text-danger"></span>
+                Linnia
+                <input asp-for="@Model.Ram.Line" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Line" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.MemoryType" class="control-label"></label>
-                <input asp-for="@Model.MemoryType" class="form-control" />
-                <span asp-validation-for="@Model.MemoryType" class="text-danger"></span>
+                Typ złącza
+                @Html.DropDownListFor(m => m.Ram.ConnectorType, new SelectList(Model.ConnectorType, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Cooling" class="control-label"></label>
-                <input asp-for="@Model.Cooling" class="form-control" />
-                <span asp-validation-for="@Model.Cooling" class="text-danger"></span>
+                Rodzaj pamięci
+                @Html.DropDownListFor(m => m.Ram.MemoryType, new SelectList(Model.MemoryType, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.LowProfile" class="control-label"></label>
-                <input asp-for="@Model.LowProfile" class="form-control" />
-                <span asp-validation-for="@Model.LowProfile" class="text-danger"></span>
+                Chłodzenie
+                <input asp-for="@Model.Ram.Cooling" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Cooling" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.TotalCapacity" class="control-label"></label>
-                <input asp-for="@Model.TotalCapacity" class="form-control" />
-                <span asp-validation-for="@Model.TotalCapacity" class="text-danger"></span>
+                Niskoprofilowe
+                <input asp-for="@Model.Ram.LowProfile" class="form-control" />
+                <span asp-validation-for="@Model.Ram.LowProfile" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.NumberOfModules" class="control-label"></label>
-                <input asp-for="@Model.NumberOfModules" class="form-control" />
-                <span asp-validation-for="@Model.NumberOfModules" class="text-danger"></span>
+                Pojemność łączna [GB]
+                @Html.DropDownListFor(m => m.Ram.TotalCapacity, new SelectList(Model.TotalCapacity, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Frequency" class="control-label"></label>
-                <input asp-for="@Model.Frequency" class="form-control" />
-                <span asp-validation-for="@Model.Frequency" class="text-danger"></span>
+                Liczba modułów
+                <input asp-for="@Model.Ram.NumberOfModules" class="form-control" />
+                <span asp-validation-for="@Model.Ram.NumberOfModules" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Delay" class="control-label"></label>
-                <input asp-for="@Model.Delay" class="form-control" />
-                <span asp-validation-for="@Model.Delay" class="text-danger"></span>
+                Częstotliwość pracy [MHz]
+                <input asp-for="@Model.Ram.Frequency" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Frequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Voltage" class="control-label"></label>
-                <input asp-for="@Model.Voltage" class="form-control" />
-                <span asp-validation-for="@Model.Voltage" class="text-danger"></span>
+                Opóźnienie
+                @Html.DropDownListFor(m => m.Ram.Delay, new SelectList(Model.Delay, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Backlight" class="control-label"></label>
-                <input asp-for="@Model.Backlight" class="form-control" />
-                <span asp-validation-for="@Model.Backlight" class="text-danger"></span>
+                Napięcie [V]
+                <input asp-for="@Model.Ram.Voltage" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Voltage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Podświetlenie
+                <input asp-for="@Model.Ram.Backlight" class="form-control" />
+                <span asp-validation-for="@Model.Ram.Backlight" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary" />
@@ -87,6 +81,10 @@
 </div>
 
 <div>
-    <a asp-action="Index">Wróć</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

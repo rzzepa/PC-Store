@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
+using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -20,9 +22,44 @@ namespace PC_Store.Controllers
         }
 
         // GET: Dictionaries
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber, string filter)
         {
-            return View(await _context.Dictionary.OrderBy(o=>o.CodeDict).ToListAsync());
+            ViewData["DictSortParm"] = String.IsNullOrEmpty(sortOrder) ? "DICT_desc" : "";
+            ViewData["Filter"] =  String.IsNullOrEmpty(filter) ? "" : filter;
+            ViewBag.dictitems = _context.Dictionary.Select(p => p.CodeDict).Distinct();
+            
+            var dict = from s in _context.Dictionary select s;
+
+            if (filter != null)
+                dict=dict.Where(p => p.CodeDict.Equals(filter));
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dict = dict.Where(s => s.CodeDict.Contains(searchString) || s.CodeItem.Contains(searchString) || s.CodeValue.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+            case "DICT_desc":
+                dict = dict.OrderByDescending(s => s.CodeDict).ThenBy(s=>s.ExtN1);
+                break;
+            default:
+                dict = dict.OrderBy(s => s.CodeDict).ThenBy(s => s.ExtN1);
+                break;
+            }
+            int pageSize = 15;
+            return View(await PaginatedList<Dictionary>.CreateAsync(dict.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Dictionaries/Details/5
@@ -46,6 +83,7 @@ namespace PC_Store.Controllers
         // GET: Dictionaries/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -54,7 +92,7 @@ namespace PC_Store.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CodeItem,CodeDict,CodeValue,Ext1,Ext2,ExtN1,ExtN2")] Dictionary dictionary)
+        public async Task<IActionResult> Create(Dictionary dictionary)
         {
             if (ModelState.IsValid)
             {

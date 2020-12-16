@@ -4,15 +4,95 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Strona główna</h1>
+<center>
+    <h1>Strona główna</h1>
+    <hr />
+    <div class="container mt-100">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="ProcessorList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category"></div>
+                        </div>
 
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Processory</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="GraphiccardList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category"></div>
+                        </div>
 
-    <div>
-        <ul>
-            <li><a asp-action="ProcessorList">Procesory</a></li>
-            <li><a asp-action="MotherboardList">Płyty główne</a></li>
-            <li><a asp-action="GraphiccardList">Karty graficzne</a></li>
-        </ul>
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Karty Graficzne</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="MotherboardList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category"></div>
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Płyty główne</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="ComputerCaseList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category"></div>
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Obudowy</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="RamList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category"></div>
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Pamięć RAM</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-30">
+                    <a class="card-img-tiles" asp-controller="Home" asp-action="PowerSupplyList" data-abc="true">
+                        <div class="inner">
+                            <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category"></div>
+                        </div>
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Zasilacze</h4>
+                            <p>Zobacz produkty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</center>

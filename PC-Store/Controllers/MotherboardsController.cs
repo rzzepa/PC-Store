@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
 
@@ -27,10 +28,55 @@ namespace PC_Store.Controllers
             _userManager = userManager;
         }
 
-        // GET: Motherboards
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            return View(await _context.Motherboards.ToListAsync());
+            ViewData["ProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Prod_desc" : "";
+            ViewData["StandardSortParm"] = sortOrder == "standard_asc" ? "standard_desc" : "standard_asc";
+            ViewData["SocketSortParm"] = sortOrder == "socket_asc" ? "socket_desc" : "socket_asc";
+
+            var motherboard = from s in _context.Motherboards select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                motherboard = motherboard.Where(s => s.Producer.Contains(searchString) || s.ProducerCode.Contains(searchString) || s.SocketType.Contains(searchString) || s.StandardMemory.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Prod_desc":
+                    motherboard = motherboard.OrderByDescending(s => s.Producer);
+                    break;
+                case "standard_asc":
+                    motherboard = motherboard.OrderBy(s => s.Standard);
+                    break;
+                case "standard_desc":
+                    motherboard = motherboard.OrderByDescending(s => s.Standard);
+                    break;
+                case "socket_asc":
+                    motherboard = motherboard.OrderBy(s => s.SocketType);
+                    break;
+                case "socket_desc":
+                    motherboard = motherboard.OrderByDescending(s => s.SocketType);
+                    break;
+                default:
+                    motherboard = motherboard.OrderBy(s => s.Producer);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<Motherboard>.CreateAsync(motherboard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public Task<IActionResult> MotherboardDetail(int? id)
@@ -99,6 +145,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.Motherboard.Producer + " " +model.Motherboard.Chipset+" "+model.Motherboard.SocketType;
                 product.Price = 0;
+                product.Deleted = false;
                 product.InsertBy = _userManager.GetUserName(HttpContext.User);
                 product.ModifyBy = _userManager.GetUserName(HttpContext.User);
                 product.InsertDate = DateTime.Now;
@@ -191,6 +238,9 @@ namespace PC_Store.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var motherboard = await _context.Motherboards.FindAsync(id);
+            var prod = await _context.Products.FindAsync(motherboard.ProductId);
+            prod.Deleted = true;
+            _context.Products.Update(prod);
             _context.Motherboards.Remove(motherboard);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -14,7 +14,7 @@ namespace PC_Store.Models
 {
 
 
-    public class Processor :IEnumerable,IProducts
+    public class Processor :IEnumerable
     {
         public int Id { get; set; }
         [StringLength(20)]
@@ -39,7 +39,7 @@ namespace PC_Store.Models
 
         public bool UnlockedMultiplier { get; set; }
 
-        public int Architecture { get; set; } //bit
+        public int Architecture { get; set; }
 
         public string TypesOfSupportedMemory { get; set; }
 
@@ -48,16 +48,6 @@ namespace PC_Store.Models
         public IEnumerator GetEnumerator()
         {
             throw new NotImplementedException();
-        }
-
-        public int GetId()
-        {
-            return Id;
-        }
-
-        public decimal GetPrice()
-        {
-            return 99;
         }
 
     }

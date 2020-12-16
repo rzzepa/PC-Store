@@ -4,99 +4,96 @@
     ViewData["Title"] = "Create";
 }
 @using (Html.BeginForm("Create", "Ram", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Create</h1>
+<center><h1>Dodawanie Pamięci RAM</h1></center>
 
-<h4>Motherboard</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Producer" class="control-label"></label>
-                <input asp-for="@Model.Ram.Producer" class="form-control" />
-                <span asp-validation-for="@Model.Ram.Producer" class="text-danger"></span>
+                Producent
+                @Html.DropDownListFor(m => m.Ram.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.ProducerCode" class="control-label"></label>
+                Kod producenta
                 <input asp-for="@Model.Ram.ProducerCode" class="form-control" />
                 <span asp-validation-for="@Model.Ram.ProducerCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Line" class="control-label"></label>
+                Linnia
                 <input asp-for="@Model.Ram.Line" class="form-control" />
                 <span asp-validation-for="@Model.Ram.Line" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.ConnectorType" class="control-label"></label>
-                <input asp-for="@Model.Ram.ConnectorType" class="form-control" />
-                <span asp-validation-for="@Model.Ram.ConnectorType" class="text-danger"></span>
+                Typ złącza
+                @Html.DropDownListFor(m => m.Ram.ConnectorType, new SelectList(Model.ConnectorType, "CodeItem"), "--Wybierz złącze--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.MemoryType" class="control-label"></label>
-                <input asp-for="@Model.Ram.MemoryType" class="form-control" />
-                <span asp-validation-for="@Model.Ram.MemoryType" class="text-danger"></span>
+                Rodzaj pamięci
+                @Html.DropDownListFor(m => m.Ram.MemoryType, new SelectList(Model.MemoryType, "CodeItem"), "--Wybierz rodzaj pamięci--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Cooling" class="control-label"></label>
+                Chłodzenie
                 <input asp-for="@Model.Ram.Cooling" class="form-control" />
                 <span asp-validation-for="@Model.Ram.Cooling" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.LowProfile" class="control-label"></label>
+                Niskoprofilowe
                 <input asp-for="@Model.Ram.LowProfile" class="form-control" />
                 <span asp-validation-for="@Model.Ram.LowProfile" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.TotalCapacity" class="control-label"></label>
-                <input asp-for="@Model.Ram.TotalCapacity" class="form-control" />
-                <span asp-validation-for="@Model.Ram.TotalCapacity" class="text-danger"></span>
+                Pojemność łączna [GB]
+                @Html.DropDownListFor(m => m.Ram.TotalCapacity, new SelectList(Model.TotalCapacity, "CodeItem"), "--Wybierz pojemność--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.NumberOfModules" class="control-label"></label>
+                Liczba modułów
                 <input asp-for="@Model.Ram.NumberOfModules" class="form-control" />
                 <span asp-validation-for="@Model.Ram.NumberOfModules" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Frequency" class="control-label"></label>
+                Częstotliwość pracy [MHz]
                 <input asp-for="@Model.Ram.Frequency" class="form-control" />
                 <span asp-validation-for="@Model.Ram.Frequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Delay" class="control-label"></label>
-                <input asp-for="@Model.Ram.Delay" class="form-control" />
-                <span asp-validation-for="@Model.Ram.Delay" class="text-danger"></span>
+                Opóźnienie
+                @Html.DropDownListFor(m => m.Ram.Delay, new SelectList(Model.Delay, "CodeItem"), "--Wybierz opóźnienie--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Voltage" class="control-label"></label>
+                Napięcie [V]
                 <input asp-for="@Model.Ram.Voltage" class="form-control" />
                 <span asp-validation-for="@Model.Ram.Voltage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram.Backlight" class="control-label"></label>
+                Podświetlenie
                 <input asp-for="@Model.Ram.Backlight" class="form-control" />
                 <span asp-validation-for="@Model.Ram.Backlight" class="text-danger"></span>
             </div>
 
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="File" class="control-label"></label>
-                    <div class="custom-file">
-                        <input asp-for="File" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
                     <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

@@ -4,112 +4,129 @@
     ViewData["Title"] = "Create";
 }
 @using (Html.BeginForm("Create", "GraphicCard", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Create</h1>
+<center><h1>Dodawanie Karty graficznej</h1></center>
 
-<h4>GraphicCard</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.Producer" class="control-label"></label>
+                Producent
                 <input asp-for="@Model.GraphicCard.Producer" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.Producer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.ProducerCode" class="control-label"></label>
+                Kod producenta
                 <input asp-for="@Model.GraphicCard.ProducerCode" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.ProducerCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.ProducerChipset" class="control-label"></label>
+                Producent chipsetu
                 <input asp-for="@Model.GraphicCard.ProducerChipset" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.ProducerChipset" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.CoreClock" class="control-label"></label>
+                Taktowanie rdzenia
                 <input asp-for="@Model.GraphicCard.CoreClock" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.CoreClock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.CoreClockBoost" class="control-label"></label>
+                Taktowanie rdzenia w trybie boost
                 <input asp-for="@Model.GraphicCard.CoreClockBoost" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.CoreClockBoost" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.ConnectorType" class="control-label"></label>
+                Typ złącza
                 <input asp-for="@Model.GraphicCard.ConnectorType" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.ConnectorType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.Resolution" class="control-label"></label>
+                Wersja złącza
+                <input asp-for="@Model.GraphicCard.VerConnectorType" class="form-control" />
+                <span asp-validation-for="@Model.GraphicCard.VerConnectorType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Rozdzielczość
                 <input asp-for="@Model.GraphicCard.Resolution" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.Resolution" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.RecommendedPSUPower" class="control-label"></label>
+                Rekomendowana moc zasilacza
                 <input asp-for="@Model.GraphicCard.RecommendedPSUPower" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.RecommendedPSUPower" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.AmountOfRAM" class="control-label"></label>
+                Ilość pamięci RAM
                 <input asp-for="@Model.GraphicCard.AmountOfRAM" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.AmountOfRAM" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.TypeOfRAM" class="control-label"></label>
+                Rodzaj pamięci RAM
                 <input asp-for="@Model.GraphicCard.TypeOfRAM" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.TypeOfRAM" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.DataBus" class="control-label"></label>
+                Szyna danych
                 <input asp-for="@Model.GraphicCard.DataBus" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.DataBus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.MemoryClock" class="control-label"></label>
+                Taktowanie pamięci
                 <input asp-for="@Model.GraphicCard.MemoryClock" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.MemoryClock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.CoolingType" class="control-label"></label>
+                Typ chłodzenia
                 <input asp-for="@Model.GraphicCard.CoolingType" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.CoolingType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.NumberOfFans" class="control-label"></label>
+                Ilość wentylatorów
                 <input asp-for="@Model.GraphicCard.NumberOfFans" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.NumberOfFans" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.DSub" class="control-label"></label>
+                D-Sub
                 <input asp-for="@Model.GraphicCard.DSub" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.DSub" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.DisplayPort" class="control-label"></label>
+                DisplayPort
                 <input asp-for="@Model.GraphicCard.DisplayPort" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.DisplayPort" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.HDMI" class="control-label"></label>
+                HDMI
                 <input asp-for="@Model.GraphicCard.HDMI" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.HDMI" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.GraphicCard.DVI" class="control-label"></label>
+                DVI
                 <input asp-for="@Model.GraphicCard.DVI" class="form-control" />
                 <span asp-validation-for="@Model.GraphicCard.DVI" class="text-danger"></span>
             </div>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+            </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

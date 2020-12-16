@@ -1,0 +1,151 @@
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.Views.ViewModels.PowerSupplyProduct>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<center><h1>Zasilacze</h1></center>
+<br />
+<br />
+<div style="display: flex;">
+    <form asp-action="PowerSupplyList" method="get" float="left">
+        <div class="form-actions no-color">
+            <p>
+                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
+                <a asp-action="PowerSupplyList">
+                    <button type="button" class="btn btn-success">
+                        Wróć do pełnej listy
+                    </button>
+                </a>
+            </p>
+        </div>
+    </form>
+    <pre>                                      </pre>
+    <form asp-action="PowerSupplyList" method="get" float="right">
+        <div class="form-row align-items-center">
+            <p>
+                <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <select class="custom-select mr-sm-2" name="sortOrder" value="@ViewData["sortOrder"]">
+
+                    @if (@ViewData["sortOrder"].ToString() == "price_asc")
+                    {
+                        <option value="price_asc">Cena - rosnąco</option>
+                        <option value="price_desc" selected>Cena - malejąco</option>
+                    }
+                    else
+                    {
+                        <option value="price_asc" selected>Cena - rosnąco</option>
+                        <option value="price_desc">Cena - malejąco</option>
+                    }
+
+                </select>
+                <input type="submit" value="Sortuj" class="btn btn-primary" />
+            </p>
+        </div>
+    </form>
+</div>
+@foreach (var item in Model)
+{
+    <section>
+        <hr />
+        <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+
+                <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    @if (item.Product.Picture != null)
+                    {
+                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/@item.Product.Picture" alt="Sample">
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Graphiccards" asp-action="GraphicCardDetail" asp-route-id="@item.Product.Id">
+                            <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Sample">
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-7">
+
+                        <h5><a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@item.Product.Id">@Html.DisplayFor(modelItem => item.powerSupply.Producer) @Html.DisplayFor(modelItem => item.powerSupply.ProducerCode) @Html.DisplayFor(modelItem => item.powerSupply.Power)</a></h5>
+                        <ul class="rating">
+                            <li>
+                                <i>Kod producenta: @Html.DisplayFor(modelItem => item.powerSupply.ProducerCode)</i>
+                            </li>
+                            <li>
+                                <i>Standard/Format: @Html.DisplayFor(modelItem => item.powerSupply.Standard)</i>
+                            </li>
+                            <li>
+                                <i>Moc [W]: @Html.DisplayFor(modelItem => item.powerSupply.Power)</i>
+                            </li>
+                            <li>
+                                <i>Typ chłodzenia: @Html.DisplayFor(modelItem => item.powerSupply.CoolingType)</i>
+                            </li>
+                            <li>
+                                <i>Podświetlenie: @Html.DisplayFor(modelItem => item.powerSupply.Backlight)</i>
+                            </li>
+                        </ul>
+                        <hr>
+
+                    </div>
+                    <div class="col-lg-5 col-xl-5">
+
+                        <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Product.Price) Zł</span></h6>
+                        <div class="my-4">
+
+                            <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                                    Dodaj do koszyka
+                                </button>
+                            </a>
+
+                            <a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@item.Product.Id">
+                                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                                    Szczegóły
+                                </button>
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<center>
+    <a asp-action="PowerSupplyList"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="PowerSupplyList"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PC_Store.Views.ViewModels.GraphiccardList>
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.Views.ViewModels.GraphicCardProduct>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,6 +7,45 @@
 <center><h1>Karty Graficzne</h1></center>
 <br />
 <br />
+<div style="display: flex;">
+    <form asp-action="GraphicCardList" method="get" float="left">
+        <div class="form-actions no-color">
+            <p>
+                Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Szukaj" class="btn btn-primary" />
+                <input type="hidden" name="sortOrder" value="@ViewData["sortOrder"]" />
+                <a asp-action="GraphicCardList">
+                    <button type="button" class="btn btn-success">
+                        Wróć do pełnej listy
+                    </button>
+                </a>
+            </p>
+        </div>
+    </form>
+    <pre>                                      </pre>
+    <form asp-action="GraphicCardList" method="get" float="right">
+        <div class="form-row align-items-center">
+            <p>
+                <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <select class="custom-select mr-sm-2" name="sortOrder" value="@ViewData["sortOrder"]">
+
+                    @if (@ViewData["sortOrder"].ToString() == "price_asc")
+                    {
+                        <option value="price_asc">Cena - rosnąco</option>
+                        <option value="price_desc" selected>Cena - malejąco</option>
+                    }
+                    else
+                    {
+                        <option value="price_asc" selected>Cena - rosnąco</option>
+                        <option value="price_desc">Cena - malejąco</option>
+                    }
+
+                </select>
+                <input type="submit" value="Sortuj" class="btn btn-primary" />
+            </p>
+        </div>
+    </form>
+</div>
 
 @foreach (var item in Model)
 {
@@ -61,16 +100,16 @@
 
                             <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
                                 <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
-                                    <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
+                                    Dodaj do koszyka
                                 </button>
                             </a>
 
                             <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Product.Id">
                                 <button type="button" class="btn btn-light btn-md mr-1 mb-2">
-                                    <i class="fas fa-info-circle pr-2"></i>Szczegóły
+                                    Szczegóły
                                 </button>
                             </a>
-                            
+
 
                         </div>
                     </div>
@@ -79,3 +118,32 @@
         </div>
     </section>
 }
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<center>
+    <a asp-action="GraphicCardList"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="GraphicCardList"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

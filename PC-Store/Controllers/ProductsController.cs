@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
 
@@ -29,10 +30,56 @@ namespace PC_Store.Controllers
             _userManager = userManager;
         }
 
-        // GET: Products
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber, string filter)
         {
-            return View(await _context.Products.ToListAsync());
+            ViewData["TypeProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Type_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
+            ViewData["Filter"] = String.IsNullOrEmpty(filter) ? "" : filter;
+            ViewBag.products = _context.Dictionary.Where(p=>p.CodeDict== "PRODUCTS").Select(p => p.CodeValue).Distinct();
+            var prod = from s in _context.Products where s.Deleted==false select s;
+
+            if (filter != null)
+            {
+                filter = _context.Dictionary.Where(p => p.CodeDict == "PRODUCTS").Where(p => p.CodeValue == filter).Select(p => p.CodeItem).FirstOrDefault();
+                prod = prod.Where(p => p.ProductType.Equals(filter));
+            }
+                
+
+                if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                prod = prod.Where(s => s.ProductType.Contains(searchString) || s.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Type_desc":
+                    prod = prod.OrderByDescending(s => s.ProductType).ThenBy(s => s.Name);
+                    break;
+                case "price_asc":
+                    prod = prod.OrderBy(s => s.Price).ThenBy(s => s.Name);
+                    break;
+                case "price_desc":
+                    prod = prod.OrderByDescending(s => s.Price).ThenBy(s => s.Name);
+                    break;
+                default:
+                    prod = prod.OrderBy(s => s.ProductType).ThenBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<Product>.CreateAsync(prod.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Products/Details/5
@@ -108,15 +155,23 @@ namespace PC_Store.Controllers
             return itemId.Select(p => p.Id).FirstOrDefault();
         }
 
-        // GET: Products/Create
-        public IActionResult Create()
+        public int PowerSupplyDetail(int? id)
+        {
+            var itemId =
+            from PS in _context.PowerSupplies
+            join PR in _context.Products on PS.ProductId equals PR.Id
+            where PR.Id == id
+            select new Ram { Id = PS.Id };
+
+            return itemId.Select(p => p.Id).FirstOrDefault();
+        }
+
+/*        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Price,Name,Picture")] Product product)
@@ -128,9 +183,9 @@ namespace PC_Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
-        }
+        }*/
 
-        // GET: Products/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -182,18 +237,23 @@ namespace PC_Store.Controllers
                 editProductViewModel = new EditProductViewModel()
                 {
                     Product = product,
-                    Id = ComputerCaseDetail(product.Id)
+                    Id = RamDetail(product.Id)
                 };
             }
-
+            else if (product.ProductType.Equals("POWERSUPPLY"))
+            {
+                editProductViewModel = new EditProductViewModel()
+                {
+                    Product = product,
+                    Id = PowerSupplyDetail(product.Id)
+                };
+            }
 
 
             return View(editProductViewModel);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EditProductViewModel model)
@@ -260,34 +320,33 @@ namespace PC_Store.Controllers
             return uniqueFileName;
         }
 
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        /*        public async Task<IActionResult> Delete(int? id)
+                {
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+                    var product = await _context.Products
+                        .FirstOrDefaultAsync(m => m.Id == id);
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
 
-            return View(product);
-        }
+                    return View(product);
+                }*/
 
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        /*        [HttpPost, ActionName("Delete")]
+                [ValidateAntiForgeryToken]
+                public async Task<IActionResult> DeleteConfirmed(int id)
+                {
+                    var product = await _context.Products.FindAsync(id);
+                        _context.Products.Remove(product);
+                        await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }*/
 
         private bool ProductExists(int id)
         {

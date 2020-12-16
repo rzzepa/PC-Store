@@ -1,0 +1,169 @@
+﻿@model PC_Store.Models.PowerSupply
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Zasilacz @Html.DisplayFor(model => model.Producer) @Html.DisplayNameFor(model => model.ProducerCode) @Html.DisplayNameFor(model => model.Power)</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Producent
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producer)
+        </dd>
+        <dt class="col-sm-2">
+            Kod producenta
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProducerCode)
+        </dd>
+        <dt class="col-sm-2">
+            Standard/Format
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Standard)
+        </dd>
+        <dt class="col-sm-2">
+            Moc [W]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Power)
+        </dd>
+        <dt class="col-sm-2">
+            Certyfikat sprawności
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EfficiencyCertificate)
+        </dd>
+        <dt class="col-sm-2">
+            Układ PFC
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PFCSystem)
+        </dd>
+        <dt class="col-sm-2">
+            Sprawność
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Efficiency) %
+        </dd>
+        <dt class="col-sm-2">
+            Typ chłodzenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoolingType)
+        </dd>
+        <dt class="col-sm-2">
+            Średnica wentylatora [mm]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Diameter)
+        </dd>
+        <dt class="col-sm-2">
+            Zabezpieczenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Security)
+        </dd>
+        <dt class="col-sm-2">
+            Modularne okablowanie
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModularCabling)
+        </dd>
+        <dt class="col-sm-2">
+            ATX 24-pin (20+4)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ATX24pin204)
+        </dd>
+        <dt class="col-sm-2">
+            PCI-E 8-pin (6+2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PCIE8pin62)
+        </dd>
+        <dt class="col-sm-2">
+            PCI-E 8-pin
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PCIE8pin)
+        </dd>
+        <dt class="col-sm-2">
+            PCI-E 6-pin
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PCIE6pin)
+        </dd>
+        <dt class="col-sm-2">
+            CPU 4+4 (8) pin
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CPU44pin8)
+        </dd>
+        <dt class="col-sm-2">
+            CPU 8-pin
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CPU8pin)
+        </dd>
+        <dt class="col-sm-2">
+            CPU 4-pin
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CPU4pin)
+        </dd>
+        <dt class="col-sm-2">
+            SATA
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SATA)
+        </dd>
+        <dt class="col-sm-2">
+            Molex
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Molex)
+        </dd>
+        <dt class="col-sm-2">
+            Wysokość [mm]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+        <dt class="col-sm-2">
+            Szerokość [mm]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+        <dt class="col-sm-2">
+            Głębokość [mm]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Depth)
+        </dd>
+        <dt class="col-sm-2">
+            Podświetlenie
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Backlight)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">
+        <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+            Edytuj
+        </button>
+    </a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
+</div>

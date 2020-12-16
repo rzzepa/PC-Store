@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
+using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.Views.ViewModels;
 using System;
@@ -28,9 +29,48 @@ namespace PC_Store.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            return View(await _context.ComputerCases.ToListAsync());
+
+            ViewData["ProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Prod_desc" : "";
+            ViewData["CaseTypeSortParm"] = sortOrder == "case_asc" ? "case_desc" : "case_asc";
+
+            var computecase = from s in _context.ComputerCases select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                computecase = computecase.Where(s => s.Producer.Contains(searchString) || s.ComputerCaseType.Contains(searchString) || s.Compatibility.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Prod_desc":
+                    computecase = computecase.OrderByDescending(s => s.Producer);
+                    break;
+                case "case_asc":
+                    computecase = computecase.OrderBy(s => s.ComputerCaseType);
+                    break;
+                case "case_desc":
+                    computecase = computecase.OrderByDescending(s => s.ComputerCaseType);
+                    break;
+                default:
+                    computecase = computecase.OrderBy(s => s.Producer);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<ComputerCase>.CreateAsync(computecase.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public Task<IActionResult> ComputerCaseDetail(int? id)
@@ -84,7 +124,12 @@ namespace PC_Store.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            CreateComputerCaseViewModel createComputerCaseViewModel = new CreateComputerCaseViewModel()
+            {
+                Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODCCASE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                ComputerCaseType = _context.Dictionary.Where(p => p.CodeDict.Equals("CCASETYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
+            return View(createComputerCaseViewModel);
         }
 
 
@@ -99,6 +144,7 @@ namespace PC_Store.Controllers
                 product.Picture = uniqueFileName;
                 product.Name = model.ComputerCase.Producer + " " + model.ComputerCase.ProducerCode + " " + model.ComputerCase.Color;
                 product.Price = 0;
+                product.Deleted = false;
                 product.InsertBy = _userManager.GetUserName(HttpContext.User);
                 product.ModifyBy = _userManager.GetUserName(HttpContext.User);
                 product.InsertDate = DateTime.Now;
@@ -124,13 +170,18 @@ namespace PC_Store.Controllers
             {
                 return NotFound();
             }
+            CreateComputerCaseViewModel createComputerCaseViewModel = new CreateComputerCaseViewModel()
+            {
+                ComputerCase = await _context.ComputerCases.FindAsync(id),
+                Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODCCASE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                ComputerCaseType = _context.Dictionary.Where(p => p.CodeDict.Equals("CCASETYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
 
-            var computercase = await _context.ComputerCases.FindAsync(id);
-            if (computercase == null)
+            if (createComputerCaseViewModel.ComputerCase == null)
             {
                 return NotFound();
             }
-            return View(computercase);
+            return View(createComputerCaseViewModel);
         }
 
 
@@ -190,6 +241,9 @@ namespace PC_Store.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var computerCase = await _context.ComputerCases.FindAsync(id);
+            var prod = await _context.Products.FindAsync(computerCase.ProductId);
+            prod.Deleted = true;
+            _context.Products.Update(prod);
             _context.ComputerCases.Remove(computerCase);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<center><h1>@Model.graphicCard.Producer @Model.graphicCard.ProducerCode</h1></center>
+<center><h1>@Model.GraphicCard.Producer @Model.GraphicCard.ProducerCode</h1></center>
 
 <div>
     <hr />
@@ -42,58 +42,61 @@
                 <h5>Szczegóły processora</h5>
                 <ul class="rating">
                     <li>
-                        <i>Producent: @Model.graphicCard.Producer</i>
+                        <i>Producent: @Model.GraphicCard.Producer</i>
                     </li>
                     <li>
-                        <i>Kod producenta: @Model.graphicCard.ProducerCode</i>
+                        <i>Kod producenta: @Model.GraphicCard.ProducerCode</i>
                     </li>
                     <li>
-                        <i>Producent chipsetu: @Model.graphicCard.ProducerChipset</i>
+                        <i>Producent chipsetu: @Model.GraphicCard.ProducerChipset</i>
                     </li>
                     <li>
-                        <i>Taktowanie rdzenia: @Model.graphicCard.CoreClock</i>
+                        <i>Taktowanie rdzenia: @Model.GraphicCard.CoreClock</i>
                     </li>
                     <li>
-                        <i>Taktowanie rdzenia w trybie boost: @Model.graphicCard.CoreClockBoost</i>
+                        <i>Taktowanie rdzenia w trybie boost: @Model.GraphicCard.CoreClockBoost</i>
                     </li>
                     <li>
-                        <i>Typ złącza: @Model.graphicCard.ConnectorType</i>
+                        <i>Typ złącza: @Model.GraphicCard.ConnectorType</i>
                     </li>
                     <li>
-                        <i>Rozdzielczość: @Model.graphicCard.Resolution</i>
+                        <i>Wersja złącza: @Model.GraphicCard.VerConnectorType</i>
                     </li>
                     <li>
-                        <i>Rekomendowana moc zasilacza: @Model.graphicCard.RecommendedPSUPower</i>
+                        <i>Rozdzielczość: @Model.GraphicCard.Resolution</i>
                     </li>
                     <li>
-                        <i>Ilość pamięci RAM: @Model.graphicCard.AmountOfRAM</i>
+                        <i>Rekomendowana moc zasilacza: @Model.GraphicCard.RecommendedPSUPower</i>
                     </li>
                     <li>
-                        <i>Rodzaj pamięci RAM: @Model.graphicCard.TypeOfRAM</i>
+                        <i>Ilość pamięci RAM: @Model.GraphicCard.AmountOfRAM</i>
                     </li>
                     <li>
-                        <i>Szyna danych: @Model.graphicCard.DataBus</i>
+                        <i>Rodzaj pamięci RAM: @Model.GraphicCard.TypeOfRAM</i>
                     </li>
                     <li>
-                        <i>Taktowanie pamięci: @Model.graphicCard.MemoryClock</i>
+                        <i>Szyna danych: @Model.GraphicCard.DataBus</i>
                     </li>
                     <li>
-                        <i>Typ chłodzenia: @Model.graphicCard.CoolingType</i>
+                        <i>Taktowanie pamięci: @Model.GraphicCard.MemoryClock</i>
                     </li>
                     <li>
-                        <i>Ilość wentylatorów: @Model.graphicCard.NumberOfFans</i>
+                        <i>Typ chłodzenia: @Model.GraphicCard.CoolingType</i>
                     </li>
                     <li>
-                        <i>D-Sub: @Model.graphicCard.DSub</i>
+                        <i>Ilość wentylatorów: @Model.GraphicCard.NumberOfFans</i>
                     </li>
                     <li>
-                        <i>DisplayPort: @Model.graphicCard.DisplayPort</i>
+                        <i>D-Sub: @Model.GraphicCard.DSub</i>
                     </li>
                     <li>
-                        <i>HDMI: @Model.graphicCard.HDMI</i>
+                        <i>DisplayPort: @Model.GraphicCard.DisplayPort</i>
                     </li>
                     <li>
-                        <i>DVI: @Model.graphicCard.DVI</i>
+                        <i>HDMI: @Model.GraphicCard.HDMI</i>
+                    </li>
+                    <li>
+                        <i>DVI: @Model.GraphicCard.DVI</i>
                     </li>
 
                 </ul>
@@ -117,9 +120,9 @@
 
     </section>
     <div>
-        <form asp-controller="Home" asp-action="GraphicCardList">
-            <div class="form-group">
-                <input type="submit" value="Wróć" class="btn btn-primary" />
-            </div>
-        </form>
+            <a asp-controller="Home" asp-action="GraphicCardList">
+                <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                    Wróć
+                </button>
+            </a>
     </div>

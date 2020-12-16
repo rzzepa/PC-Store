@@ -14,104 +14,113 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Producer" class="control-label"></label>
+                Producent
                 <input asp-for="Producer" class="form-control" />
                 <span asp-validation-for="Producer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProducerCode" class="control-label"></label>
+                Kod producenta
                 <input asp-for="ProducerCode" class="form-control" />
                 <span asp-validation-for="ProducerCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProducerChipset" class="control-label"></label>
+                Producent chipsetu
                 <input asp-for="ProducerChipset" class="form-control" />
                 <span asp-validation-for="ProducerChipset" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CoreClock" class="control-label"></label>
+                Taktowanie rdzenia
                 <input asp-for="CoreClock" class="form-control" />
                 <span asp-validation-for="CoreClock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CoreClockBoost" class="control-label"></label>
+                Taktowanie rdzenia w trybie boost
                 <input asp-for="CoreClockBoost" class="form-control" />
                 <span asp-validation-for="CoreClockBoost" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConnectorType" class="control-label"></label>
+                Typ złącza
                 <input asp-for="ConnectorType" class="form-control" />
                 <span asp-validation-for="ConnectorType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Resolution" class="control-label"></label>
+                Wersja złącza
+                <input asp-for="VerConnectorType" class="form-control" />
+                <span asp-validation-for="VerConnectorType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Rozdzielczość
                 <input asp-for="Resolution" class="form-control" />
                 <span asp-validation-for="Resolution" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RecommendedPSUPower" class="control-label"></label>
+                Rekomendowana moc zasilacza
                 <input asp-for="RecommendedPSUPower" class="form-control" />
                 <span asp-validation-for="RecommendedPSUPower" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AmountOfRAM" class="control-label"></label>
+                Ilość pamięci RAM
                 <input asp-for="AmountOfRAM" class="form-control" />
                 <span asp-validation-for="AmountOfRAM" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeOfRAM" class="control-label"></label>
+                Rodzaj pamięci RAM
                 <input asp-for="TypeOfRAM" class="form-control" />
                 <span asp-validation-for="TypeOfRAM" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataBus" class="control-label"></label>
+                Szyna danych
                 <input asp-for="DataBus" class="form-control" />
                 <span asp-validation-for="DataBus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MemoryClock" class="control-label"></label>
+                Taktowanie pamięci
                 <input asp-for="MemoryClock" class="form-control" />
                 <span asp-validation-for="MemoryClock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CoolingType" class="control-label"></label>
+                Typ chłodzenia
                 <input asp-for="CoolingType" class="form-control" />
                 <span asp-validation-for="CoolingType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfFans" class="control-label"></label>
+                Ilość wentylatorów
                 <input asp-for="NumberOfFans" class="form-control" />
                 <span asp-validation-for="NumberOfFans" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DSub" class="control-label"></label>
+                D-Sub
                 <input asp-for="DSub" class="form-control" />
                 <span asp-validation-for="DSub" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DisplayPort" class="control-label"></label>
+                DisplayPort
                 <input asp-for="DisplayPort" class="form-control" />
                 <span asp-validation-for="DisplayPort" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HDMI" class="control-label"></label>
+                HDMI
                 <input asp-for="HDMI" class="form-control" />
                 <span asp-validation-for="HDMI" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DVI" class="control-label"></label>
+                DVI
                 <input asp-for="DVI" class="form-control" />
                 <span asp-validation-for="DVI" class="text-danger"></span>
             </div>
             @Html.HiddenFor(model => model.ProductId)
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 </div>
 

@@ -1,0 +1,139 @@
+﻿@model PC_Store.structure.PowerSupplyCreatorList
+
+@{
+    ViewData["Title"] = "Szczegóły zasilacza";
+}
+
+<center><h1>@Model.Producer @Model.ProducerCode @Model.Power</h1></center>
+
+<div>
+    <hr />
+    <section class="mb-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox">
+
+                    <div class="row product-gallery mx-1">
+
+                        <div class="col-12 mb-0">
+                            <figure class="view overlay rounded z-depth-1 main-img">
+
+                                @if (@Model.Picture != null)
+                                {
+                                    <img src="~/images/@Model.Picture" class="img-fluid z-depth-1">
+                                }
+                                else
+                                {
+                                    <img src="~/images/serverimg/brak_zdjecia.png" class="img-fluid z-depth-1">
+                                }
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <h5>Szczegóły processora</h5>
+                <ul class="rating">
+                    <li>
+                        <i>Producent: @Model.Producer</i>
+                    </li>
+                    <li>
+                        <i>Kod producenta: @Model.ProducerCode</i>
+                    </li>
+                    <li>
+                        <i>Standard/Format: @Model.Standard</i>
+                    </li>
+                    <li>
+                        <i>Moc [W]: @Model.Power</i>
+                    </li>
+                    <li>
+                        <i>Certyfikat sprawności: @Model.EfficiencyCertificate</i>
+                    </li>
+                    <li>
+                        <i>Układ PFC: @Model.PFCSystem</i>
+                    </li>
+                    <li>
+                        <i>Sprawność: @Model.Efficiency</i>
+                    </li>
+                    <li>
+                        <i>Typ chłodzenia: @Model.CoolingType</i>
+                    </li>
+                    <li>
+                        <i>Średnica wentylatora: @Model.Diameter</i>
+                    </li>
+                    <li>
+                        <i>Zabezpieczenia: @Model.Security</i>
+                    </li>
+                    <li>
+                        <i>Modularne okablowanie: @Model.ModularCabling</i>
+                    </li>
+                    <li>
+                        <i>ATX 24-pin (20+4): @Model.ATX24pin204</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 8-pin (6+2): @Model.PCIE8pin62</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 8-pin: @Model.PCIE8pin</i>
+                    </li>
+                    <li>
+                        <i>PCI-E 6-pin: @Model.PCIE6pin</i>
+                    </li>
+                    <li>
+                        <i>CPU 4+4 (8) pin: @Model.CPU44pin8</i>
+                    </li>
+                    <li>
+                        <i>CPU 8-pin: @Model.CPU8pin</i>
+                    </li>
+                    <li>
+                        <i>CPU 4-pin: @Model.CPU4pin</i>
+                    </li>
+                    <li>
+                        <i>SATA: @Model.SATA</i>
+                    </li>
+                    <li>
+                        <i>Molex : @Model.Molex</i>
+                    </li>
+                    <li>
+                        <i>Wysokość [mm]: @Model.Height</i>
+                    </li>
+                    <li>
+                        <i>Szerokość [mm]: @Model.Width</i>
+                    </li>
+                    <li>
+                        <i>Głębokość [mm]: @Model.Depth</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie: @Model.Backlight</i>
+                    </li>
+                </ul>
+                <h3><span class="mr-1"><strong>Cena: @Model.Price Zł</strong></span></h3>
+                <p class="pt-1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+                    error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+                    officia quis dolore quos sapiente tempore alias.
+                </p>
+                <hr>
+                <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id=@Model.Id>
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                        Dodaj do konfiguracji
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <div>
+        <a asp-controller="PcCreator" asp-action="PowerSupplyListCreator">
+            <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                Wróć
+            </button>
+        </a>
+    </div>

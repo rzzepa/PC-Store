@@ -1,19 +1,37 @@
-﻿@model IEnumerable<PC_Store.Models.ComputerCase>
+﻿@model PC_Store.Infrastructure.PaginatedList<ComputerCase>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Obudowy do komputera</h1>
-
+<h1><center>Obudowy do komputera - Panel</center></h1>
 <p>
-    <a asp-action="Create">Dodaj</a>
+    <a asp-action="Create">
+        <button type="button" class="btn btn-success btn-md mr-1 mb-2">
+            Dodaj
+        </button>
+    </a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" />
+            <a asp-action="Index">
+                <button type="button" class="btn btn-success">
+                    Wróć do pełnej listy
+                </button>
+            </a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                Producent
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProdSortParm"]">Producent</a>
             </th>
             <th>
                 Kod producenta
@@ -25,11 +43,13 @@
                 Podświetlenie
             </th>
             <th>
-                Typ obudowy
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CaseTypeSortParm"]">Typ obudowy</a>
             </th>
             <th>
                 Kompatybilność
             </th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -56,11 +76,58 @@
                     @Html.DisplayFor(modelItem => item.Compatibility)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+                            Edytuj
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-info btn-md mr-1 mb-2">
+                            Szczegóły
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+
+                        <button type="button" class="btn btn-danger btn-md mr-1 mb-2">
+                            Usuń
+                        </button>
+                    </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<center>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>
