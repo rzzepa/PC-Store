@@ -28,6 +28,12 @@
             @Html.DisplayFor(model => model.ProducerChipset)
         </dd>
         <dt class="col-sm-2">
+            Rodzaj chipsetu
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ChipsetType)
+        </dd>
+        <dt class="col-sm-2">
             Taktowanie rdzenia
         </dt>
         <dd class="col-sm-10">
@@ -56,6 +62,18 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Resolution)
+        </dd>
+        <dt class="col-sm-2">
+            Podświetlenie LED
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Led)
+        </dd>
+        <dt class="col-sm-2">
+            Długość karty
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CardLength)
         </dd>
         <dt class="col-sm-2">
             Rekomendowana moc zasilacza

@@ -1,4 +1,4 @@
-﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.Models.Order>
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.Views.ViewModels.ManagmentOrdersViewModel>
 
 
 <h1>Moje zamówienia</h1>
@@ -30,41 +30,45 @@
             <th>
                 Nazwisko
             </th>
+            <th>Status zamówienia</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderPlaced)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderTotal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AddressLine)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ZipCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.OrderId">Szczegóły</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderPlaced)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.AddressLine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusOrder)
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Order.OrderId">Szczegóły</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

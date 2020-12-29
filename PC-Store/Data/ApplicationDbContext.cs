@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Models;
-using PC_Store.Models.ViewModels;
+using PC_Store.ViewModels;
 using PC_Store.structure;
-using PC_Store.Views.ViewModels;
 
 namespace PC_Store.Data
 {
@@ -42,6 +41,7 @@ namespace PC_Store.Data
         public DbSet<ShoppingCardItem> ShoppingCardItems { get; set; }
 
         public DbSet<PCCreator> pCCreators{ get; set; }
+        public DbSet<UserPCCreator> userPCCreators { get; set; }
 
 
         public DbQuery<ProductSalesRaport> ProductSalesRaport { get; set; }

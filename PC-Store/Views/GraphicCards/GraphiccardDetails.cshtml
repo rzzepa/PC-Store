@@ -51,6 +51,9 @@
                         <i>Producent chipsetu: @Model.GraphicCard.ProducerChipset</i>
                     </li>
                     <li>
+                        <i>Rodzaj chipsetu: @Model.GraphicCard.ChipsetType</i>
+                    </li>
+                    <li>
                         <i>Taktowanie rdzenia: @Model.GraphicCard.CoreClock</i>
                     </li>
                     <li>
@@ -61,6 +64,12 @@
                     </li>
                     <li>
                         <i>Wersja złącza: @Model.GraphicCard.VerConnectorType</i>
+                    </li>
+                    <li>
+                        <i>Długość karty: @Model.GraphicCard.CardLength</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie LED: @Model.GraphicCard.Led</i>
                     </li>
                     <li>
                         <i>Rozdzielczość: @Model.GraphicCard.Resolution</i>
@@ -105,16 +114,15 @@
                     Miejsce na opis
                 </p>
                 <hr>
-                <h4><strong>Ilość:</strong></h4>
-                <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
-                </div>
-                <hr>
-                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
-                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
-                        <i class="fas fa-shopping-cart pr-2"></i>Dodaj do koszyka
-                    </button>
-                </a>
+                <form asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <h4><strong>Ilość:</strong></h4>
+                    <div class="def-number-input number-input safari_only">
+                        <input class="quantity" min="1" name="quantity" value="1" type="number">
+                    </div>
+                    <hr>
+
+                    <input type="submit" value="Dodaj do koszyka" class="btn btn-primary" />
+                </form>
             </div>
         </div>
 

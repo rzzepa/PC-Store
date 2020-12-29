@@ -1,0 +1,152 @@
+﻿@model PC_Store.Infrastructure.PaginatedList<PC_Store.Views.ViewModels.ManagmentOrdersViewModel>
+
+
+
+<center><h1>Zamówienia</h1></center>
+
+<form asp-action="ManagementOrders" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input class="form-control" placeholder="Wyszukaj..." type="text" name="searchString" value="@ViewData["CurrentFilter"]" /><br />
+            <select class="custom-select mr-sm-2 w-auto" name="filter" value="@ViewData["Filter"]">
+                <option value="">Wszystko</option>
+                @foreach (var item in ViewBag.dictitems)
+                {
+                    if (@ViewData["Filter"].ToString() == @item)
+                    {
+                        <option selected value="@item">@item</option>
+                    }
+                    else
+                    {
+                        <option value="@item">@item</option>
+                    }
+                }
+            </select>
+            <input type="date" name="fromDate" value="@string.Format("{0:yyyy-MM-dd}", @ViewData["fromDate"].ToString())"/>
+            <input type="date" name="toDate" value="@string.Format("{0:yyyy-MM-dd}", @ViewData["toDate"].ToString())"/>
+            <input type="submit" value="Szukaj" class="btn btn-primary" />
+            <a asp-action="ManagementOrders">
+                <button type="button" class="btn btn-success">
+                    Wróć do pełnej listy
+                </button>
+            </a>
+        </p>
+    </div>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data zamówienia
+            </th>
+            <th>
+                Koszt zamówienia
+            </th>
+            <th>
+                Adres
+            </th>
+            <th>
+                Miasto
+            </th>
+            <th>
+                Kod pocztowy
+            </th>
+            <th>
+                Kraj
+            </th>
+            <th>
+                Imię
+            </th>
+            <th>
+                Nazwisko
+            </th>
+            <th>Status zamówienia</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderPlaced)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.OrderTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.AddressLine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusOrder)
+            </td>
+            <td>
+                <a asp-action="DetailsOrder"
+                   asp-route-id="@item.Order.OrderId"
+                   asp-route-pageNumber="@ViewData["pageNumber"]"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-fromDate="@ViewData["fromDate"].ToString()"
+                   asp-route-toDate="@ViewData["toDate"].ToString()"
+                   asp-route-filter="@ViewData["Filter"]"
+                   class="btn btn-default">
+                    <button type="button" class="btn btn-success">
+                        Szczegóły
+                    </button>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<center>
+    <a asp-action="ManagementOrders"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-fromDate="@ViewData["fromDate"].ToString()"
+       asp-route-toDate="@ViewData["toDate"].ToString()"
+       asp-route-filter="@ViewData["Filter"]"
+       class="btn btn-default @prevDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Poprzednia strona
+        </button>
+    </a>
+    <a asp-action="ManagementOrders"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       asp-route-fromDate="@ViewData["fromDate"].ToString()"
+       asp-route-toDate="@ViewData["toDate"].ToString()"
+       asp-route-filter="@ViewData["Filter"]"
+       class="btn btn-default @nextDisabled">
+        <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+            Następna strona
+        </button>
+    </a>
+</center>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>

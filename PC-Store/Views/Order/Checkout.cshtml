@@ -5,10 +5,11 @@
 
 @model Order
 
-<div class="row orderForm ">
 
-    <div>
-        <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+<div class="row orderForm">
+
+    <div style="margin-left: auto; margin-right: auto;">
+        <form asp-action="SummaryOrder" method="post">
             <div class="form-group">
                 <label asp-for="FirstName" class="col-md-2 control-label"></label>
                 <div class="col-md-15">
@@ -73,13 +74,37 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="btn-group col-md-offset-2 col-md-8">
-                    <input class="btn btn-success" type="submit" value="Complete order" />
+                Regulamin
+                <div class="col-md-15">
+                    <input asp-for="Regulations" name="checkbox" class="form-control" />
                 </div>
             </div>
 
+            <p>Forma płatności:<p>
+
+                <label>
+                    <input type="radio" asp-for="Payment" value="PAYPAL"> PayPal
+                </label>
+                <br />
+                <label>
+                    <input type="radio" asp-for="Payment" value="CASHONDELIVERY"> Płatność przy odbiorze
+                </label>
+                <div class="form-group">
+                    <div class="btn-group col-md-offset-2 col-md-8">
+                        <input class="btn btn-success" type="submit" value="Zamów" onclick="if(!this.form.checkbox.checked){alert('Musisz potwierdzić,że zapoznałeś się z regulaminem.');return false}" />
+                    </div>
+                </div>
+
         </form>
+        </div>
     </div>
 </div>
+<br /><br />
+    <a asp-controller="ShoppingCart" asp-action="Index" >
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+            Wróć
+        </button>
+    </a>
 

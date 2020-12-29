@@ -334,11 +334,20 @@ namespace PC_Store.Migrations
                     b.Property<int>("AmountOfRAM")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ConnectorType")
+                    b.Property<int>("CardLength")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ChipsetType")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("CoolingType")
-                        .HasColumnType("integer");
+                    b.Property<string>("ConnectorType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CoolingType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("CoreClock")
                         .HasColumnType("integer");
@@ -361,6 +370,9 @@ namespace PC_Store.Migrations
                     b.Property<int>("HDMI")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Led")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("MemoryClock")
                         .HasColumnType("integer");
 
@@ -368,27 +380,34 @@ namespace PC_Store.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Producer")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ProducerChipset")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ProducerCode")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
                     b.Property<string>("RecommendedPSUPower")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Resolution")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TypeOfRAM")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("VerConnectorType")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -407,15 +426,18 @@ namespace PC_Store.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Chipset")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("CombiningCards")
                         .HasColumnType("text");
 
                     b.Property<string>("ConnectorType")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("GraphicsChipset")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IntegratedGraphicsCardSupport")
@@ -446,24 +468,29 @@ namespace PC_Store.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Producer")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ProducerCode")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
                     b.Property<string>("SocketType")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SoundChipset")
                         .HasColumnType("text");
 
                     b.Property<string>("Standard")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("StandardMemory")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Technologies")
@@ -513,10 +540,20 @@ namespace PC_Store.Migrations
                     b.Property<decimal>("OrderTotal")
                         .HasColumnType("numeric");
 
+                    b.Property<string>("Payment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("character varying(25)")
                         .HasMaxLength(25);
+
+                    b.Property<bool>("Regulations")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("StatusOrder")
+                        .HasColumnType("text");
 
                     b.Property<string>("User")
                         .HasColumnType("text");
@@ -663,6 +700,7 @@ namespace PC_Store.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("IntegratedGraphics")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Line")
@@ -680,8 +718,7 @@ namespace PC_Store.Migrations
 
                     b.Property<string>("Producer")
                         .IsRequired()
-                        .HasColumnType("character varying(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("text");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
@@ -694,6 +731,7 @@ namespace PC_Store.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("TypesOfSupportedMemory")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("UnlockedMultiplier")
@@ -740,6 +778,9 @@ namespace PC_Store.Migrations
 
                     b.Property<string>("ProductType")
                         .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -821,6 +862,40 @@ namespace PC_Store.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCardItems");
+                });
+
+            modelBuilder.Entity("PC_Store.Models.UserPCCreator", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ComputerCaseProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GraphicCardProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("MotherboardProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PowerSupplyProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProcessorProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RamProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("User")
+                        .HasColumnType("text");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("userPCCreators");
                 });
 
             modelBuilder.Entity("PC_Store.Views.ViewModels.PCCreator", b =>

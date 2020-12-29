@@ -1,121 +1,132 @@
-﻿@model PC_Store.Models.GraphicCard
+﻿@model PC_Store.Views.ViewModels.CreateGraphicCardViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<center>
+    <h1>Edit</h1>
 
-<h4>GraphicCard</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                Producent
-                <input asp-for="Producer" class="form-control" />
-                <span asp-validation-for="Producer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Kod producenta
-                <input asp-for="ProducerCode" class="form-control" />
-                <span asp-validation-for="ProducerCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Producent chipsetu
-                <input asp-for="ProducerChipset" class="form-control" />
-                <span asp-validation-for="ProducerChipset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Taktowanie rdzenia
-                <input asp-for="CoreClock" class="form-control" />
-                <span asp-validation-for="CoreClock" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Taktowanie rdzenia w trybie boost
-                <input asp-for="CoreClockBoost" class="form-control" />
-                <span asp-validation-for="CoreClockBoost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Typ złącza
-                <input asp-for="ConnectorType" class="form-control" />
-                <span asp-validation-for="ConnectorType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Wersja złącza
-                <input asp-for="VerConnectorType" class="form-control" />
-                <span asp-validation-for="VerConnectorType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Rozdzielczość
-                <input asp-for="Resolution" class="form-control" />
-                <span asp-validation-for="Resolution" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Rekomendowana moc zasilacza
-                <input asp-for="RecommendedPSUPower" class="form-control" />
-                <span asp-validation-for="RecommendedPSUPower" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Ilość pamięci RAM
-                <input asp-for="AmountOfRAM" class="form-control" />
-                <span asp-validation-for="AmountOfRAM" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Rodzaj pamięci RAM
-                <input asp-for="TypeOfRAM" class="form-control" />
-                <span asp-validation-for="TypeOfRAM" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Szyna danych
-                <input asp-for="DataBus" class="form-control" />
-                <span asp-validation-for="DataBus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Taktowanie pamięci
-                <input asp-for="MemoryClock" class="form-control" />
-                <span asp-validation-for="MemoryClock" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Typ chłodzenia
-                <input asp-for="CoolingType" class="form-control" />
-                <span asp-validation-for="CoolingType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Ilość wentylatorów
-                <input asp-for="NumberOfFans" class="form-control" />
-                <span asp-validation-for="NumberOfFans" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                D-Sub
-                <input asp-for="DSub" class="form-control" />
-                <span asp-validation-for="DSub" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                DisplayPort
-                <input asp-for="DisplayPort" class="form-control" />
-                <span asp-validation-for="DisplayPort" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                HDMI
-                <input asp-for="HDMI" class="form-control" />
-                <span asp-validation-for="HDMI" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                DVI
-                <input asp-for="DVI" class="form-control" />
-                <span asp-validation-for="DVI" class="text-danger"></span>
-            </div>
-            @Html.HiddenFor(model => model.ProductId)
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>GraphicCard</h4>
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="GraphicCard.Id" />
+                <div class="form-group">
+                    Producent
+                    @Html.DropDownListFor(m => m.GraphicCard.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Kod producenta
+                    <input asp-for="GraphicCard.ProducerCode" class="form-control" />
+                    <span asp-validation-for="GraphicCard.ProducerCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Producent chipsetu
+                    @Html.DropDownListFor(m => m.GraphicCard.ProducerChipset, new SelectList(Model.ChipsetProducers, "CodeItem"), "--Wybierz--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Rodzaj chipsetu
+                    <input asp-for="GraphicCard.ChipsetType" class="form-control" />
+                    <span asp-validation-for="GraphicCard.ChipsetType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Taktowanie rdzenia
+                    <input asp-for="GraphicCard.CoreClock" class="form-control" />
+                    <span asp-validation-for="GraphicCard.CoreClock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Taktowanie rdzenia w trybie boost
+                    <input asp-for="GraphicCard.CoreClockBoost" class="form-control" />
+                    <span asp-validation-for="GraphicCard.CoreClockBoost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Typ złącza
+                    <input asp-for="GraphicCard.ConnectorType" class="form-control" />
+                    <span asp-validation-for="GraphicCard.ConnectorType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Wersja złącza
+                    <input asp-for="GraphicCard.VerConnectorType" class="form-control" />
+                    <span asp-validation-for="GraphicCard.VerConnectorType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Długość karty
+                    <input asp-for="GraphicCard.CardLength" class="form-control" />
+                    <span asp-validation-for="GraphicCard.CardLength" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Rozdzielczość
+                    @Html.DropDownListFor(m => m.GraphicCard.Resolution, new SelectList(Model.Resolution, "CodeItem"), "--Wybierz--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Podświetlenie LED
+                    <input asp-for="GraphicCard.Led" class="form-control" />
+                    <span asp-validation-for="GraphicCard.Led" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Rekomendowana moc zasilacza
+                    <input asp-for="GraphicCard.RecommendedPSUPower" class="form-control" />
+                    <span asp-validation-for="GraphicCard.RecommendedPSUPower" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Ilość pamięci RAM
+                    <input asp-for="GraphicCard.AmountOfRAM" class="form-control" />
+                    <span asp-validation-for="GraphicCard.AmountOfRAM" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Rodzaj pamięci RAM
+                    @Html.DropDownListFor(m => m.GraphicCard.TypeOfRAM, new SelectList(Model.MemoryTypes, "CodeItem"), "--Wybierz--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Szyna danych
+                    <input asp-for="GraphicCard.DataBus" class="form-control" />
+                    <span asp-validation-for="GraphicCard.DataBus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Taktowanie pamięci
+                    <input asp-for="GraphicCard.MemoryClock" class="form-control" />
+                    <span asp-validation-for="GraphicCard.MemoryClock" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Typ chłodzenia
+                    @Html.DropDownListFor(m => m.GraphicCard.CoolingType, new SelectList(Model.CoolingTypes, "CodeItem"), "--Wybierz--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Ilość wentylatorów
+                    <input asp-for="GraphicCard.NumberOfFans" class="form-control" />
+                    <span asp-validation-for="GraphicCard.NumberOfFans" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    D-Sub
+                    <input asp-for="GraphicCard.DSub" class="form-control" />
+                    <span asp-validation-for="GraphicCard.DSub" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    DisplayPort
+                    <input asp-for="GraphicCard.DisplayPort" class="form-control" />
+                    <span asp-validation-for="GraphicCard.DisplayPort" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    HDMI
+                    <input asp-for="GraphicCard.HDMI" class="form-control" />
+                    <span asp-validation-for="GraphicCard.HDMI" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    DVI
+                    <input asp-for="GraphicCard.DVI" class="form-control" />
+                    <span asp-validation-for="GraphicCard.DVI" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.GraphicCard.ProductId)
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</center>
 <div>
     <a asp-action="Index">
         <button type="button" class="btn btn-light btn-md mr-1 mb-2">

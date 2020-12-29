@@ -13,7 +13,7 @@ using Npgsql;
 using PC_Store.Data;
 using PC_Store.Infrastructure;
 using PC_Store.Models;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -36,6 +36,7 @@ namespace PC_Store.Controllers
             ViewData["TypeProdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Type_desc" : "";
             ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
             ViewData["Filter"] = String.IsNullOrEmpty(filter) ? "" : filter;
+            ViewData["pageNumber"] = pageNumber;
             ViewBag.products = _context.Dictionary.Where(p=>p.CodeDict== "PRODUCTS").Select(p => p.CodeValue).Distinct();
             var prod = from s in _context.Products where s.Deleted==false select s;
 
@@ -59,7 +60,8 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                prod = prod.Where(s => s.ProductType.Contains(searchString) || s.Name.Contains(searchString));
+                searchString = searchString.ToLower();
+                prod = prod.Where(s => s.ProductType.ToLower().Contains(searchString) || s.Name.ToLower().Contains(searchString));
             }
 
             switch (sortOrder)
@@ -186,8 +188,10 @@ namespace PC_Store.Controllers
         }*/
 
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id,string message, int? pageNumber, string filter, string currentFilter)
         {
+            ViewData["Filter"] = String.IsNullOrEmpty(filter) ? "" : filter;
+
             if (id == null)
             {
                 return NotFound();
@@ -197,6 +201,12 @@ namespace PC_Store.Controllers
             {
                 return NotFound();
             }
+            if(message != null)
+            {
+                ViewBag.Mess = message;
+            }
+
+            ViewData["CurrentFilter"] = currentFilter;
 
             EditProductViewModel editProductViewModel = null;
 
@@ -294,6 +304,16 @@ namespace PC_Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddQuantity(EditProductViewModel model, int? pageNumber, string filter, string currentFilter)
+        {
+            var product =  _context.Products.Where(p => p.Id == model.Product.Id).FirstOrDefault();
+            product.Quantity += model.OrderProduct;
+            _context.Products.Update(product);
+            _context.SaveChanges();
+            return RedirectToAction ("Edit",new { id = model.Product.Id, message= "Zamówienie dotarło do magazynu", pageNumber= pageNumber, filter= filter, currentFilter= currentFilter });
         }
 
         private Product GetProduct(int? id)

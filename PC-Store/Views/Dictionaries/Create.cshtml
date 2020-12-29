@@ -4,55 +4,56 @@
     ViewData["Title"] = "Create";
 }
 
-<center><h1>Dodawanie słownika</h1></center>
+<center>
+    <h1>Dodawanie słownika</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CodeItem" class="control-label"></label>
-                <input asp-for="CodeItem" class="form-control" />
-                <span asp-validation-for="CodeItem" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodeDict" class="control-label"></label>
-                <input asp-for="CodeDict" class="form-control" />
-                <span asp-validation-for="CodeDict" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CodeValue" class="control-label"></label>
-                <input asp-for="CodeValue" class="form-control" />
-                <span asp-validation-for="CodeValue" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ext1" class="control-label"></label>
-                <input asp-for="Ext1" class="form-control" />
-                <span asp-validation-for="Ext1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ext2" class="control-label"></label>
-                <input asp-for="Ext2" class="form-control" />
-                <span asp-validation-for="Ext2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExtN1" class="control-label"></label>
-                <input asp-for="ExtN1" class="form-control" value=0 />
-                <span asp-validation-for="ExtN1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExtN2" class="control-label"></label>
-                <input asp-for="ExtN2" class="form-control" value=0 />
-                <span asp-validation-for="ExtN2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Dodaj" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CodeItem" class="control-label"></label>
+                    <input asp-for="CodeItem" class="form-control" />
+                    <span asp-validation-for="CodeItem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CodeDict" class="control-label"></label>
+                    <input asp-for="CodeDict" class="form-control" />
+                    <span asp-validation-for="CodeDict" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CodeValue" class="control-label"></label>
+                    <input asp-for="CodeValue" class="form-control" />
+                    <span asp-validation-for="CodeValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ext1" class="control-label"></label>
+                    <input asp-for="Ext1" class="form-control" />
+                    <span asp-validation-for="Ext1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ext2" class="control-label"></label>
+                    <input asp-for="Ext2" class="form-control" />
+                    <span asp-validation-for="Ext2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExtN1" class="control-label"></label>
+                    <input asp-for="ExtN1" class="form-control" value=1 min="1" />
+                    <span asp-validation-for="ExtN1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExtN2" class="control-label"></label>
+                    <input asp-for="ExtN2" class="form-control" value=1 min="1" />
+                    <span asp-validation-for="ExtN2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Dodaj" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</center>
 <div>
     <a asp-action="Index">
         <button type="button" class="btn btn-light btn-md mr-1 mb-2">

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Infrastructure;
 using PC_Store.Models;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -20,12 +20,14 @@ namespace PC_Store.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly int pageSize;
 
         public GraphicCardsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
         
@@ -49,7 +51,8 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                graphiccard = graphiccard.Where(s => s.Producer.Contains(searchString) || s.ProducerChipset.Contains(searchString));
+                searchString = searchString.ToLower();
+                graphiccard = graphiccard.Where(s => s.Producer.ToLower().Contains(searchString) || s.ProducerChipset.ToLower().Contains(searchString));
             }
 
             switch (sortOrder)
@@ -68,7 +71,6 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
             return View(await PaginatedList<GraphicCard>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -121,15 +123,21 @@ namespace PC_Store.Controllers
             return View(graphicCardProduct);
         }
 
-        // GET: GraphicCards/Create
         public IActionResult Create()
         {
-            return View();
+            CreateGraphicCardViewModel createGraphicCardViewModel = new CreateGraphicCardViewModel()
+            {
+                Producers= _context.Dictionary.Where(p => p.CodeDict.Equals("PRODGRAPHCARD")).OrderBy(p=>p.ExtN1).Select(o => o.CodeValue),
+                ChipsetProducers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODCHIPSETGC")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                CoolingTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("GCCOOLINGTYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                Resolution = _context.Dictionary.Where(p => p.CodeDict.Equals("GCRESOLUTION")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue),
+                MemoryTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("GCMEMORYTYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
+
+            return View(createGraphicCardViewModel);
         }
 
-        // POST: GraphicCards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateGraphicCardViewModel model)
@@ -147,6 +155,7 @@ namespace PC_Store.Controllers
                 product.InsertDate = DateTime.Now;
                 product.ModifyDate = DateTime.Now;
                 product.ProductType = "GRAPHICSCARD";
+                product.Quantity = 0;
                 product.Act = false;
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
@@ -157,7 +166,7 @@ namespace PC_Store.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            return View();
+            return RedirectToAction(nameof(Create));
         }
 
         private string UploadedFile(CreateGraphicCardViewModel model)
@@ -177,7 +186,7 @@ namespace PC_Store.Controllers
             return uniqueFileName;
         }
 
-        // GET: GraphicCards/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -185,12 +194,20 @@ namespace PC_Store.Controllers
                 return NotFound();
             }
 
-            var graphicCard = await _context.GraphicCards.FindAsync(id);
-            if (graphicCard == null)
+            CreateGraphicCardViewModel createGraphicCardViewModel = new CreateGraphicCardViewModel()
+            {
+                GraphicCard= await _context.GraphicCards.FindAsync(id),
+                Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODGRAPHCARD")).Select(o => o.CodeValue),
+                ChipsetProducers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODCHIPSETGC")).Select(o => o.CodeValue),
+                CoolingTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("GCCOOLINGTYPE")).Select(o => o.CodeValue),
+                Resolution = _context.Dictionary.Where(p => p.CodeDict.Equals("GCRESOLUTION")).Select(o => o.CodeValue),
+                MemoryTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("GCMEMORYTYPE")).OrderBy(p => p.ExtN1).Select(o => o.CodeValue)
+            };
+            if (createGraphicCardViewModel.GraphicCard == null)
             {
                 return NotFound();
             }
-            return View(graphicCard);
+            return View(createGraphicCardViewModel);
         }
 
 
@@ -227,7 +244,7 @@ namespace PC_Store.Controllers
             return View(graphicCard);
         }
 
-        // GET: GraphicCards/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -245,7 +262,7 @@ namespace PC_Store.Controllers
             return View(graphicCard);
         }
 
-        // POST: GraphicCards/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

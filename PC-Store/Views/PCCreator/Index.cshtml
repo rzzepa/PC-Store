@@ -7,6 +7,61 @@
 <center>
     <h1>Kreator PC</h1>
     <hr />
+    @if (User.Identity.IsAuthenticated)
+    { 
+        <div>
+            <div>
+                <form asp-action="LoadPcCreator" method="get">
+                    <div class="form-actions no-color">
+                        <p>
+                            @if (ViewBag.userCreators != null)
+                            {
+                             <p>Twoje zapisane konfiguracje</p>
+
+
+                                <select class="custom-select mr-sm-2 w-auto" name="name" value="@ViewData["name"]">
+
+                                    @foreach (var item in ViewBag.userCreators)
+                                    {
+                                        if (@ViewData["name"].ToString() == @item)
+                                        {
+                                            <option selected value="@item">@item</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                </select>
+
+                                <input type="submit" value="Wczytaj" class="btn btn-primary" />
+                            }
+                            else
+                            {
+                                <p>Nie masz zapisanej żadnej konfiguracji</p>
+                            }
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div>
+                @if (Model.ComputerCaseProduct != null && Model.ProcessorProduct != null && Model.RamProduct != null && Model.GraphicCardProduct != null && Model.MotherboardProduct != null && Model.PowerSupplyProduct != null)
+                {
+                    <form asp-action="SavePcCreator" method="get">
+                        <div class="form-actions no-color">
+                            <p>
+                                <input name="pageNumber" type="hidden" value="@ViewData["name"]" />
+                                <label>Nazwa konfiguracji</label>
+                                <input class="form-control w-25 p-3" placeholder="Podaj nazwę konfiguracji" value="@ViewData["name"]" type="text" name="name" required="required" /><br />
+                                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                            </p>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    <hr />
+    }
     <div class="container mt-100">
         <div class="row">
             <div class="col-md-4 col-sm-6">
@@ -15,7 +70,7 @@
                     {
                         <a class="card-img-tiles" asp-action="ProcessorListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category" style="height: 300px; object-fit: contain"></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -26,16 +81,16 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="ProcessorListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="ProcessorListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.ProcessorProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.ProcessorProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.ProcessorProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>
@@ -60,7 +115,7 @@
                     {
                         <a class="card-img-tiles" asp-action="GraphiccardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category" style="height: 300px; object-fit: contain"></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -71,16 +126,16 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="GraphiccardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="GraphiccardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.GraphicCardProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.GraphicCardProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.GraphicCardProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>
@@ -105,7 +160,7 @@
                     {
                         <a class="card-img-tiles" asp-action="MotherboardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category" style="height: 300px; object-fit: contain "></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -116,23 +171,23 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="MotherboardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="MotherboardListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.MotherboardProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.MotherboardProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.MotherboardProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>
 
                             <div class="card-body text-center">
-                                <h6 class="card-title">@Model.MotherboardProduct.Name</h6>
-                                <h6 class="card-title">@Model.MotherboardProduct.Price Zł</h6>
+                                <h4 class="card-title">@Model.MotherboardProduct.Name</h4>
+                                <h4 class="card-title">@Model.MotherboardProduct.Price Zł</h4>
                                 <p>Dodaj do konfiguracji</p>
                             </div>
                         </a>
@@ -150,7 +205,7 @@
                     {
                         <a class="card-img-tiles" asp-action="ComputercaseListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category" style="height: 300px; object-fit: contain"></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -161,16 +216,16 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="ComputercaseListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="ComputercaseListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.ComputerCaseProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.ComputerCaseProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.ComputerCaseProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>
@@ -195,7 +250,7 @@
                     {
                         <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category" style="height: 300px; object-fit: contain"></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -206,16 +261,16 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.RamProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.RamProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.RamProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>
@@ -240,7 +295,7 @@
                     {
                         <a class="card-img-tiles" asp-action="PowerSupplyListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
-                                <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category" style="height: 100%; width: 100%; object-fit: contain"></div>
+                                <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category" style="height: 300px; object-fit: contain"></div>
                             </div>
 
                             <div class="card-body text-center">
@@ -251,16 +306,16 @@
                     }
                     else
                     {
-                        <a class="card-img-tiles" asp-action="RamListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
+                        <a class="card-img-tiles" style="height: 550px;" asp-action="PowerSupplyListCreator" asp-route-id=@Model.PcCreatorId data-abc="true">
                             <div class="inner">
                                 <div class="main-img">
                                     @if (Model.PowerSupplyProduct.Picture != null)
                                     {
-                                        <img class="img-fluid w-100" src="~/images/@Model.PowerSupplyProduct.Picture" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/@Model.PowerSupplyProduct.Picture" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                     else
                                     {
-                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 100%; width: 100%; object-fit: contain">
+                                        <img class="img-fluid w-100" src="~/images/serverimg/brak_zdjecia.png" alt="Category" style="height: 300px; object-fit: contain">
                                     }
                                 </div>
                             </div>

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Models;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 using System.Web;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
@@ -24,18 +24,17 @@ namespace PC_Store.Controllers
     public class ProcessorsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly IWebHostEnvironment _webHostEnvironment;
-
         public IndexProcessorViewModel indexModel;
-
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly int pageSize;
 
         public ProcessorsController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
 
@@ -72,7 +71,6 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 10;
             return View(await PaginatedList<Processor>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -125,7 +123,7 @@ namespace PC_Store.Controllers
         }
 
 
-        public IActionResult Create(string Param)
+        public IActionResult Create()
         {
             CreateProcessorViewModel createProcessorViewModel = new CreateProcessorViewModel()
             {
@@ -138,7 +136,7 @@ namespace PC_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateProcessorViewModel model)
+        public async Task<IActionResult> Create(CreateProcessorViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +152,7 @@ namespace PC_Store.Controllers
                 product.InsertDate= DateTime.Now;
                 product.ModifyDate= DateTime.Now;
                 product.ProductType = "PROCESSOR";
+                product.Quantity = 0;
                 _context.Products.Add(product);
                 _context.SaveChanges();
 
@@ -162,8 +161,8 @@ namespace PC_Store.Controllers
                  _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
              }
-                return View();
-            }
+            return RedirectToAction(nameof(Create));
+        }
 
         private string UploadedFile(CreateProcessorViewModel model)
         {
@@ -193,7 +192,7 @@ namespace PC_Store.Controllers
             CreateProcessorViewModel createProcessorViewModel = new CreateProcessorViewModel()
             {
                 Processor= _context.Processors.Find(id),
-            Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeValue),
+                Producers = _context.Dictionary.Where(p => p.CodeDict.Equals("PRODPROCES")).Select(o => o.CodeValue),
                 SocketTypes = _context.Dictionary.Where(p => p.CodeDict.Equals("PROCSOCKET")).Select(o => o.CodeValue)
             };
             if (createProcessorViewModel.Processor == null)

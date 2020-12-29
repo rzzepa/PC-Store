@@ -23,6 +23,8 @@ namespace PC_Store.Models
 
         public string ProductType { get; set; }
 
+        public int Quantity { get; set; }
+
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime InsertDate { get; set; }

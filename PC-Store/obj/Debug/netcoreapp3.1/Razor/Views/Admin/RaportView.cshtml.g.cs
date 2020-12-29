@@ -28,14 +28,14 @@ using PC_Store.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\Rzepa\Desktop\PC-Store\PC-Store\Views\_ViewImports.cshtml"
-using PC_Store.Models.ViewModels;
+using PC_Store.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f737370ddaa6b74de7bd66a848328ee83ddf39b4", @"/Views/Admin/RaportView.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9b0c1d3f87b12c65acf0f22202cba3e956ad6ac5", @"/Views/_ViewImports.cshtml")]
-    public class Views_Admin_RaportView : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PC_Store.Views.ViewModels.RaportViewModel>
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bf057bf8b02e50a4609bf185cd2dff6feb7ed83c", @"/Views/_ViewImports.cshtml")]
+    public class Views_Admin_RaportView : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PC_Store.ViewModels.RaportViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Admin", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "GetProductSalesRaport", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -66,7 +66,7 @@ using PC_Store.Models.ViewModels;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n\r\n<center>\r\n    <h1>Raporty</h1>\r\n\r\n    <hr />\r\n\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f737370ddaa6b74de7bd66a848328ee83ddf39b44413", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f737370ddaa6b74de7bd66a848328ee83ddf39b44406", async() => {
                 WriteLiteral("\r\n        <p><h3>Raport Sprzedazy Produktów</h3></p>\r\n        ");
 #nullable restore
 #line 11 "C:\Users\Rzepa\Desktop\PC-Store\PC-Store\Views\Admin\RaportView.cshtml"
@@ -110,7 +110,7 @@ using PC_Store.Models.ViewModels;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    <hr />\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f737370ddaa6b74de7bd66a848328ee83ddf39b47032", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f737370ddaa6b74de7bd66a848328ee83ddf39b47025", async() => {
                 WriteLiteral("\r\n        <p><h3>Raport Sprzedaży Użytkownicy</h3></p>\r\n        ");
 #nullable restore
 #line 22 "C:\Users\Rzepa\Desktop\PC-Store\PC-Store\Views\Admin\RaportView.cshtml"
@@ -165,7 +165,7 @@ using PC_Store.Models.ViewModels;
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<PC_Store.Views.ViewModels.RaportViewModel> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<PC_Store.ViewModels.RaportViewModel> Html { get; private set; }
     }
 }
 #pragma warning restore 1591

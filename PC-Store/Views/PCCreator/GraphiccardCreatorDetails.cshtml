@@ -51,6 +51,9 @@
                         <i>Producent chipsetu: @Model.ProducerChipset</i>
                     </li>
                     <li>
+                        <i>Rodzaj chipsetu: @Model.ChipsetType</i>
+                    </li>
+                    <li>
                         <i>Taktowanie rdzenia: @Model.CoreClock</i>
                     </li>
                     <li>
@@ -58,6 +61,12 @@
                     </li>
                     <li>
                         <i>Typ złącza: @Model.ConnectorType</i>
+                    </li>
+                    <li>
+                        <i>Długość karty: @Model.CardLength</i>
+                    </li>
+                    <li>
+                        <i>Podświetlenie LED: @Model.Led</i>
                     </li>
                     <li>
                         <i>Rozdzielczość: @Model.Resolution</i>
@@ -98,14 +107,6 @@
 
                 </ul>
                 <h3><span class="mr-1"><strong>Cena: @Model.Price Zł</strong></span></h3>
-                <p class="pt-1">
-                    Miejsce na opis
-                </p>
-                <hr>
-                <h4><strong>Ilość:</strong></h4>
-                <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
-                </div>
                 <hr>
                 <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id="@Model.Id">
                     <button type="button" class="btn btn-primary btn-md mr-1 mb-2">

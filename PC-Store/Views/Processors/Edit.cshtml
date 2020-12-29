@@ -4,84 +4,85 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edycja</h1>
+<center>
+    <h1>Edycja</h1>
 
-<h4>Processor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Processor.Id" />
-            <div class="form-group">
+    <h4>Processor</h4>
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Processor.Id" />
                 <div class="form-group">
-                    Producent
-                    @Html.DropDownListFor(m => m.Processor.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control", @value = Model.Processor.Producer })
+                    <div class="form-group">
+                        Producent
+                        @Html.DropDownListFor(m => m.Processor.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control", @value = Model.Processor.Producer })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                Linnia
-                <input asp-for="Processor.Line" class="form-control" />
-                <span asp-validation-for="Processor.Line" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group form-check">
-                Chłodzenie
-                <input asp-for="Processor.Cooling" class="form-control" />
-                <span asp-validation-for="Processor.Cooling" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Rodzaj gniazda
-                @Html.DropDownListFor(m => m.Processor.SocketType, new SelectList(Model.SocketTypes, "CodeItem"), "--Wybierz Socket--", new { @class = "form-control", @value = Model.Processor.SocketType })
-            </div>
-            <div class="form-group">
-                Liczba rdzeni
-                <input asp-for="Processor.NumberOfCores" class="form-control" />
-                <span asp-validation-for="Processor.NumberOfCores" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Liczba wątków
-                <input asp-for="Processor.NumberOfThreads" class="form-control" />
-                <span asp-validation-for="Processor.NumberOfThreads" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Częstotliwość zegara
-                <input asp-for="Processor.ProcessorClockFrequency" class="form-control" />
-                <span asp-validation-for="Processor.ProcessorClockFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Maksymalna częstotliwość
-                <input asp-for="Processor.TurboMaximumFrequency" class="form-control" />
-                <span asp-validation-for="Processor.TurboMaximumFrequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Zintegrowana grafika
-                <input asp-for="Processor.IntegratedGraphics" class="form-control" />
-                <span asp-validation-for="Processor.IntegratedGraphics" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Odblokowany mnożnik
-                <input asp-for="Processor.UnlockedMultiplier" class="form-control" />
-                <span asp-validation-for="Processor.UnlockedMultiplier" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Architektura
-                <input asp-for="Processor.Architecture" class="form-control" />
-                <span asp-validation-for="Processor.Architecture" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Typ pamięci
-                <input asp-for="Processor.TypesOfSupportedMemory" class="form-control" />
-                <span asp-validation-for="Processor.TypesOfSupportedMemory" class="text-danger"></span>
-            </div>
-            @Html.HiddenFor(model => model.Processor.ProductId)
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+                <div class="form-group">
+                    Linnia
+                    <input asp-for="Processor.Line" class="form-control" />
+                    <span asp-validation-for="Processor.Line" class="text-danger"></span>
+                </div>
 
+                <div class="form-group form-check">
+                    Chłodzenie
+                    <input asp-for="Processor.Cooling" class="form-control" />
+                    <span asp-validation-for="Processor.Cooling" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Rodzaj gniazda
+                    @Html.DropDownListFor(m => m.Processor.SocketType, new SelectList(Model.SocketTypes, "CodeItem"), "--Wybierz Socket--", new { @class = "form-control", @value = Model.Processor.SocketType })
+                </div>
+                <div class="form-group">
+                    Liczba rdzeni
+                    <input asp-for="Processor.NumberOfCores" class="form-control" />
+                    <span asp-validation-for="Processor.NumberOfCores" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Liczba wątków
+                    <input asp-for="Processor.NumberOfThreads" class="form-control" />
+                    <span asp-validation-for="Processor.NumberOfThreads" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Częstotliwość zegara
+                    <input asp-for="Processor.ProcessorClockFrequency" class="form-control" />
+                    <span asp-validation-for="Processor.ProcessorClockFrequency" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Maksymalna częstotliwość
+                    <input asp-for="Processor.TurboMaximumFrequency" class="form-control" />
+                    <span asp-validation-for="Processor.TurboMaximumFrequency" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Zintegrowana grafika
+                    <input asp-for="Processor.IntegratedGraphics" class="form-control" />
+                    <span asp-validation-for="Processor.IntegratedGraphics" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Odblokowany mnożnik
+                    <input asp-for="Processor.UnlockedMultiplier" class="form-control" />
+                    <span asp-validation-for="Processor.UnlockedMultiplier" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Architektura
+                    <input asp-for="Processor.Architecture" class="form-control" />
+                    <span asp-validation-for="Processor.Architecture" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Typ pamięci
+                    <input asp-for="Processor.TypesOfSupportedMemory" class="form-control" />
+                    <span asp-validation-for="Processor.TypesOfSupportedMemory" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.Processor.ProductId)
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</center>
 <div>
     <a asp-action="Index">
         <button type="button" class="btn btn-light btn-md mr-1 mb-2">

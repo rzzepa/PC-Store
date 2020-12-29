@@ -1,4 +1,4 @@
-﻿using PC_Store.Models.ViewModels;
+﻿using PC_Store.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;

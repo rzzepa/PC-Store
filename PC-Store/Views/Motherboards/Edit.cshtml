@@ -4,128 +4,129 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<center>
+    <h1>Edit</h1>
 
-<h4>Motherboard</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                Producent
-                <input asp-for="@Model.Producer" class="form-control" />
-                <span asp-validation-for="@Model.Producer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Kod producenta
-                <input asp-for="@Model.ProducerCode" class="form-control" />
-                <span asp-validation-for="@Model.ProducerCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Standard
-                <input asp-for="@Model.Standard" class="form-control" />
-                <span asp-validation-for="@Model.Standard" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Chipset płyty
-                <input asp-for="@Model.Chipset" class="form-control" />
-                <span asp-validation-for="@Model.Chipset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Gniazdo procesora
-                <input asp-for="@Model.SocketType" class="form-control" />
-                <span asp-validation-for="@Model.SocketType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Technologie
-                <input asp-for="@Model.Technologies" class="form-control" />
-                <span asp-validation-for="@Model.Technologies" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Standard pamięci
-                <input asp-for="@Model.StandardMemory" class="form-control" />
-                <span asp-validation-for="@Model.StandardMemory" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Rodzaj złącza
-                <input asp-for="@Model.ConnectorType" class="form-control" />
-                <span asp-validation-for="@Model.ConnectorType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Ilość slotów pamięci
-                <input asp-for="@Model.NumberOfMemorySlots" class="form-control" />
-                <span asp-validation-for="@Model.NumberOfMemorySlots" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Maksymalna ilość pamięci [GB]
-                <input asp-for="@Model.MaximumAmountOfMemory" class="form-control" />
-                <span asp-validation-for="@Model.MaximumAmountOfMemory" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Architektura wielokanałowa
-                <input asp-for="@Model.MultiChannelArchitecture" class="form-control" />
-                <span asp-validation-for="@Model.MultiChannelArchitecture" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Obsługa zintegrowanych kart graficznych
-                <input asp-for="@Model.IntegratedGraphicsCardSupport" class="form-control" />
-                <span asp-validation-for="@Model.IntegratedGraphicsCardSupport" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Chipset graficzny
-                <input asp-for="@Model.GraphicsChipset" class="form-control" />
-                <span asp-validation-for="@Model.GraphicsChipset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Łączenie kart
-                <input asp-for="@Model.CombiningCards" class="form-control" />
-                <span asp-validation-for="@Model.CombiningCards" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Chipset dźwiękowy
-                <input asp-for="@Model.SoundChipset" class="form-control" />
-                <span asp-validation-for="@Model.SoundChipset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Kanały audio
-                <input asp-for="@Model.AudioChannels" class="form-control" />
-                <span asp-validation-for="@Model.AudioChannels" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Zintegrowana karta sieciowa
-                <input asp-for="@Model.IntegratedNetworkCard" class="form-control" />
-                <span asp-validation-for="@Model.IntegratedNetworkCard" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Chipset karty sieciowej
-                <input asp-for="@Model.NetworkCardChipset" class="form-control" />
-                <span asp-validation-for="@Model.NetworkCardChipset" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                PCI Express x1
-                <input asp-for="@Model.PCIExpressx1" class="form-control" />
-                <span asp-validation-for="@Model.PCIExpressx1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                PCI Express x4
-                <input asp-for="@Model.PCIExpressx4" class="form-control" />
-                <span asp-validation-for="@Model.PCIExpressx4" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                PCI Express x16
-                <input asp-for="@Model.PCIExpressx16" class="form-control" />
-                <span asp-validation-for="@Model.PCIExpressx16" class="text-danger"></span>
-            </div>
-            @Html.HiddenFor(model => model.ProductId)
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Motherboard</h4>
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    Producent
+                    <input asp-for="@Model.Producer" class="form-control" />
+                    <span asp-validation-for="@Model.Producer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Kod producenta
+                    <input asp-for="@Model.ProducerCode" class="form-control" />
+                    <span asp-validation-for="@Model.ProducerCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Standard
+                    <input asp-for="@Model.Standard" class="form-control" />
+                    <span asp-validation-for="@Model.Standard" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Chipset płyty
+                    <input asp-for="@Model.Chipset" class="form-control" />
+                    <span asp-validation-for="@Model.Chipset" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Gniazdo procesora
+                    <input asp-for="@Model.SocketType" class="form-control" />
+                    <span asp-validation-for="@Model.SocketType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Technologie
+                    <input asp-for="@Model.Technologies" class="form-control" />
+                    <span asp-validation-for="@Model.Technologies" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Standard pamięci
+                    <input asp-for="@Model.StandardMemory" class="form-control" />
+                    <span asp-validation-for="@Model.StandardMemory" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Rodzaj złącza
+                    <input asp-for="@Model.ConnectorType" class="form-control" />
+                    <span asp-validation-for="@Model.ConnectorType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Ilość slotów pamięci
+                    <input asp-for="@Model.NumberOfMemorySlots" class="form-control" />
+                    <span asp-validation-for="@Model.NumberOfMemorySlots" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Maksymalna ilość pamięci [GB]
+                    <input asp-for="@Model.MaximumAmountOfMemory" class="form-control" />
+                    <span asp-validation-for="@Model.MaximumAmountOfMemory" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Architektura wielokanałowa
+                    <input asp-for="@Model.MultiChannelArchitecture" class="form-control" />
+                    <span asp-validation-for="@Model.MultiChannelArchitecture" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Obsługa zintegrowanych kart graficznych
+                    <input asp-for="@Model.IntegratedGraphicsCardSupport" class="form-control" />
+                    <span asp-validation-for="@Model.IntegratedGraphicsCardSupport" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Chipset graficzny
+                    <input asp-for="@Model.GraphicsChipset" class="form-control" />
+                    <span asp-validation-for="@Model.GraphicsChipset" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Łączenie kart
+                    <input asp-for="@Model.CombiningCards" class="form-control" />
+                    <span asp-validation-for="@Model.CombiningCards" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Chipset dźwiękowy
+                    <input asp-for="@Model.SoundChipset" class="form-control" />
+                    <span asp-validation-for="@Model.SoundChipset" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Kanały audio
+                    <input asp-for="@Model.AudioChannels" class="form-control" />
+                    <span asp-validation-for="@Model.AudioChannels" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Zintegrowana karta sieciowa
+                    <input asp-for="@Model.IntegratedNetworkCard" class="form-control" />
+                    <span asp-validation-for="@Model.IntegratedNetworkCard" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Chipset karty sieciowej
+                    <input asp-for="@Model.NetworkCardChipset" class="form-control" />
+                    <span asp-validation-for="@Model.NetworkCardChipset" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    PCI Express x1
+                    <input asp-for="@Model.PCIExpressx1" class="form-control" />
+                    <span asp-validation-for="@Model.PCIExpressx1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    PCI Express x4
+                    <input asp-for="@Model.PCIExpressx4" class="form-control" />
+                    <span asp-validation-for="@Model.PCIExpressx4" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    PCI Express x16
+                    <input asp-for="@Model.PCIExpressx16" class="form-control" />
+                    <span asp-validation-for="@Model.PCIExpressx16" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.ProductId)
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</center>
 <div>
     <a asp-action="Index">
         <button type="button" class="btn btn-light btn-md mr-1 mb-2">

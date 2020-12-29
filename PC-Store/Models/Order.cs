@@ -64,5 +64,13 @@ namespace PC_Store.Models
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime OrderPlaced { get; set; }
+
+        [Required(ErrorMessage = "Wybierz sposób płatności")]
+        public string Payment { get; set; }
+
+        public string StatusOrder { get; set; }
+
+        [Required]
+        public bool Regulations { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PC_Store.Models.Dictionary>
+﻿@model List<PC_Store.Models.Product>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,7 +13,7 @@
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="ProcessorList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/PROCESSORcategory.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -27,7 +27,7 @@
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="GraphiccardList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/GRAPHICCARDcategory.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -41,7 +41,7 @@
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="MotherboardList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/MOTHERBOARDcategory.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -55,7 +55,7 @@
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="ComputerCaseList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/COMPUTERCASEcategory.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -69,7 +69,7 @@
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="RamList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/RAMcategory.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -79,11 +79,11 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-6" >
                 <div class="card mb-30">
                     <a class="card-img-tiles" asp-controller="Home" asp-action="PowerSupplyList" data-abc="true">
                         <div class="inner">
-                            <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category"></div>
+                            <div class="main-img"><img src="~/images/serverimg/POWERSUPPLYcategroy.jpg" alt="Category" style="height:200px;"></div>
                         </div>
 
                         <div class="card-body text-center">
@@ -95,4 +95,95 @@
             </div>
         </div>
     </div>
+    <hr />
+    <h3>Ostatnio dodane produkty</h3>
+    <div class="slideshow-container">
+        @foreach (var item in Model)
+        {
+            <div class="mySlides fade">
+                @if (item.ProductType.Equals("PROCESSOR"))
+                {
+                    <a asp-controller="Processors" asp-action="ProcessorDetails" asp-route-id="@item.Id">
+                        <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                        <br />
+                        <div class="text"><h3><p>@item.Name</p></h3></div>
+                    </a>
+                }
+                else if (item.ProductType.Equals("MOTHERBOARD"))
+                {
+                <a asp-controller="Motherboards" asp-action="MotherboardDetails" asp-route-id="@item.Id">
+                    <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                    <br />
+                    <div class="text"><h3><p>@item.Name</p></h3></div>
+                </a>
+                }
+                else if (item.ProductType.Equals("GRAPHICSCARD"))
+                {
+                <a asp-controller="Graphiccards" asp-action="GraphicCardDetails" asp-route-id="@item.Id">
+                    <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                    <br />
+                    <div class="text"><h3><p>@item.Name</p></h3></div>
+                </a>
+                }
+                else if (item.ProductType.Equals("COMPUTERCASE"))
+                {
+                <a asp-controller="ComputerCases" asp-action="ComputerCaseDetails" asp-route-id="@item.Id">
+                    <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                    <br />
+                    <div class="text"><h3><p>@item.Name</p></h3></div>
+                </a>
+                }
+                else if (item.ProductType.Equals("RAMMEMORY"))
+                {
+                <a asp-controller="Rams" asp-action="RamDetails" asp-route-id="@item.Id">
+                    <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                    <br />
+                    <div class="text"><h3><p>@item.Name</p></h3></div>
+                </a>
+                }
+                else if (item.ProductType.Equals("POWERSUPPLY"))
+                {
+                <a asp-controller="PowerSupplies" asp-action="PowerSupplyDetails" asp-route-id="@item.Id">
+                    <img src="~/images/@item.Picture" style="width:50%; height:600px">
+                    <br />
+                    <div class="text"><h3><p>@item.Name</p></h3></div>
+                </a>
+                }
+
+            </div>
+
+
+        }
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 5000);
+        }
+    </script>
 </center>

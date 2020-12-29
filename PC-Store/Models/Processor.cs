@@ -17,12 +17,11 @@ namespace PC_Store.Models
     public class Processor :IEnumerable
     {
         public int Id { get; set; }
-        [StringLength(20)]
         [Required]
         public string Producer { get; set; }
         [Required]
         public string Line { get; set; }
-
+        [Required]
         public bool Cooling { get; set; }
         [Required]
         public string SocketType { get; set; }
@@ -30,17 +29,17 @@ namespace PC_Store.Models
         public int NumberOfCores { get; set; }
         [Required]
         public int NumberOfThreads { get; set; }
-
+        [Required]
         public float ProcessorClockFrequency { get; set; }
-
+        [Required]
         public float TurboMaximumFrequency { get; set; }
-
+        [Required]
         public string IntegratedGraphics { get; set; }
-
+        [Required]
         public bool UnlockedMultiplier { get; set; }
-
+        [Required]
         public int Architecture { get; set; }
-
+        [Required]
         public string TypesOfSupportedMemory { get; set; }
 
         public int ProductId { get; set; }

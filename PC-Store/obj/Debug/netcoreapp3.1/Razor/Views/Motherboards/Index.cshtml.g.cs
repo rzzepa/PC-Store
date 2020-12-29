@@ -28,13 +28,13 @@ using PC_Store.Models;
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\Rzepa\Desktop\PC-Store\PC-Store\Views\_ViewImports.cshtml"
-using PC_Store.Models.ViewModels;
+using PC_Store.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f8bfaf2acdd018b03cca6067315868078765955c", @"/Views/Motherboards/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9b0c1d3f87b12c65acf0f22202cba3e956ad6ac5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bf057bf8b02e50a4609bf185cd2dff6feb7ed83c", @"/Views/_ViewImports.cshtml")]
     public class Views_Motherboards_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PC_Store.Infrastructure.PaginatedList<Motherboard>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -81,7 +81,7 @@ using PC_Store.Models.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<h1><center>Płyty Główne - Panel</center></h1>\r\n\r\n<p>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c6314", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c6307", async() => {
                 WriteLiteral("\r\n        <button type=\"button\" class=\"btn btn-success btn-md mr-1 mb-2\">\r\n            Dodaj\r\n        </button>\r\n    ");
             }
             );
@@ -97,7 +97,7 @@ using PC_Store.Models.ViewModels;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n</p>\r\n\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c7604", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c7597", async() => {
                 WriteLiteral("\r\n    <div class=\"form-actions no-color\">\r\n        <p>\r\n            <input class=\"form-control\" placeholder=\"Wyszukaj...\" type=\"text\" name=\"searchString\"");
                 BeginWriteAttribute("value", " value=\"", 508, "\"", 542, 1);
 #nullable restore
@@ -109,7 +109,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
 #nullable disable
                 EndWriteAttribute();
                 WriteLiteral(" /><br />\r\n            <input type=\"submit\" value=\"Szukaj\" class=\"btn btn-primary\" />\r\n            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c8516", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c8509", async() => {
                     WriteLiteral("\r\n                <button type=\"button\" class=\"btn btn-success\">\r\n                    Wróć do pełnej listy\r\n                </button>\r\n            ");
                 }
                 );
@@ -143,7 +143,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n<table class=\"table\">\r\n    <thead>\r\n        <tr>\r\n            <th>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c11385", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c11378", async() => {
                 WriteLiteral("Producent");
             }
             );
@@ -174,7 +174,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </th>\r\n            <th>\r\n                Kod producenta\r\n            </th>\r\n            <th>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c13716", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c13709", async() => {
                 WriteLiteral("Standard");
             }
             );
@@ -205,7 +205,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            </th>\r\n            <th>\r\n                Chipset\r\n            </th>\r\n            <th>\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c16043", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c16036", async() => {
                 WriteLiteral("Rodzaj gniazda");
             }
             );
@@ -293,7 +293,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
 #line hidden
 #nullable disable
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c20728", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c20721", async() => {
                 WriteLiteral("\r\n                        <button type=\"button\" class=\"btn btn-primary btn-md mr-1 mb-2\">\r\n                            Edytuj\r\n                        </button>\r\n                    ");
             }
             );
@@ -324,7 +324,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c23132", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c23125", async() => {
                 WriteLiteral("\r\n                        <button type=\"button\" class=\"btn btn-info btn-md mr-1 mb-2\">\r\n                            Szczegóły\r\n                        </button>\r\n                    ");
             }
             );
@@ -355,7 +355,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c25539", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c25532", async() => {
                 WriteLiteral("\r\n\r\n                        <button type=\"button\" class=\"btn btn-danger btn-md mr-1 mb-2\">\r\n                            Usuń\r\n                        </button>\r\n                    ");
             }
             );
@@ -404,7 +404,7 @@ WriteAttributeValue("", 516, ViewData["CurrentFilter"], 516, 26, false);
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<center>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c28486", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c28479", async() => {
                 WriteLiteral("\r\n        <button type=\"button\" class=\"btn btn-secondary btn-md mr-1 mb-2\">\r\n            Poprzednia strona\r\n        </button>\r\n    ");
             }
             );
@@ -468,7 +468,7 @@ AddHtmlAttributeValue(" ", 3701, prevDisabled, 3702, 13, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c32824", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c32817", async() => {
                 WriteLiteral("\r\n        <button type=\"button\" class=\"btn btn-secondary btn-md mr-1 mb-2\">\r\n            Następna strona\r\n        </button>\r\n    ");
             }
             );
@@ -532,7 +532,7 @@ AddHtmlAttributeValue(" ", 4080, nextDisabled, 4081, 13, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n</center>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c37169", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bfaf2acdd018b03cca6067315868078765955c37162", async() => {
                 WriteLiteral("\r\n    <button type=\"button\" class=\"btn btn-light btn-md mr-1 mb-2\">\r\n        Wróć\r\n    </button>\r\n");
             }
             );

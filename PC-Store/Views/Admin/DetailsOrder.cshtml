@@ -1,0 +1,92 @@
+﻿@model IEnumerable<PC_Store.Views.ViewModels.OrderDetailViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Szczególy zamówienia</h1>
+
+<h1>
+    @ViewBag.EmptyCartMessage
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Ilość
+            </th>
+            <th>
+                Cena
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Product.Picture != null)
+                    {
+                        <img src="~/images/@item.Product.Picture" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                    }
+                    else
+                    {
+                        <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                    }
+                </td>
+                <td>
+                    @item.Product.Name
+                </td>
+                <td>
+                    @item.OrderDetail.Amount
+                </td>
+                <td>
+                    @item.OrderDetail.Price
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>
+
+
+<form asp-action="ChangeStatus" method="post">
+    <input type="hidden" name="id" value="@ViewData["OrderId"]" />
+    <div class="form-actions no-color">
+        <p>
+            <select class="custom-select mr-sm-2 w-auto" name="status" value="@ViewData["Filter"]">
+                @foreach (var item in ViewBag.dictitems)
+                {
+                    if (ViewData["Status"].ToString() == @item)
+                    {
+                        <option selected value="@item">@item</option>
+                    }
+                    else
+                    {
+                        <option value="@item">@item</option>
+                    }
+                }
+            </select>
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+        </p>
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="ManagementOrders"
+    asp-route-pageNumber="@ViewData["PageNumber"]"
+    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+    asp-route-fromDate="@ViewData["fromDate"].ToString()"
+    asp-route-toDate="@ViewData["toDate"].ToString()"
+    asp-route-filter="@ViewData["Filter"]"
+    class="btn btn-default>
+    <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+       Wróć
+    </button>
+    </a>
+</div>

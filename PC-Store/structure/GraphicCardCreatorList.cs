@@ -36,7 +36,7 @@ namespace PC_Store.structure
 
         public int MemoryClock { get; set; }
 
-        public int CoolingType { get; set; }
+        public string CoolingType { get; set; }
 
         public int NumberOfFans { get; set; }
 
@@ -53,6 +53,14 @@ namespace PC_Store.structure
         public string Name { get; set; }
 
         public string Picture { get; set; }
+
+        public bool Led { get; set; }
+
+        public int CardLength { get; set; }
+
+        public string ChipsetType { get; set; }
+
+        public int Quantity { get; set; }
 
         public int Id { get; set; }
 

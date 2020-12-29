@@ -4,121 +4,122 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edycja</h1>
+<center>
+    <h1>Edycja</h1>
 
-<h4>Obudowa</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ComputerCase.Id" />
-            <div class="form-group">
-                Producent
-                @Html.DropDownListFor(m => m.ComputerCase.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                Kod producenta
-                <input asp-for="@Model.ComputerCase.ProducerCode" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.ProducerCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Kolor
-                <input asp-for="@Model.ComputerCase.Color" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Podświetlenie
-                <input asp-for="@Model.ComputerCase.Backlit" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Backlit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Wysokość [cm]
-                <input asp-for="@Model.ComputerCase.Height" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Height" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Szerokość [cm]
-                <input asp-for="@Model.ComputerCase.Width" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Width" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Głębokość [cm]
-                <input asp-for="@Model.ComputerCase.Depth" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Depth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Waga [kg]
-                <input asp-for="@Model.ComputerCase.Weight" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Weight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Typ obudowy
-                @Html.DropDownListFor(m => m.ComputerCase.ComputerCaseType, new SelectList(Model.ComputerCaseType, "CodeItem"), "--Wybierz typ obudowy--", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                Kompatybilność
-                <input asp-for="@Model.ComputerCase.Compatibility" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Compatibility" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Okno
-                <input asp-for="@Model.ComputerCase.Window" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Window" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Wyciszona
-                <input asp-for="@Model.ComputerCase.Muted" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Muted" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                USB 2.0
-                <input asp-for="@Model.ComputerCase.Usb20" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Usb20" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                USB 3.0
-                <input asp-for="@Model.ComputerCase.Usb30" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Usb30" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                USB 3.1
-                <input asp-for="@Model.ComputerCase.Usb31" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Usb31" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                USB 3.2
-                <input asp-for="@Model.ComputerCase.Usb32" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.Usb32" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                USB Typ-C
-                <input asp-for="@Model.ComputerCase.USBC" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.USBC" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Czytnik kart pamięci
-                <input asp-for="@Model.ComputerCase.MemoryCardReader" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.MemoryCardReader" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Złącze słuchawkowe/głośnikowe
-                <input asp-for="@Model.ComputerCase.SpeakerConnector" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.SpeakerConnector" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                Złącze mikrofonowe
-                <input asp-for="@Model.ComputerCase.MicrophoneConnector" class="form-control" />
-                <span asp-validation-for="@Model.ComputerCase.MicrophoneConnector" class="text-danger"></span>
-            </div>
-            @Html.HiddenFor(model => model.ComputerCase.ProductId)
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Obudowa</h4>
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ComputerCase.Id" />
+                <div class="form-group">
+                    Producent
+                    @Html.DropDownListFor(m => m.ComputerCase.Producer, new SelectList(Model.Producers, "CodeItem"), "--Wybierz Producenta--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Kod producenta
+                    <input asp-for="@Model.ComputerCase.ProducerCode" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.ProducerCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Kolor
+                    <input asp-for="@Model.ComputerCase.Color" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Podświetlenie
+                    <input asp-for="@Model.ComputerCase.Backlit" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Backlit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Wysokość [cm]
+                    <input asp-for="@Model.ComputerCase.Height" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Height" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Szerokość [cm]
+                    <input asp-for="@Model.ComputerCase.Width" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Width" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Głębokość [cm]
+                    <input asp-for="@Model.ComputerCase.Depth" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Depth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Waga [kg]
+                    <input asp-for="@Model.ComputerCase.Weight" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Weight" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Typ obudowy
+                    @Html.DropDownListFor(m => m.ComputerCase.ComputerCaseType, new SelectList(Model.ComputerCaseType, "CodeItem"), "--Wybierz typ obudowy--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    Kompatybilność
+                    <input asp-for="@Model.ComputerCase.Compatibility" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Compatibility" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Okno
+                    <input asp-for="@Model.ComputerCase.Window" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Window" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Wyciszona
+                    <input asp-for="@Model.ComputerCase.Muted" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Muted" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    USB 2.0
+                    <input asp-for="@Model.ComputerCase.Usb20" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Usb20" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    USB 3.0
+                    <input asp-for="@Model.ComputerCase.Usb30" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Usb30" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    USB 3.1
+                    <input asp-for="@Model.ComputerCase.Usb31" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Usb31" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    USB 3.2
+                    <input asp-for="@Model.ComputerCase.Usb32" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.Usb32" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    USB Typ-C
+                    <input asp-for="@Model.ComputerCase.USBC" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.USBC" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Czytnik kart pamięci
+                    <input asp-for="@Model.ComputerCase.MemoryCardReader" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.MemoryCardReader" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Złącze słuchawkowe/głośnikowe
+                    <input asp-for="@Model.ComputerCase.SpeakerConnector" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.SpeakerConnector" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Złącze mikrofonowe
+                    <input asp-for="@Model.ComputerCase.MicrophoneConnector" class="form-control" />
+                    <span asp-validation-for="@Model.ComputerCase.MicrophoneConnector" class="text-danger"></span>
+                </div>
+                @Html.HiddenFor(model => model.ComputerCase.ProductId)
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</center>
 <div>
     <a asp-action="Index">
         <button type="button" class="btn btn-light btn-md mr-1 mb-2">

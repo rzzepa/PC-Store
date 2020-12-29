@@ -22,8 +22,7 @@
             </p>
         </div>
     </form>
-    <pre>                                                                                         </pre>
-    <form asp-action="PowerSupplyList" method="get">
+    <form asp-action="PowerSupplyList" method="get" style="margin-left:600px">
         <div class="form-row align-items-center">
             <p>
                 <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
@@ -49,6 +48,12 @@
         </div>
     </form>
 </div>
+<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
+    <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+        Wróć
+    </button>
+</a>
+
 @foreach (var item in Model)
 {
     <section>
@@ -101,6 +106,14 @@
                     <div class="col-lg-5 col-xl-5">
 
                         <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Product.Price) Zł</span></h6>
+                        @if (item.Product.Quantity <= 10 && item.Product.Quantity >= 0)
+                        {
+                            <h6>Zostało ostatnie @item.Product.Quantity sztuk!</h6>
+                        }
+                        else if (item.Product.Quantity == 0)
+                        {
+                            <h6>Brak na magazynie</h6>
+                        }
                         <div class="my-4">
 
                             <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@item.Product.Id">
@@ -129,7 +142,7 @@
 }
 <center>
     <a asp-action="PowerSupplyList"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-sortOrder="@ViewData["sortOrder"]"
        asp-route-pageNumber="@(Model.PageIndex - 1)"
        asp-route-currentFilter="@ViewData["CurrentFilter"]"
        class="btn btn-default @prevDisabled">
@@ -138,7 +151,7 @@
         </button>
     </a>
     <a asp-action="PowerSupplyList"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-sortOrder="@ViewData["sortOrder"]"
        asp-route-pageNumber="@(Model.PageIndex + 1)"
        asp-route-currentFilter="@ViewData["CurrentFilter"]"
        class="btn btn-default @nextDisabled">

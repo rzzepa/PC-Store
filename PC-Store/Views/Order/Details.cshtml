@@ -41,7 +41,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Name)
-</td>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDetail.Amount)
             </td>
@@ -52,7 +52,12 @@
         }
     </tbody>
 </table>
-
+<div>
+    <center>
+    <label>Status zamówienia:</label>
+    <p>@ViewData["Status"]</p>
+</center>
+</div>
 <div>
     <form asp-controller="Order" asp-action="GetMyOrders">
         <div class="form-group">

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Infrastructure;
 using PC_Store.Models;
 using PC_Store.structure;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,43 @@ namespace PC_Store.Controllers
     {
         private readonly ApplicationDbContext _context;
         private PCCreator _PCCreator;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly int pageSize;
 
-        public PcCreatorController(ApplicationDbContext context, PCCreator PCCreator)
+        public PcCreatorController(ApplicationDbContext context, UserManager<IdentityUser> userManager, PCCreator PCCreator)
         {
             _context = context;
             _PCCreator = PCCreator;
+            _userManager = userManager;
+            pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? name)
         {
-            PCCreator creator = _PCCreator.getPcCreator(_PCCreator.PcCreatorId);
+            PCCreator creator=null;
+            if (name == null)
+            {
+                name = "";
+            }
+            creator = _PCCreator.getPcCreator(_PCCreator.PcCreatorId);
+
+            var item = _context.userPCCreators.Where(p => p.User.Equals(_userManager.GetUserName(HttpContext.User))).Select(p => p.Name).ToList();
+
+            if(item.Count != 0 )
+            {
+                ViewBag.userCreators = item;
+            }
+            else
+            {
+                ViewBag.userCreators = null;
+            }
+
+            ViewData["name"] = name;
             if (creator!= null)
             {
                 _PCCreator = creator;
             }
-            else
+            else if(name=="")
             {
                 _PCCreator = new PCCreator(_context)
                 {
@@ -48,6 +71,83 @@ namespace PC_Store.Controllers
             }
 
             return View(_PCCreator);
+        }
+
+        public async Task<IActionResult> SavePcCreator(string name)
+        {
+            var item = _context.userPCCreators.Where(p => p.Name.Equals(name)).FirstOrDefault();
+            _PCCreator= _PCCreator.getPcCreator(_PCCreator.PcCreatorId);
+            if (item != null)
+            {
+                if(_PCCreator.ComputerCaseProduct!=null)
+                item.ComputerCaseProduct = _PCCreator.ComputerCaseProduct.Id;
+
+                if (_PCCreator.ProcessorProduct != null)
+                    item.ProcessorProduct = _PCCreator.ProcessorProduct.Id;
+
+                if (_PCCreator.GraphicCardProduct != null)
+                    item.GraphicCardProduct = _PCCreator.GraphicCardProduct.Id;
+
+                if (_PCCreator.MotherboardProduct != null)
+                    item.MotherboardProduct = _PCCreator.MotherboardProduct.Id;
+
+                if (_PCCreator.PowerSupplyProduct != null)
+                    item.PowerSupplyProduct = _PCCreator.PowerSupplyProduct.Id;
+
+                if (_PCCreator.RamProduct != null)
+                    item.RamProduct = _PCCreator.RamProduct.Id;
+                _context.userPCCreators.Update(item);
+            }
+            else
+            {
+                UserPCCreator userPCCreator = new UserPCCreator()
+                {
+                    User = _userManager.GetUserName(HttpContext.User),
+                    Name = name
+                };
+                if (_PCCreator.ProcessorProduct != null)
+                    userPCCreator.ProcessorProduct = _PCCreator.ProcessorProduct.Id;
+
+                if (_PCCreator.ComputerCaseProduct != null)
+                    userPCCreator.ComputerCaseProduct = _PCCreator.ComputerCaseProduct.Id;
+
+                if (_PCCreator.GraphicCardProduct != null)
+                    userPCCreator.GraphicCardProduct = _PCCreator.GraphicCardProduct.Id;
+
+                if (_PCCreator.PowerSupplyProduct != null)
+                    userPCCreator.PowerSupplyProduct = _PCCreator.PowerSupplyProduct.Id;
+
+                if (_PCCreator.MotherboardProduct != null)
+                    userPCCreator.MotherboardProduct = _PCCreator.MotherboardProduct.Id;
+
+                if (_PCCreator.RamProduct != null)
+                    userPCCreator.RamProduct = _PCCreator.RamProduct.Id;
+                _context.userPCCreators.Add(userPCCreator);
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { name = name });
+        }
+
+        public IActionResult LoadPcCreator(string name)
+        {
+            var item = _context.userPCCreators.Where(p => p.Name.Equals(name)).FirstOrDefault();
+
+            _PCCreator = new PCCreator(_context)
+            {
+                GraphicCardProduct = _context.Products.Where(p => p.Id == item.GraphicCardProduct).FirstOrDefault(),
+                ComputerCaseProduct = _context.Products.Where(p => p.Id == item.ComputerCaseProduct).FirstOrDefault(),
+                ProcessorProduct = _context.Products.Where(p => p.Id == item.ProcessorProduct).FirstOrDefault(),
+                RamProduct = _context.Products.Where(p => p.Id == item.RamProduct).FirstOrDefault(),
+                PowerSupplyProduct = _context.Products.Where(p => p.Id == item.PowerSupplyProduct).FirstOrDefault(),
+                MotherboardProduct = _context.Products.Where(p => p.Id == item.MotherboardProduct).FirstOrDefault(),
+                PcCreatorId = _PCCreator.PcCreatorId,
+                ModifyDate = DateTime.Now
+            };
+
+            _context.pCCreators.Update(_PCCreator);
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { name = name });
         }
 
 
@@ -82,7 +182,8 @@ namespace PC_Store.Controllers
                 NetworkCardChipset = MCL.NetworkCardChipset,
                 Price = MCL.Price,
                 Name = MCL.Name,
-                Picture = MCL.Picture
+                Picture = MCL.Picture,
+                Quantity=MCL.Quantity
             };
 
             if (searchString != null)
@@ -111,7 +212,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<MotherboardCreatorList>.CreateAsync(MotherBoard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -140,7 +241,8 @@ namespace PC_Store.Controllers
                 Price=MCL.Price,
                 Name=MCL.Name,
                 Picture=MCL.Picture,
-                Id=MCL.Id
+                Id=MCL.Id,
+                Quantity = MCL.Quantity
             };
             if (searchString != null)
             {
@@ -168,7 +270,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<ProcessorCreatorList>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -210,7 +312,8 @@ namespace PC_Store.Controllers
                 Price=MCL.Price,
                 Name=MCL.Name,
                 Picture=MCL.Picture,
-                Id=MCL.Id
+                Id=MCL.Id,
+                Quantity = MCL.Quantity
             };
             if (searchString != null)
             {
@@ -238,7 +341,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<PowerSupplyCreatorList>.CreateAsync(powersupply.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -269,7 +372,8 @@ namespace PC_Store.Controllers
                 Price=MCL.Price,
                 Name=MCL.Name,
                 Picture=MCL.Picture,
-                Id=MCL.Id
+                Id=MCL.Id,
+                Quantity = MCL.Quantity
             };
             if (searchString != null)
             {
@@ -297,7 +401,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<RamCreatorList>.CreateAsync(rams.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -334,7 +438,8 @@ namespace PC_Store.Controllers
                 Price=MCL.Price,
                 Name=MCL.Name,
                 Picture=MCL.Picture,
-                Id=MCL.Id
+                Id=MCL.Id,
+                Quantity = MCL.Quantity
             };
             if (searchString != null)
             {
@@ -362,7 +467,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<ComputerCaseCreatorList>.CreateAsync(computercase.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -398,7 +503,11 @@ namespace PC_Store.Controllers
                 Price=MCL.Price,
                 Name=MCL.Name,
                 Picture=MCL.Picture,
-                Id=MCL.Id
+                Id=MCL.Id,
+                Led=MCL.Led,
+                CardLength=MCL.CardLength,
+                ChipsetType=MCL.ChipsetType,
+                Quantity = MCL.Quantity
             };
             if (searchString != null)
             {
@@ -426,7 +535,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<GraphicCardCreatorList>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -481,6 +590,9 @@ namespace PC_Store.Controllers
 
             return RedirectToAction("Index");
         }
+
+        
+
 
     }
 }

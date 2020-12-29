@@ -18,7 +18,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using PC_Store.Models;
 using PC_Store.Interfaces;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 
 namespace PC_Store
 {
@@ -51,6 +51,8 @@ namespace PC_Store
                 options.ClientId = "809918557684-t62t7ob6h5hoh8aosp3dia9p4otd8emb.apps.googleusercontent.com";
                 options.ClientSecret = "qoFhlmJgcmxw4Uly-QFdn-8h";
             });
+
+            
 
             services.AddAuthorization(options =>
             {

@@ -43,9 +43,8 @@
             </th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TypeProdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-filter="@ViewData["Filter"]">Typ porduktu</a></th>
             <th><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-filter="@ViewData["Filter"]">Cena</a></th>
-            <th>
-            </th>
             <th></th>
+            <th>Na stanie</th>
             <th>Atywyny</th>
             <th></th>
             <th></th>
@@ -74,12 +73,16 @@
                         <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="100" width="100" asp-append-version="true" />
                     }
                 </td>
-                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Act)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">
+                    <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       asp-route-pageNumber="@ViewData["PageNumber"]"
+                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                        asp-route-filter="@ViewData["Filter"]">
                         <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
                             Edytuj
                         </button>

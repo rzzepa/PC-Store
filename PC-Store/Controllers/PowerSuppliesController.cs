@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Infrastructure;
 using PC_Store.Models;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,12 +19,14 @@ namespace PC_Store.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly int pageSize;
 
         public PowerSuppliesController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
@@ -48,7 +50,8 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                powersupp = powersupp.Where(s => s.Producer.Contains(searchString) || s.Standard.Contains(searchString) || s.Power.ToString().Contains(searchString));
+                searchString = searchString.ToLower();
+                powersupp = powersupp.Where(s => s.Producer.ToLower().Contains(searchString) || s.Standard.ToLower().Contains(searchString) || s.Power.ToString().ToLower().Contains(searchString));
             }
 
             switch (sortOrder)
@@ -73,7 +76,6 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
             return View(await PaginatedList<PowerSupply>.CreateAsync(powersupp.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -157,6 +159,7 @@ namespace PC_Store.Controllers
                 product.InsertDate = DateTime.Now;
                 product.ModifyDate = DateTime.Now;
                 product.ProductType = "POWERSUPPLY";
+                product.Quantity = 0;
                 product.Act = false;
                 _context.Products.Add(product);
 
@@ -168,7 +171,7 @@ namespace PC_Store.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return RedirectToAction(nameof(Create));
         }
 
         public async Task<IActionResult> Edit(int? id)

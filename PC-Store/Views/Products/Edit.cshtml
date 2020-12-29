@@ -4,89 +4,114 @@
     ViewData["Title"] = "Edit";
 }
 @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" })) { }
-<h1>Edycja</h1>
-Dodany: @Html.DisplayFor(model => model.Product.InsertDate)     Przez: @Html.DisplayFor(model => model.Product.InsertBy)<br />
-Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     Przez: @Html.DisplayFor(model => model.Product.ModifyBy)<br />
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="@Model.Product.Id" />
-            <div class="form-group">
-                <label asp-for="@Model.Product.Name" class="control-label"></label>
-                <input asp-for="@Model.Product.Name" asp-value="@Model.Product.Name" class="form-control" />
-                <span asp-validation-for="@Model.Product.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Product.Price" class="control-label"></label>
-                <input asp-for="@Model.Product.Price" class="form-control" />
-                <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
-            </div>
-            <div class="input-group">
-                <div class="custom-file">
-                    <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
-                           aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
-                    <span asp-validation-for="File" class="text-danger"></span>
+<center>
+    <h1>Edycja</h1>
+    Dodany: @Html.DisplayFor(model => model.Product.InsertDate)     Przez: @Html.DisplayFor(model => model.Product.InsertBy)<br />
+    Ostatnio zmodyfikowany: @Html.DisplayFor(model => model.Product.ModifyDate)     Przez: @Html.DisplayFor(model => model.Product.ModifyBy)<br />
+    <hr />
+    <div>
+        <div class="col-md-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="@Model.Product.Id" />
+                <div class="form-group">
+                    <label asp-for="@Model.Product.Name" class="control-label"></label>
+                    <input asp-for="@Model.Product.Name" asp-value="@Model.Product.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Product.Name" class="text-danger"></span>
                 </div>
-            </div>
-            <hr />
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="@Model.Product.Act" /> Aktywny
-                </label>
-            </div>
-            @if (Model.File != null)
-            {
-                <img src="~/images/@Model.File" class="rounded-circle" height="250" width="250" asp-append-version="true" />
-            }
-            else if (Model.Product.Picture != null)
-            {
-                <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="250" width="250" asp-append-version="true" />
-            }
-            else
-            {
-                <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="250" width="250" asp-append-version="true" />
-            }
-            @Html.HiddenFor(model => model.Product.InsertDate)
-            @Html.HiddenFor(model => model.Product.InsertBy)
+                <div class="form-group">
+                    <label asp-for="@Model.Product.Price" class="control-label"></label>
+                    <input asp-for="@Model.Product.Price" class="form-control" />
+                    <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
+                </div>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input asp-for="File" type="file" class="custom-file-input" id="inputGroupFile01"
+                               aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+                        <span asp-validation-for="File" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="@Model.Product.Act" /> Aktywny
+                    </label>
+                </div>
+                <hr />
+                @if (Model.File != null)
+                {
+                    <img src="~/images/@Model.File" class="rounded-circle" height="250" width="250" asp-append-version="true" />
+                }
+                else if (Model.Product.Picture != null)
+                {
+                    <img src="~/images/@Model.Product.Picture" class="rounded-circle" height="250" width="250" asp-append-version="true" />
+                }
+                else
+                {
+                    <img src="~/images/serverimg/brak_zdjecia.png" class="rounded-circle" height="250" width="250" asp-append-version="true" />
+                }
+                @Html.HiddenFor(model => model.Product.InsertDate)
+                @Html.HiddenFor(model => model.Product.InsertBy)
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <h4>Zamów produkt</h4>
+    <h3>@ViewBag.Mess</h3>
+    <div>
+        <form asp-action="AddQuantity" method="post">
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <input type="hidden" asp-for="@Model.Product.Id" />
+                <h7>Ilość sztuk</h7>
+                <input asp-for="@Model.OrderProduct" class="form-control" type="number" value="1" min="1" max="25" />
+                <input name="pageNumber" type="hidden" value="@ViewData["PageNumber"]" />
+                <input name="filter" type="hidden" value="@ViewData["Filter"]" />
+                <input name="currentFilter" type="hidden" value="@ViewData["CurrentFilter"]" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zamów" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-<div>
-    <a asp-action="Index">
-        <button type="button" class="btn btn-light btn-md mr-1 mb-2">
-            Wróć
-        </button>
-    </a>
     <hr />
-    @if (Model.Product.ProductType.Equals("PROCESSOR"))
-    {
-        <a asp-controller="Processors" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-    else if (Model.Product.ProductType.Equals("MOTHERBOARD"))
-    {
-        <a asp-controller="Motherboards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-    else if (Model.Product.ProductType.Equals("GRAPHICSCARD"))
-    {
-        <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-    else if (Model.Product.ProductType.Equals("COMPUTERCASE"))
-    {
-        <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-    else if (Model.Product.ProductType.Equals("RAMMEMORY"))
-    {
-        <a asp-controller="Rams" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-    else if (Model.Product.ProductType.Equals("POWERSUPPLY"))
-    {
-    <a asp-controller="PowerSupplies" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
-    }
-</div>
-
+    <div>
+        <a asp-action="Index"
+           asp-route-pageNumber="@ViewData["PageNumber"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-filter="@ViewData["Filter"]"
+           class="btn btn-default>
+            <button type="button" class="btn btn-secondary btn-md mr-1 mb-2">
+                Wróć
+            </button>
+        </a>
+        <hr />
+        @if (Model.Product.ProductType.Equals("PROCESSOR"))
+        {
+            <a asp-controller="Processors" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+        else if (Model.Product.ProductType.Equals("MOTHERBOARD"))
+        {
+            <a asp-controller="Motherboards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+        else if (Model.Product.ProductType.Equals("GRAPHICSCARD"))
+        {
+            <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+        else if (Model.Product.ProductType.Equals("COMPUTERCASE"))
+        {
+            <a asp-controller="Graphiccards" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+        else if (Model.Product.ProductType.Equals("RAMMEMORY"))
+        {
+            <a asp-controller="Rams" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+        else if (Model.Product.ProductType.Equals("POWERSUPPLY"))
+        {
+            <a asp-controller="PowerSupplies" asp-action="Edit" asp-route-id="@Model.Id">Przejdz edycji do produktu</a>
+        }
+    </div>
+</center>

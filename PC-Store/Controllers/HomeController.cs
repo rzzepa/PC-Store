@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using PC_Store.Data;
 using PC_Store.Models;
 using X.PagedList;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 using PC_Store.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,18 +18,19 @@ namespace PC_Store.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-
+        private readonly int pageSize;
 
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
+            pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
         public IActionResult Index()
         {
-            var items = _context.Dictionary.Where(p => p.CodeDict == "PRODUCTS").OrderBy(p=>p.ExtN1);
+            var items = _context.Products.Where(p=>p.Act==true).Where(p => p.Picture!=null).OrderByDescending(p => p.InsertDate).Take(5).ToList();
             return View(items);
         }
 
@@ -81,8 +82,6 @@ namespace PC_Store.Controllers
             }
 
 
-
-            int pageSize = 15;
             return View(await PaginatedList<ProcessorProduct>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
@@ -126,7 +125,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<MotherboardProduct>.CreateAsync(MotherBoard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
         
@@ -169,7 +168,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<GraphicCardProduct>.CreateAsync(GraphicCards.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
         
@@ -213,7 +212,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<ComputerCaseProduct>.CreateAsync(ComputerCase.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
         
@@ -257,7 +256,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<RamProduct>.CreateAsync(ram.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
         
@@ -301,7 +300,7 @@ namespace PC_Store.Controllers
                     break;
             }
 
-            int pageSize = 15;
+
             return View(await PaginatedList<PowerSupplyProduct>.CreateAsync(powerSupplies.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 

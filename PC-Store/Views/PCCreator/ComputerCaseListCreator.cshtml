@@ -21,8 +21,8 @@
             </p>
         </div>
     </form>
-    <pre>                                                                                         </pre>
-    <form asp-action="ComputerCaseListCreator" method="get">
+
+    <form asp-action="ComputerCaseListCreator" method="get" style="margin-left:600px">
         <div class="form-row align-items-center">
             <p>
                 <input type="hidden" name="searchString" value="@ViewData["CurrentFilter"]" />
@@ -110,6 +110,14 @@
                     <div class="col-lg-5 col-xl-5">
 
                         <h6 class="mb-3"><span>@Html.DisplayFor(modelItem => item.Price) Zł</span></h6>
+                        @if (item.Quantity <= 10 && item.Quantity >= 0)
+                        {
+                            <h6>Zostało ostatnie @item.Quantity sztuk!</h6>
+                        }
+                        else if (item.Quantity == 0)
+                        {
+                            <h6>Brak na magazynie</h6>
+                        }
                         <div class="my-4">
                             <a asp-controller="PcCreator" asp-action="AddToCreator" asp-route-id="@item.Id">
                                 <button type="button" class="btn btn-primary btn-md mr-1 mb-2">

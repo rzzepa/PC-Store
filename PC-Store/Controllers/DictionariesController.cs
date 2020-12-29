@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PC_Store.Data;
 using PC_Store.Infrastructure;
 using PC_Store.Models;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -46,7 +46,7 @@ namespace PC_Store.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                dict = dict.Where(s => s.CodeDict.Contains(searchString) || s.CodeItem.Contains(searchString) || s.CodeValue.Contains(searchString));
+                dict = dict.Where(s => s.CodeDict.ToLower().Contains(searchString.ToLower()) || s.CodeItem.ToLower().Contains(searchString.ToLower()) || s.CodeValue.ToLower().Contains(searchString.ToLower()));
             }
 
             switch (sortOrder)

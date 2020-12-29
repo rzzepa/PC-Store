@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PC_Store.Data;
 using PC_Store.Interfaces;
 using PC_Store.Models;
-using PC_Store.Models.ViewModels;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 
 namespace PC_Store.Controllers
 {
@@ -39,12 +38,15 @@ namespace PC_Store.Controllers
             return View("View",sCVM);
         }
 
-        public RedirectToActionResult AddtoShoppingCart(int? id)
+        public RedirectToActionResult AddtoShoppingCart(int? id, int quantity)
         {
+            if (quantity == 0)
+                quantity = 1;
+
                 var selectedProduct = _context.Products.FirstOrDefault(p => p.Id == id);
                 if(selectedProduct!= null)
                     {
-                         _shoppingCart.AddtoCart(selectedProduct, 1);
+                         _shoppingCart.AddtoCart(selectedProduct, quantity);
                      }
                 return RedirectToAction("Index");
          }

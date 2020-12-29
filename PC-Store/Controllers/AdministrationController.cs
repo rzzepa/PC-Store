@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PC_Store.Data;
 using PC_Store.structure;
-using PC_Store.Views.ViewModels;
+using PC_Store.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

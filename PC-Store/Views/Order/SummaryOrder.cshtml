@@ -1,0 +1,115 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Zakup";
+}
+
+<div>
+
+
+    <div>
+        <form asp-action="Checkout" method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="LastName" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="AddressLine" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="ZipCode" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="City" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Country" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Email" class="col-md-2 control-label"></label>
+                        </th>
+                        <th>
+                            <label class="col-md-2 control-label">Forma płatności</label>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.AddressLine)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ZipCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                        <td>
+                            @ViewData["Payment"]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            @Html.HiddenFor(model => model.FirstName)
+            @Html.HiddenFor(model => model.LastName)
+            @Html.HiddenFor(model => model.AddressLine)
+            @Html.HiddenFor(model => model.ZipCode)
+            @Html.HiddenFor(model => model.City)
+            @Html.HiddenFor(model => model.PhoneNumber)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.Payment)
+            @Html.HiddenFor(model => model.Country)
+            @Html.HiddenFor(model => model.OrderId)
+            @Html.HiddenFor(model => model.OrderLines)
+            @Html.HiddenFor(model => model.OrderPlaced)
+            @Html.HiddenFor(model => model.OrderTotal)
+            @Html.HiddenFor(model => model.User)
+            @Html.HiddenFor(model => model.Regulations)
+            @Html.HiddenFor(model => model.StatusOrder)
+            <center>
+                <div class="form-group">
+                    <input type="submit" value="Potwierdz zamówienie" class="btn btn-success" />
+                </div>
+            </center>
+        </form>
+
+    </div>
+</div>
+<br />Uwaga:<br /> Jeżeli w zamówieniu są produkty, których brakuje na stanie to czas oczekiwania na zamówienie wydłuży się o około 5 dni roboczych.<br />
+<br /><br />
+      <form asp-action="Checkout" method="get">
+          <div class="form-group">
+              @Html.HiddenFor(model => model.FirstName)
+              @Html.HiddenFor(model => model.LastName)
+              @Html.HiddenFor(model => model.AddressLine)
+              @Html.HiddenFor(model => model.ZipCode)
+              @Html.HiddenFor(model => model.City)
+              @Html.HiddenFor(model => model.PhoneNumber)
+              @Html.HiddenFor(model => model.Email)
+              @Html.HiddenFor(model => model.Payment)
+              <input type="submit" value="Wróć" class="btn btn-success" />
+          </div>
+      </form>

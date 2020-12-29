@@ -40,6 +40,8 @@ namespace PC_Store.structure
 
         public string Picture { get; set; }
 
+        public int Quantity { get; set; }
+
         public int Id { get; set; }
         public IEnumerator GetEnumerator()
         {

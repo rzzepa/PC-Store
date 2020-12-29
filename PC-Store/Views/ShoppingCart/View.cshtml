@@ -15,17 +15,18 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th scope="col class="text-center"">Ilość</th>
-                            <th scope="col class="text-center"">Produkt</th>
-                            <th scope="col class="text-center"">Cena za produkt</th>
+                            <th scope="col class=" text-center"">Ilość</th>
+                            <th scope="col class=" text-center"">Produkt</th>
+                            <th scope="col class=" text-center"">Cena za produkt</th>
                             <th scope="col" class="text-center">Łącznie</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
                         {
                         <tr>
-                            <td class="text-center"><form asp-controller="ShoppingCart" asp-action="IncresseAmount" asp-route-prodId="@line.Product.Id"><button class="btn btn-success"></button></form> </td>
+                            <td class="text-center"><form asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id"><button class="btn btn-danger"></button></form> </td>
                             <td class="text-center">@line.Amount</td>
                             <td class="text-center">
                                 @if (line.Product.ProductType.Equals("PROCESSOR"))
@@ -57,7 +58,7 @@
                             <td class="text-center">
                                 @((line.Amount * line.Product.Price).ToString("c")) Zł
                             </td>
-                            <td class= class="text-center"><form asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-prodId="@line.Product.Id"><button class="btn btn-danger"></button></form> </td>
+                            <td class="text-center"><form asp-controller="ShoppingCart" asp-action="IncresseAmount" asp-route-prodId="@line.Product.Id"><button class="btn btn-success"></button></form> </td>
                         </tr>
                         }
                     <tr>

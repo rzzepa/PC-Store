@@ -121,16 +121,15 @@
                     officia quis dolore quos sapiente tempore alias.
                 </p>
                 <hr>
-                <h4><strong>Ilość:</strong></h4>
-                <div class="def-number-input number-input safari_only">
-                    <input class="quantity" min="0" name="quantity" value="1" type="number">
-                </div>
-                <hr>
-                <a asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
-                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
-                        Dodaj do koszyka
-                    </button>
-                </a>
+                <form asp-controller="ShoppingCart" asp-action="AddtoShoppingCart" asp-route-id="@Model.Product.Id">
+                    <h4><strong>Ilość:</strong></h4>
+                    <div class="def-number-input number-input safari_only">
+                        <input class="quantity" min="1" name="quantity" value="1" type="number">
+                    </div>
+                    <hr>
+
+                    <input type="submit" value="Dodaj do koszyka" class="btn btn-primary" />
+                </form>
             </div>
         </div>
 

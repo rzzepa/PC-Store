@@ -58,6 +58,8 @@ namespace PC_Store.structure
 
         public int PCIExpressx4 { get; set; }
 
+        public int Quantity { get; set; }
+
         public int Id { get; set; }
 
         public IEnumerator GetEnumerator()
