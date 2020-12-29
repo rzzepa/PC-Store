@@ -484,7 +484,6 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\Newtonsoft.Json
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\Npgsql.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
-C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\PayPal.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
@@ -579,3 +578,4 @@ C:\Users\Rzepa\Desktop\PC-Store\PC-Store\bin\Debug\netcoreapp3.1\runtimes\win\li
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.Views.pdb
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csproj.CopyComplete
 C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.genruntimeconfig.cache
+C:\Users\Rzepa\Desktop\PC-Store\PC-Store\obj\Debug\netcoreapp3.1\PC-Store.csprojAssemblyReference.cache

@@ -28,7 +28,7 @@ namespace PC_Store.Controllers
             pageSize = _context.Dictionary.Where(p => p.CodeDict.Equals("CONFIG")).Where(p => p.CodeItem.Equals("PAGING")).Select(p => p.ExtN2).FirstOrDefault();
         }
 
-        public IActionResult Index(string? name)
+        public IActionResult Index(string name)
         {
             PCCreator creator=null;
             if (name == null)

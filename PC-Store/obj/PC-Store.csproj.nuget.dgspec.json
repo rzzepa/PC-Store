@@ -100,10 +100,6 @@
               "target": "Package",
               "version": "[3.1.4, )"
             },
-            "PayPal": {
-              "target": "Package",
-              "version": "[1.9.1, )"
-            },
             "X.PagedList.Mvc.Core": {
               "target": "Package",
               "version": "[7.6.0, )"
