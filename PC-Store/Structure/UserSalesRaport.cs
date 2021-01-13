@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PC_Store.structure
 {
-    public class UsersSalesRaport : IEnumerable
+    public class UserSalesRaport : IEnumerable
     {
         public DateTime Date { get; set; }
 

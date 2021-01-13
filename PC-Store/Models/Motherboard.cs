@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PC_Store.Models
 {
-    public class Motherboard : IProducts
+    public class Motherboard 
     {
         public int Id { get; set; }
         [Required]

@@ -158,7 +158,7 @@ namespace PC_Store.Controllers
             var MotherBoard =
             from MCL in _context.motherboardCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new MotherboardCreatorList
+            select new MotherboardCreatorViewModel
             {
                 Id=MCL.Id,
                 PcCreatorId=MCL.PcCreatorId,
@@ -213,7 +213,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<MotherboardCreatorList>.CreateAsync(MotherBoard.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<MotherboardCreatorViewModel>.CreateAsync(MotherBoard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> ProcessorListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
@@ -223,7 +223,7 @@ namespace PC_Store.Controllers
             var processors =
             from MCL in _context.processorCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new ProcessorCreatorList
+            select new ProcessorCreatorViewModel
             {
                 PcCreatorId =MCL.PcCreatorId,
                 Producer=MCL.Producer,
@@ -271,7 +271,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<ProcessorCreatorList>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<ProcessorCreatorViewModel>.CreateAsync(processors.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
@@ -282,7 +282,7 @@ namespace PC_Store.Controllers
             var powersupply =
             from MCL in _context.powerSupplyCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new PowerSupplyCreatorList
+            select new PowerSupplyCreatorViewModel
             {
                 PcCreatorId=MCL.PcCreatorId,
                 Producer=MCL.Producer,
@@ -342,7 +342,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<PowerSupplyCreatorList>.CreateAsync(powersupply.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<PowerSupplyCreatorViewModel>.CreateAsync(powersupply.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
@@ -353,7 +353,7 @@ namespace PC_Store.Controllers
             var rams =
             from MCL in _context.ramCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new RamCreatorList
+            select new RamCreatorViewModel
             {
                 PcCreatorId=MCL.PcCreatorId,
                 Producer=MCL.Producer,
@@ -402,7 +402,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<RamCreatorList>.CreateAsync(rams.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<RamCreatorViewModel>.CreateAsync(rams.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> ComputerCaseListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
@@ -412,7 +412,7 @@ namespace PC_Store.Controllers
             var computercase =
             from MCL in _context.ComputerCaseCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new ComputerCaseCreatorList
+            select new ComputerCaseCreatorViewModel
             {
                 PcCreatorId=MCL.PcCreatorId,
                 Producer=MCL.Producer,
@@ -468,7 +468,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<ComputerCaseCreatorList>.CreateAsync(computercase.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<ComputerCaseCreatorViewModel>.CreateAsync(computercase.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> GraphicCardListCreator(string sortOrder, string searchString, string currentFilter, int? pageNumber)
@@ -478,7 +478,7 @@ namespace PC_Store.Controllers
             var graphiccard =
             from MCL in _context.graphicCardCreatorLists
             where MCL.PcCreatorId == _PCCreator.PcCreatorId
-            select new GraphicCardCreatorList
+            select new GraphicCardCreatorViewModel
             {
                 PcCreatorId=MCL.PcCreatorId,
                 Producer=MCL.Producer,
@@ -536,7 +536,7 @@ namespace PC_Store.Controllers
             }
 
 
-            return View(await PaginatedList<GraphicCardCreatorList>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<GraphicCardCreatorViewModel>.CreateAsync(graphiccard.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 

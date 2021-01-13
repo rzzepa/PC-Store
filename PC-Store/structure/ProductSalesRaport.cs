@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PC_Store.structure
+namespace PC_Store.Structure
 {
     public class ProductSalesRaport:IEnumerable
     {

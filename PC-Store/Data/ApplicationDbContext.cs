@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PC_Store.Models;
 using PC_Store.ViewModels;
 using PC_Store.structure;
+using PC_Store.Structure;
 
 namespace PC_Store.Data
 {
@@ -46,19 +47,19 @@ namespace PC_Store.Data
 
         public DbQuery<ProductSalesRaport> ProductSalesRaport { get; set; }
 
-        public DbQuery<UsersSalesRaport> UsersSalesRaport { get; set; }
+        public DbQuery<UserSalesRaport> UsersSalesRaport { get; set; }
 
-        public DbQuery<MotherboardCreatorList> motherboardCreatorLists{ get; set; }
+        public DbQuery<MotherboardCreatorViewModel> motherboardCreatorLists{ get; set; }
 
-        public DbQuery<ProcessorCreatorList> processorCreatorLists { get; set; }
+        public DbQuery<ProcessorCreatorViewModel> processorCreatorLists { get; set; }
 
-        public DbQuery<ComputerCaseCreatorList> ComputerCaseCreatorLists { get; set; }
+        public DbQuery<ComputerCaseCreatorViewModel> ComputerCaseCreatorLists { get; set; }
 
-        public DbQuery<RamCreatorList> ramCreatorLists { get; set; }
+        public DbQuery<RamCreatorViewModel> ramCreatorLists { get; set; }
 
-        public DbQuery<PowerSupplyCreatorList> powerSupplyCreatorLists { get; set; }
+        public DbQuery<PowerSupplyCreatorViewModel> powerSupplyCreatorLists { get; set; }
 
-        public DbQuery<GraphicCardCreatorList> graphicCardCreatorLists { get; set; }
+        public DbQuery<GraphicCardCreatorViewModel> graphicCardCreatorLists { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
@@ -66,13 +67,13 @@ namespace PC_Store.Data
         {
             base.OnModelCreating(builder);
             builder.Query<ProductSalesRaport>().ToView("productsalesraport");
-            builder.Query<UsersSalesRaport>().ToView("usersalesraport");
-            builder.Query<MotherboardCreatorList>().ToView("motherboardlist");
-            builder.Query<ProcessorCreatorList>().ToView("processorlist");
-            builder.Query<ComputerCaseCreatorList>().ToView("computercaselist");
-            builder.Query<RamCreatorList>().ToView("ramlist");
-            builder.Query<PowerSupplyCreatorList>().ToView("powersupplylist");
-            builder.Query<GraphicCardCreatorList>().ToView("graphiccardlist");
+            builder.Query<UserSalesRaport>().ToView("usersalesraport");
+            builder.Query<MotherboardCreatorViewModel>().ToView("motherboardlist");
+            builder.Query<ProcessorCreatorViewModel>().ToView("processorlist");
+            builder.Query<ComputerCaseCreatorViewModel>().ToView("computercaselist");
+            builder.Query<RamCreatorViewModel>().ToView("ramlist");
+            builder.Query<PowerSupplyCreatorViewModel>().ToView("powersupplylist");
+            builder.Query<GraphicCardCreatorViewModel>().ToView("graphiccardlist");
         }
     }
 }

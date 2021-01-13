@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PC_Store.structure
+namespace PC_Store.ViewModels
 {
-    public class MotherboardCreatorList : IEnumerable
+    public class MotherboardCreatorViewModel : IEnumerable
     {
         public string PcCreatorId { get; set; }
 

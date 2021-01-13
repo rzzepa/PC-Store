@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PC_Store.structure
+namespace PC_Store.ViewModels
 {
-    public class RamCreatorList : IEnumerable
+    public class RamCreatorViewModel : IEnumerable
     {
         public string PcCreatorId { get; set; }
 

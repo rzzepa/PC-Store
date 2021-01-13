@@ -853,7 +853,7 @@ namespace PC_Store.Migrations
                     b.ToTable("pCCreators");
                 });
 
-            modelBuilder.Entity("PC_Store.structure.MotherboardCreatorList", b =>
+            modelBuilder.Entity("PC_Store.structure.MotherboardCreatorViewModel", b =>
                 {
                     b.Property<string>("AudioChannels")
                         .HasColumnType("text");

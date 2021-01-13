@@ -25,7 +25,6 @@ namespace PC_Store.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public IndexProcessorViewModel indexModel;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly int pageSize;
 
